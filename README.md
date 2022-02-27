@@ -24,3 +24,15 @@ ref: https://qiita.com/karaage0703/items/705f1b750c486f00d554
   ```
   sudo apt install -y vim
   ```
+  
+- brew install
+
+https://brew.sh/index_ja
+
+- ghq
+
+```
+brew install ghq
+git config --global ghq.root '~/src'
+```
+

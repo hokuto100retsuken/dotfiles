@@ -36,3 +36,10 @@ brew install ghq
 git config --global ghq.root '~/src'
 ```
 
+- ctrl + a
+ ctrl + aで先頭に移動できない場合
+ .zshrcに`bindkey -e` を追加すると問題ないみたい
+ 
+ https://stackoverflow.com/questions/23128353/zsh-shortcut-ctrl-a-not-working
+ 
+ 問題が出るまではこれで様子見

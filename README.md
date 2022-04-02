@@ -37,6 +37,7 @@ git config --global ghq.root '~/src'
 ```
 
 - ctrl + a
+
  ctrl + aで先頭に移動できない場合
  .zshrcに`bindkey -e` を追加すると問題ないみたい
  

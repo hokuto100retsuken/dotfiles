@@ -1,1 +1,3 @@
-ln -sf _zshrc ~/.zshrc
+#!bin/bash
+
+ln -sfv `pwd`/_zshrc ~/.zshrc

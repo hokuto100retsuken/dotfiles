@@ -6,6 +6,9 @@ asdf plugin add terraform
 asdf plugin add dotnet-core https://github.com/emersonsoares/asdf-dotnet-core.git
 asdf plugin-add rust https://github.com/asdf-community/asdf-rust.git
 
+asdf plugin add ghq
+asdf install ghq latest
+
 asdf install ruby 3.1.1
 asdf install nodejs 16.14.0
 asdf install python 3.8.11

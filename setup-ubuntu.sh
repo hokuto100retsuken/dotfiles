@@ -3,7 +3,7 @@
 sudo apt-get install -y git
 
 git clone https://github.com/asdf-vm/asdf ~/.asdf
-sudo chmod +x ~/.asdf/asdf.sh
+# sudo chmod +x ~/.asdf/asdf.sh
 exec $SHELL -l
 
 sudo apt install peco

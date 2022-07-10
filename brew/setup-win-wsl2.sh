@@ -1,5 +1,8 @@
 #!bin/bash
 
+sudo apt-get install -y build-essential curl file git
+sudo apt-get install -y libssl-dev zlib1g-dev
+
 ### linux brew install
 touch ~/.zprofile
 

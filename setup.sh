@@ -3,6 +3,9 @@
 # linux
 if  [ "$(uname)" == "Linux" ]; then
 
+  sudo apt-get install zsh
+  chsh -s $(which zsh)
+
   sudo apt-get install -y git
 
   git clone https://github.com/asdf-vm/asdf ~/.asdf

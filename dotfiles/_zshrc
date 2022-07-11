@@ -11,6 +11,7 @@ setopt extended_history
 alias ls='ls -G'
 alias be='bundle exec'
 alias get_idf='. $HOME/esp/esp-idf/export.sh'
+alias d-c='docker-compose'
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then

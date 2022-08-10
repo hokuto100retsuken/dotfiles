@@ -14,6 +14,8 @@ if  [ "$(uname)" == "Linux" ]; then
 
   sudo apt install peco
 
+  sudo apt install gnome-tweaks
+
   # HomeBrewのインストール
   if [ ! -x "`which brew`" ]; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"

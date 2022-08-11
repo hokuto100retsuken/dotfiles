@@ -22,6 +22,7 @@ if  [ "$(uname)" == "Linux" ]; then
     brew update
   fi
 
+  git config --global core.editor "vim" 
 fi
 
 # Mac

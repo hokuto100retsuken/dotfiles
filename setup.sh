@@ -3,18 +3,23 @@
 # linux
 if  [ "$(uname)" == "Linux" ]; then
 
-  sudo apt-get install zsh
-  chsh -s $(which zsh)
-
   sudo apt-get install -y git
 
-  git clone https://github.com/asdf-vm/asdf ~/.asdf
-  # sudo chmod +x ~/.asdf/asdf.sh
-  exec $SHELL -l
-
-  sudo apt install peco
+  # asdf install
+  if [ ! -e ~/.asdf ]; then
+    git clone https://github.com/asdf-vm/asdf ~/.asdf
+    # sudo chmod +x ~/.asdf/asdf.sh
+    exec $SHELL -l
+  fi
 
   sudo apt install gnome-tweaks
+
+  sudo apt install -y peco
+  sudo apt install -y bat
+  sudo apt install -y tig
+
+  # docker inatall
+
 
   # HomeBrewのインストール
   if [ ! -x "`which brew`" ]; then

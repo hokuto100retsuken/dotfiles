@@ -3,7 +3,7 @@
 # linux
 if  [ "$(uname)" == "Linux" ]; then
 
-  sudo apt-get install -y git
+  sudo apt-get install -y git build-essential procps curl file
 
   # asdf install
   if [ ! -e ~/.asdf ]; then
@@ -18,14 +18,18 @@ if  [ "$(uname)" == "Linux" ]; then
   sudo apt install -y bat
   sudo apt install -y tig
 
-  # docker inatall
+  # inatall docker
 
+
+  # install nvim
+
+  sudo apt-get install neovim
 
   # HomeBrewのインストール
-  if [ ! -x "`which brew`" ]; then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    brew update
-  fi
+  # if [ ! -x "`which brew`" ]; then
+  #   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  #   brew update
+  # fi
 
   git config --global core.editor "vim" 
 fi

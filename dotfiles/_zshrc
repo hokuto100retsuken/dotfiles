@@ -44,6 +44,5 @@ bindkey '^b' anyframe-widget-checkout-git-branch
 bindkey '^g' anyframe-widget-cd-ghq-repository
 bindkey '^k' anyframe-widget-kill
 
-ZDIR=`readlink ~/.zshrc`
 # load .zshrc_*
-[ -f $ZDIR/_zshrc_`uname`  ] && . $ZDIR/_zshrc_`uname`
+[ -f `pwd`/dotfiles/_zshrc_`uname`  ] && . `pwd`/dotfiles/_zshrc_`uname`

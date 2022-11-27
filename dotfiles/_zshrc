@@ -45,4 +45,6 @@ bindkey '^g' anyframe-widget-cd-ghq-repository
 bindkey '^k' anyframe-widget-kill
 
 # load .zshrc_*
-[ -f `pwd`/dotfiles/_zshrc_`uname`  ] && . `pwd`/dotfiles/_zshrc_`uname`
+zshrcPath=`realpath ~/.zshrc`
+zshrcPath+=_`uname`
+[ -f $zshrcPath ] && . $zshrcPath

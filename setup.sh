@@ -18,6 +18,8 @@ if  [ "$(uname)" == "Linux" ]; then
   sudo apt install -y bat
   sudo apt install -y tig
 
+  sudo apt-get install -y ripgrep
+
   # inatall docker
 
 

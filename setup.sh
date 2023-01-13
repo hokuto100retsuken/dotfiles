@@ -33,7 +33,7 @@ if  [ "$(uname)" == "Linux" ]; then
   #   brew update
   # fi
 
-  git config --global core.editor "vim" 
+  git config --global core.editor "nvim" 
 fi
 
 # Mac

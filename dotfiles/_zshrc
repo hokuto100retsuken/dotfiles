@@ -43,6 +43,7 @@ bindkey '^r' anyframe-widget-execute-history
 bindkey '^b' anyframe-widget-checkout-git-branch
 bindkey '^g' anyframe-widget-cd-ghq-repository
 bindkey '^k' anyframe-widget-kill
+bindkey '^t' anyframe-widget-tmux-attach
 
 # load .zshrc_*
 zshrcPath=`realpath ~/.zshrc`

@@ -7,3 +7,6 @@ ln -sfv `pwd`/_config/starship.toml ~/.config/starship.toml
 ln -sfv `pwd`/_config/nvim/init.lua ~/.config/nvim/init.lua
 ln -sfv `pwd`/_config/nvim/lua ~/.config/nvim/
 
+# tmux config
+ln -sfv `pwd`/_tmux.conf ~/.tmux.conf
+

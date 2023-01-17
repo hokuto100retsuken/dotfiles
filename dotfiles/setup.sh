@@ -1,12 +1,14 @@
 #!bin/bash
 
-ln -sfv `pwd`/_zshrc ~/.zshrc
-ln -sfv `pwd`/_config/starship.toml ~/.config/starship.toml
+DOTPATH=$(ghq root)/github.com/hokuto100retsuken/dotfiles
+
+ln -sfv $DOTPATH/dotfiles/_zshrc ~/.zshrc
+ln -sfv $DOTPATH/dotfiles/_config/starship.toml ~/.config/starship.toml
 
 # nvim setting 
-ln -sfv `pwd`/_config/nvim/init.lua ~/.config/nvim/init.lua
-ln -sfv `pwd`/_config/nvim/lua ~/.config/nvim/
+ln -sfv $DOTPATH/dotfiles/_config/nvim/init.lua ~/.config/nvim/init.lua
+ln -sfv $DOTPATH/dotfiles/_config/nvim/lua ~/.config/nvim/
 
 # tmux config
-ln -sfv `pwd`/_tmux.conf ~/.tmux.conf
+ln -sfv $DOTPATH/dotfiles/_tmux.conf ~/.tmux.conf
 

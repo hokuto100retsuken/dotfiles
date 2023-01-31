@@ -8,7 +8,6 @@ export HISTSIZE=1000
 export SAVEHIST=100000
 setopt extended_history
 
-alias ls='ls -G'
 alias be='bundle exec'
 alias get_idf='. $HOME/esp/esp-idf/export.sh'
 alias dc='docker-compose'

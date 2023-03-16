@@ -3,6 +3,13 @@
 ## Ubuntuをちょっと使いやすくする設定集
 ref: https://qiita.com/karaage0703/items/705f1b750c486f00d554
 
+- zshの設定
+  ```
+   $ sudo apt-get install zsh
+   $ chsh -s $(which zsh)
+  ```
+  設定したら再ログイン
+
 - 最低限のソフトインストール
   ```
   $ sudo apt update

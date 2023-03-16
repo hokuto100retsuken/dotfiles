@@ -17,8 +17,14 @@ if  [ "$(uname)" == "Linux" ]; then
 		      tig
 
   curl https://rtx.pub/install.sh | sh
-  echo -e "\neval \"\$(/home/hkt100rtkn/.local/share/rtx/bin/rtx activate -s zsh)\"" >> ~/.zshrc
 
+  # WSL環境
+  if [ -n "$WSL_DISTRO_NAME" ] || [ -f "/run/WSL/4.0/microsoft-standard" ]; then
+    echo -e "\neval \"\$(/usr/bin/rtx activate -s zsh)\"" >> ~/.zshrc
+  else
+    echo -e "\neval \"\$(/home/hkt100rtkn/.local/share/rtx/bin/rtx activate -s zsh)\"" >> ~/.zshrc
+  fi
+  
   rtx plugin add ghq
   rtx install ghq
 

@@ -3,37 +3,32 @@
 # linux
 if  [ "$(uname)" == "Linux" ]; then
 
-  sudo apt-get install -y git build-essential procps curl file
+  sudo apt-get install -y git \
+  			build-essential \
+			procps \
+			curl \
+			file \
+			ripgrep \
+			nvim
 
-  # asdf install
-  if [ ! -e ~/.asdf ]; then
-    git clone https://github.com/asdf-vm/asdf ~/.asdf
-    # sudo chmod +x ~/.asdf/asdf.sh
-    exec $SHELL -l
-  fi
+  sudo apt install -y gnome-tweaks \
+		      peco \
+  		      bat \
+		      tig
 
-  sudo apt install gnome-tweaks
+  curl https://rtx.pub/install.sh | sh
+  echo -e "\neval \"\$(/home/hkt100rtkn/.local/share/rtx/bin/rtx activate -s zsh)\"" >> ~/.zshrc
 
-  sudo apt install -y peco
-  sudo apt install -y bat
-  sudo apt install -y tig
-
-  sudo apt-get install -y ripgrep
+  rtx plugin add ghq
+  rtx install ghq
 
   # inatall docker
-
-
-  # install nvim
-
-  sudo apt-get install neovim
 
   # HomeBrewのインストール
   # if [ ! -x "`which brew`" ]; then
   #   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   #   brew update
   # fi
-
-  git config --global core.editor "nvim" 
 fi
 
 # Mac
@@ -63,6 +58,6 @@ if  [ "$(uname)" == "Darwin" ]; then
 
 fi
 
-
 # 共通
-brew install starship
+git config --global core.editor "nvim"
+

@@ -1,6 +1,12 @@
 #!bin/bash
 
-DOTPATH=$(ghq root)/github.com/hokuto100retsuken/dotfiles
+DOTPATH=$~/src/github.com/hokuto100retsuken/dotfiles
+
+CONFIG_PATH="~/.config/nvim"
+
+if [ ! -d "$CONFIG_PATH" ]; then
+  mkdir -p ~/.config/nvim
+fi
 
 ln -sfv $DOTPATH/dotfiles/_zshrc ~/.zshrc
 ln -sfv $DOTPATH/dotfiles/_config/starship.toml ~/.config/starship.toml

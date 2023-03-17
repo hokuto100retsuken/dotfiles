@@ -1,29 +1,46 @@
 #!/bin/bash
 
-# linux
+echo 'setup'
+
+DOTPATH=$(pwd)
+CONFIG_PATH=~/.config/nvim
+
+echo $DOTPATH
+
+if [ ! -d "$CONFIG_PATH" ]; then
+  mkdir -p ~/.config/nvim
+fi
+
+ln -sfv $DOTPATH/dotfiles/_zshrc ~/.zshrc
+ln -sfv $DOTPATH/dotfiles/_config/starship.toml ~/.config/starship.toml
+
+# nvim setting 
+ln -sfv $DOTPATH/dotfiles/_config/nvim/init.lua ~/.config/nvim/init.lua
+ln -sfv $DOTPATH/dotfiles/_config/nvim/lua ~/.config/nvim/
+
+# tmux config
+ln -sfv $DOTPATH/dotfiles/_tmux.conf ~/.tmux.conf
+
+linux
 if  [ "$(uname)" == "Linux" ]; then
 
+  sudo apt-get -y update
+  sudo apt-get -y upgrade
+
   sudo apt-get install -y git \
-  			build-essential \
-			procps \
-			curl \
-			file \
-			ripgrep \
-			nvim
+        build-essential \
+        procps \
+        curl \
+        file \
+        ripgrep \
+		nvim
 
   sudo apt install -y gnome-tweaks \
-		      peco \
-  		      bat \
-		      tig
+        peco \
+        bat \
+        tig
 
   curl https://rtx.pub/install.sh | sh
-
-  # WSL環境
-  if [ -n "$WSL_DISTRO_NAME" ] || [ -f "/run/WSL/4.0/microsoft-standard" ]; then
-    echo -e "\neval \"\$(/usr/bin/rtx activate -s zsh)\"" >> ~/.zshrc
-  else
-    echo -e "\neval \"\$(/home/hkt100rtkn/.local/share/rtx/bin/rtx activate -s zsh)\"" >> ~/.zshrc
-  fi
   
   rtx plugin add ghq
   rtx install ghq
@@ -31,10 +48,10 @@ if  [ "$(uname)" == "Linux" ]; then
   # inatall docker
 
   # HomeBrewのインストール
-  # if [ ! -x "`which brew`" ]; then
-  #   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  #   brew update
-  # fi
+  if [ ! -x "`which brew`" ]; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    brew update
+  fi
 fi
 
 # Mac
@@ -65,5 +82,7 @@ if  [ "$(uname)" == "Darwin" ]; then
 fi
 
 # 共通
+brew install starship
+
 git config --global core.editor "nvim"
 

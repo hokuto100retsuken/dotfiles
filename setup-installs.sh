@@ -1,6 +1,6 @@
 #!/bin/bash
 
-linux
+# linux
 if  [ "$(uname)" == "Linux" ]; then
 
   sudo apt-get -y update

@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo 'setup'
-
 DOTPATH=$(pwd)
 CONFIG_PATH=~/.config/nvim
 
@@ -33,7 +31,7 @@ if  [ "$(uname)" == "Linux" ]; then
         curl \
         file \
         ripgrep \
-		nvim
+	nvim
 
   sudo apt install -y gnome-tweaks \
         peco \

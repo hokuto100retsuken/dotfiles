@@ -1,5 +1,10 @@
-export PATH="$HOME/.asdf:$PATH"
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
+# WSL環境
+if [ -n "$WSL_DISTRO_NAME" ] || [ -f "/run/WSL/4.0/microsoft-standard" ]; then
+    eval "$(/home/hkt100rtkn/.local/share/rtx/bin/rtx activate -s zsh)" 
+else
+    eval "$(/usr/bin/rtx activate -s zsh)"
+fi

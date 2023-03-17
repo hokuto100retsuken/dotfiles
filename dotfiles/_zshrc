@@ -46,3 +46,5 @@ bindkey '^t' anyframe-widget-tmux-attach
 zshrcPath=`realpath ~/.zshrc`
 zshrcPath+=_`uname`
 [ -f $zshrcPath ] && . $zshrcPath
+
+eval "$(/home/hkt100rtkn/.local/share/rtx/bin/rtx activate -s zsh)"

@@ -61,4 +61,5 @@ fi
 brew install starship
 
 git config --global core.editor "nvim"
+git config --global ghq.root '~/src'
 

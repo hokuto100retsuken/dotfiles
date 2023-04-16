@@ -1,8 +1,16 @@
 #!/bin/bash
 
-# linux
-if  [ "$(uname)" == "Linux" ]; then
+# Function to install common packages
+install_common_packages() {
 
+  git config --global core.editor "nvim"
+  git config --global ghq.root '~/src'
+}
+
+# Install packages for Ubuntu
+install_ubuntu() {
+  install_common_packages
+ 
   sudo apt-get -y update
   sudo apt-get -y upgrade
 
@@ -12,54 +20,57 @@ if  [ "$(uname)" == "Linux" ]; then
         curl \
         file \
         ripgrep \
-	nvim
+        nvim
 
   sudo apt install -y gnome-tweaks \
         peco \
         bat \
         tig
 
-  curl https://rtx.pub/install.sh | sh
+    # curl https://rtx.pub/install.sh | sh
 
-  # inatall docker
+  # Install docker
+  sudo apt-get install -y docker.io
+}
 
-  # HomeBrewのインストール
-  if [ ! -x "`which brew`" ]; then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    brew update
-  fi
-fi
+# Install packages for EndeavourOS
+install_endeavouros() {
+  install_common_packages
 
-# Mac
-if  [ "$(uname)" == "Darwin" ]; then
+  yay -Syyu
+  # yay -S docker
 
-  sudo softwareupdate --install-rosetta
+  # Install docker
+}
 
-  # HomeBrewのインストール
-  if [ ! -x "`which brew`" ]; then
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    brew update
-  fi
+# Install packages for macOS
+install_mac() {
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  brew update
 
-  brew install visual-studio-code  --cask
-  brew install docker              --cask
-  brew install iterm2              --cask
-  brew install sequel-pro          --cask
+  brew install visual-studio-code --cask
+  brew install docker --cask
+  brew install iterm2 --cask
+  brew install sequel-pro --cask
 
-  brew install git
-  brew install wget
-  brew install asdf
-  brew install peco
-  brew install z
-  brew install ghq
+  install_common_packages
+
+  # Install docker
   brew install docker-compose
-  brew install gh 
+}
 
+# Determine the OS and call the appropriate function
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  if [ -f "/etc/arch-release" ]; then
+    install_endeavouros
+  else
+    # install_ubuntu
+        echo 'ubuntu'
+  fi
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+  # install_mac
+  echo 'mac'
+else
+  echo "Unsupported OS"
+  exit 1
 fi
-
-# 共通
-brew install starship
-
-git config --global core.editor "nvim"
-git config --global ghq.root '~/src'
-

@@ -37,7 +37,14 @@ install_ubuntu() {
 install_endeavouros() {
   install_common_packages
 
-  yay -Syyu
+  yay paru
+  paru -Syyu
+
+  paru ghq
+  paru peco
+
+   sudo pacman -S starship
+
   # yay -S docker
 
   # Install docker

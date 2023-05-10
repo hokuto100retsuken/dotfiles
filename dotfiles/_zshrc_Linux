@@ -1,6 +1,6 @@
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-eval "$(/home/hkt100rtkn/.local/share/rtx/bin/rtx activate -s zsh)" 
+# eval "$(/home/hkt100rtkn/.local/share/rtx/bin/rtx activate -s zsh)" r
 
 eval "$(starship init zsh)"

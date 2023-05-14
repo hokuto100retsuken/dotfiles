@@ -44,4 +44,3 @@ bindkey '^t' anyframe-widget-tmux-attach
 zshrcPath=`realpath ~/.zshrc`
 zshrcPath+=_`uname`
 [ -f $zshrcPath ] && . $zshrcPath
-

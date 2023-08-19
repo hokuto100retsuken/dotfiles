@@ -2,20 +2,17 @@
 
 # Function to install common packages
 install_common_packages() {
-
   git config --global core.editor "nvim"
   git config --global ghq.root '~/src'
-
   git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
 }
 
 # Install packages for Ubuntu
 install_ubuntu() {
   install_common_packages
- 
+  
   sudo apt-get -y update
   sudo apt-get -y upgrade
-
   sudo apt-get install -y git \
         build-essential \
         procps \
@@ -23,58 +20,46 @@ install_ubuntu() {
         file \
         ripgrep \
         nvim
-
   sudo apt install -y gnome-tweaks \
         peco \
         bat \
         tig
 
-    # curl https://rtx.pub/install.sh | sh
+  # curl https://rtx.pub/install.sh | sh
 
   # Install docker
   sudo apt-get install -y docker.io
 }
 
-# Install packages for EndeavourOS
-install_endeavouros() {
+# Install packages for archlinux
+install_archlinux() {
   install_common_packages
-
   yay paru
   paru -Syyu
-
   paru ghq
   paru peco
-
-   sudo pacman -S starship
-
+  sudo pacman -S starship
   # yay -S docker
-
-  # Install docker
 }
 
 # Install packages for macOS
 install_mac() {
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   brew update
-
   brew install visual-studio-code --cask
   brew install docker --cask
   brew install iterm2 --cask
   brew install sequel-pro --cask
-
   install_common_packages
-
-  # Install docker
   brew install docker-compose
 }
 
 # Determine the OS and call the appropriate function
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   if [ -f "/etc/arch-release" ]; then
-    install_endeavouros
+    install_archlinux
   else
-    # install_ubuntu
-        echo 'ubuntu'
+    install_ubuntu
   fi
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   # install_mac

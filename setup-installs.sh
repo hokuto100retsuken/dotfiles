@@ -39,7 +39,13 @@ install_archlinux() {
   paru ghq
   paru peco
   sudo pacman -S starship
-  # yay -S docker
+  
+  # setup japanese
+  sudo pacman -S noto-fonts-cjk
+
+  sudo pacman -S fcitx5-mozc fcitx5-im
+  # /etc/environment に以下を追記  
+  sudo echo -e "\n# Fcitx5 env\nGTK_IM_MODULE=fcitx\nQT_IM_MODULE=fcitx\nXMODIFIERS=@im=fcitx" >> /etc/environment
 }
 
 # Install packages for macOS

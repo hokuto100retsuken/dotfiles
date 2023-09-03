@@ -30,14 +30,17 @@ zinit light zsh-users/zsh-completions
 zinit light zdharma/fast-syntax-highlighting
 zinit light mollifier/anyframe
 zinit light asdf-vm/asdf
-
-bindkey '^f' anyframe-widget-cdr
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
-bindkey '^r' anyframe-widget-execute-history
+
+# bindkey
+bindkey '^a' beginning-of-line
 bindkey '^b' anyframe-widget-checkout-git-branch
+bindkey '^e' end-of-line
+bindkey '^f' anyframe-widget-cdr
 bindkey '^g' anyframe-widget-cd-ghq-repository
 bindkey '^k' anyframe-widget-kill
+bindkey '^r' anyframe-widget-execute-history
 bindkey '^t' anyframe-widget-tmux-attach
 
 # load .zshrc_*

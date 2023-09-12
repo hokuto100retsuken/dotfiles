@@ -41,6 +41,9 @@ install_archlinux() {
   yay ghq
   yay fzf
   yay bat
+  yay exa
+  yay fd
+  
   # sudo pacman -S starship
   
   # setup japanese

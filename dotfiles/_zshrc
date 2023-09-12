@@ -14,7 +14,7 @@ export SAVEHIST=100000
 setopt extended_history
 
 alias dc='docker-compose'
-alias ls='ls -F --color=auto'
+alias ls='exa -F --color=auto'
 
 ### Added by Zplug's installer
 if [[ ! -f $HOME/.zplug/init.zsh ]]; then

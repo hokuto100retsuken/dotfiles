@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 autoload -U compinit
 compinit -u
 
@@ -7,7 +14,7 @@ export SAVEHIST=100000
 setopt extended_history
 
 alias dc='docker-compose'
-alias bat='batcat'
+alias ls='ls -F --color=auto'
 
 ### Added by Zplug's installer
 if [[ ! -f $HOME/.zplug/init.zsh ]]; then
@@ -15,18 +22,26 @@ if [[ ! -f $HOME/.zplug/init.zsh ]]; then
 fi
 
 source $HOME/.zplug/init.zsh
+#zplugをzplug自身で管理
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 # Load plugins
-zplug "plugins/docker", from:oh-my-zsh
-zplug "plugins/git", from:oh-my-zsh
-zplug "zsh-users/zsh-autosuggestions"
+zplug "mafredri/zsh-async"
+zplug "zsh-users/zsh-history-substring-search"
 zplug "zsh-users/zsh-completions"
-zplug "zdharma/fast-syntax-highlighting"
+zplug "zsh-users/zsh-syntax-highlighting", as:plugin
 zplug "mollifier/anyframe"
 zplug "asdf-vm/asdf"
+zplug "chrissicool/zsh-256color"
+zplug "zsh-users/zsh-autosuggestions", as:plugin
+zplug "rupa/z", use:"*.sh"
 
 # Load theme (optional)
 # zplug "themes/robbyrussell", from:oh-my-zsh
+# zplug "sindresorhus/pure"
+# zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
+# zplug "agnoster/agnoster-zsh-theme", use:agnoster.zsh-theme
+zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
@@ -37,7 +52,7 @@ if ! zplug check --verbose; then
 fi
 
 # Then, source plugins and add commands to $PATH
-zplug load
+zplug load --verbose
 
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
@@ -56,3 +71,6 @@ bindkey '^t' anyframe-widget-tmux-attach
 zshrcPath=`realpath ~/.zshrc`
 zshrcPath+=_`uname`
 [ -f $zshrcPath ] && . $zshrcPath
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

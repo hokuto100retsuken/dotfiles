@@ -5,6 +5,8 @@ install_common_packages() {
   git config --global core.editor "nvim"
   git config --global ghq.root '~/src'
   git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
+
+  curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 }
 
 # Install packages for Ubuntu

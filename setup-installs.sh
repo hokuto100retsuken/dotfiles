@@ -40,7 +40,8 @@ install_archlinux() {
   yay -Syyu
   yay ghq
   yay fzf
-  sudo pacman -S starship
+  yay bat
+  # sudo pacman -S starship
   
   # setup japanese
   sudo pacman -S noto-fonts-cjk

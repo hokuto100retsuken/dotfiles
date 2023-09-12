@@ -35,9 +35,9 @@ install_ubuntu() {
 install_archlinux() {
   install_common_packages
   yay paru
-  paru -Syyu
-  paru ghq
-  paru peco
+  yay -Syyu
+  yay ghq
+  yay fzf
   sudo pacman -S starship
   
   # setup japanese

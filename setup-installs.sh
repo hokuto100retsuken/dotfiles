@@ -2,8 +2,6 @@
 
 # Function to install common packages
 install_common_packages() {
-  git config --global core.editor "nvim"
-  git config --global ghq.root '~/src'
   git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
 }
 

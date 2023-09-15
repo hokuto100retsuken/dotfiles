@@ -5,8 +5,6 @@ install_common_packages() {
   git config --global core.editor "nvim"
   git config --global ghq.root '~/src'
   git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
-
-  curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 }
 
 # Install packages for Ubuntu
@@ -43,7 +41,7 @@ install_archlinux() {
   yay bat
   yay exa
   yay fd
-  
+
   # sudo pacman -S starship
   
   # setup japanese
@@ -62,6 +60,12 @@ install_mac() {
   brew install docker --cask
   brew install iterm2 --cask
   brew install sequel-pro --cask
+  brew install peco
+  brew install ghq
+  brew install asdf
+  brew install exa
+  brew install bat
+  brew install sheldon
   install_common_packages
   brew install docker-compose
 }

@@ -17,26 +17,6 @@ export PATH="$HOME/.asdf/bin:$HOME/.asdf/shims:$PATH"
 alias dc='docker-compose'
 alias ls='exa -F --color=auto'
 
-function create_git_branch() {
-    # $GIT_USER環境変数が設定されているか確認
-    if [[ -n "$GIT_USER" ]]; then
-        GITUSERNAME=$GIT_USER
-    else
-        # Gitのユーザー名を取得
-        echo $(git config user.name)
-        GITUSERNAME=$(git config user.name)
-    fi
-
-    # 現在の日付を取得（形式: YYYYMMDDHHMMSS）
-    DATE=$(date +"%Y%m%d%H%M%S")
-
-    # ブランチ名を生成
-    BRANCH_NAME="${GITUSERNAME}-${DATE}"
-
-    # ブランチを作成
-    git checkout -b $BRANCH_NAME
-}
-
 eval "$(sheldon source)"
 
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook

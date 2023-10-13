@@ -18,6 +18,7 @@
   required = true
 [alias]
   delete-merged-branch = "!f () { git checkout $1; git branch --merged|egrep -v '\\*|develop|main|master'|xargs git branch -d; };f"
+  branch-date = "!f() { git checkout -b $(git config user.name)-$(date +'%Y%m%d%H%M%S'); }; f"
 [core]
     pager = delta
 

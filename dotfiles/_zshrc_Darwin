@@ -1,1 +1,2 @@
 eval "$(starship init zsh)"
+printf '\eP$f{"hook": "SourcedRcFileForWarp", "value": { "shell": "zsh"}}\x9c'

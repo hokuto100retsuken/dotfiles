@@ -1,4 +1,4 @@
-#!/bin/bash
+!/bin/bash
 
 # Function to install common packages
 install_common_packages() {

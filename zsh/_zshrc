@@ -14,7 +14,6 @@ export SAVEHIST=100000
 setopt extended_history
 export PATH="$HOME/.asdf/bin:$HOME/.asdf/shims:$PATH"
 
-alias dc='docker-compose'
 alias ls='exa -F --color=auto'
 
 eval "$(sheldon source)"

@@ -2,8 +2,11 @@
 require 'format'
 require 'status'
 
+local wezterm = require 'wezterm';
+
 return {
     color_scheme = 'Ef-Deuteranopia-Dark',
+    font = wezterm.font('Hack Nerd Font Mono'),
     window_background_opacity = 0.93,
     window_frame = {
         font_size = 12.0,

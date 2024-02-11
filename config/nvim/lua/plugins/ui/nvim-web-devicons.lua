@@ -1,4 +1,4 @@
-return {
+local web_devicons = {
     "nvim-tree/nvim-web-devicons",
     config = function()
         require("nvim-web-devicons").set_icon({
@@ -11,3 +11,5 @@ return {
         })
     end,
 }
+
+return web_devicons

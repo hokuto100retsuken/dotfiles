@@ -1,4 +1,4 @@
-return {
+local nvim_treesitter = {
     {
         "nvim-treesitter/nvim-treesitter",
         event = { "BufReadPre", "BufNewFile" },
@@ -59,3 +59,5 @@ return {
         end,
     },
 }
+
+return nvim_treesitter

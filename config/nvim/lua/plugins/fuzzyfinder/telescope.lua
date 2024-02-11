@@ -1,4 +1,4 @@
-return {
+local nvim_lualine = {
     "nvim-telescope/telescope.nvim",
     branch = "0.1.x",
     dependencies = {
@@ -34,3 +34,5 @@ return {
         keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
     end,
 }
+
+return nvim_lualine

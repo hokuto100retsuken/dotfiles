@@ -1,4 +1,4 @@
-return {
+local nvim_cmp = {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
@@ -54,3 +54,5 @@ return {
         })
     end,
 }
+
+return nvim_cmp

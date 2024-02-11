@@ -1,4 +1,4 @@
-return {
+local linting = {
     "mfussenegger/nvim-lint",
     lazy = true,
     event = { "BufReadPre", "BufNewFile" }, -- to disable, comment this out
@@ -28,3 +28,5 @@ return {
         end, { desc = "Trigger linting for current file" })
     end,
 }
+
+return linting

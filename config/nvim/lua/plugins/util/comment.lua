@@ -1,4 +1,4 @@
-return {
+local nvim_comment = {
     "numToStr/Comment.nvim",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
@@ -17,3 +17,5 @@ return {
         })
     end,
 }
+
+return nvim_comment

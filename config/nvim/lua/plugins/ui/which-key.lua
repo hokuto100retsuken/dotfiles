@@ -1,4 +1,4 @@
-return {
+local wk = {
     "folke/which-key.nvim",
     event = "VeryLazy",
     init = function()
@@ -11,3 +11,5 @@ return {
         -- refer to the configuration section below
     },
 }
+
+return wk

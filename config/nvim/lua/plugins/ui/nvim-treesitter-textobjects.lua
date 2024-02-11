@@ -1,4 +1,4 @@
-return {
+local treesitter_textobjects = {
     "nvim-treesitter/nvim-treesitter-textobjects",
     lazy = true,
     config = function()
@@ -108,3 +108,5 @@ return {
         vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T)
     end,
 }
+
+return treesitter_textobjects

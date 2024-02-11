@@ -1,4 +1,4 @@
-return {
+local alpha_nvim = {
     "goolord/alpha-nvim",
     event = "VimEnter",
     dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -35,3 +35,5 @@ return {
         vim.cmd([[autocmd FileType alpha setlocal nofoldenable]])
     end,
 }
+
+return alpha_nvim

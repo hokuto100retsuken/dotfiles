@@ -12,6 +12,10 @@ local list = {
     -- filer
     'filer/nvim-tree',
 
+    -- fuzzy finder
+    'fuzzyfinder/telescope',
+    'fuzzyfinder/telescope-egrepify',
+
     -- git
     'git/gitsigns',
 

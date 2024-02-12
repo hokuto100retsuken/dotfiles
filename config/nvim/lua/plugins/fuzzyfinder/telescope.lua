@@ -1,38 +1,62 @@
-local nvim_lualine = {
-    "nvim-telescope/telescope.nvim",
-    branch = "0.1.x",
-    dependencies = {
-        "nvim-lua/plenary.nvim",
-        { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-        "nvim-tree/nvim-web-devicons",
+local utils = require('utils')
+local nmap = utils.keymaps.nmap
+
+-- telescope.vim
+local config = function()
+  local telescope = require("telescope")
+  local actions = require('telescope.actions')
+
+  telescope.load_extension("ui-select")
+  telescope.setup({
+    pickers = {
+      live_grep = {
+        mappings = {
+          i = {
+            ['<C-o>'] = actions.send_to_qflist + actions.open_qflist,
+            ['<C-l>'] = actions.send_to_loclist + actions.open_loclist,
+          }
+        }
+      }
     },
-    config = function()
-        local telescope = require("telescope")
-        local actions = require("telescope.actions")
+    extensions = {
+      ['ui-select'] = {
+        require('telescope.themes').get_dropdown({})
+      }
+    }
+  })
+end
 
-        telescope.setup({
-            defaults = {
-                path_display = { "truncate " },
-                mappings = {
-                    i = {
-                        ["<C-k>"] = actions.move_selection_previous, -- move to prev result
-                        ["<C-j>"] = actions.move_selection_next, -- move to next result
-                        ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-                    },
-                },
-            },
-        })
+local telescope = {
+  'nvim-telescope/telescope.nvim',
+  dependencies = {
+    { 'nvim-lua/plenary.nvim' },
+    { 'nvim-telescope/telescope-ui-select.nvim' },
+  },
+  init = function()
+    local function builtin(name)
+      return function(opt)
+        return function()
+          return require('telescope.builtin')[name](opt or {})
+        end
+      end
+    end
 
-        telescope.load_extension("fzf")
+    local function egrepify()
+      require('telescope').extensions.egrepify.egrepify({})
+    end
 
-        -- set keymaps
-        local keymap = vim.keymap -- for conciseness
-
-        keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
-        keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Fuzzy find recent files" })
-        keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
-        keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
-    end,
+    nmap('<C-p>', builtin('find_files')())
+    nmap('<C-f>', builtin('live_grep')())
+    nmap('mg', egrepify)
+    nmap('md', builtin('diagnostics')())
+    nmap('mf', builtin('current_buffer_fuzzy_find')())
+    nmap('mh', builtin('help_tags')({ lang = 'ja' }))
+    nmap('mo', builtin('oldfiles')())
+    nmap('ms', builtin('git_status')())
+    nmap('mc', builtin('commands')())
+    nmap('<Leader>s', builtin('lsp_document_symbols')())
+  end,
+  config = config,
 }
 
-return nvim_lualine
+return telescope

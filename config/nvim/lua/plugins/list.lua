@@ -12,6 +12,18 @@ local list = {
     'completion/nvim-surround',
     'completion/sonictemplate',
 
+    -- develop
+    'develop/vital-whiskey',
+    'develop/vital',
+
+    -- docs
+    'docs/helpful',
+    'docs/list2tree',
+    'docs/maketable',
+    'docs/markdown',
+    'docs/memolist',
+    'docs/previm',
+
     -- filer
     'filer/nvim-tree',
     -- 'filer/fern-renderer-nerdfont',
@@ -22,6 +34,7 @@ local list = {
     'fuzzyfinder/telescope-egrepify',
 
     -- git
+    'git/gina',
     'git/gitsigns',
 
     -- session

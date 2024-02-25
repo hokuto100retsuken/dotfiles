@@ -35,7 +35,11 @@ local list = {
 
     -- git
     'git/gina',
+    'git/git',
     'git/gitsigns',
+
+    -- lsp
+    'lsp/lspsaga',
 
     -- session
     'session/auto-session',
@@ -55,8 +59,9 @@ local list = {
 
     -- util
     'util/comment',
+    -- 'util/coppypath',
+    'util/notice',
     'util/nvim-autopairs',
-
 
     -- window
     'window/alpha-nvim',

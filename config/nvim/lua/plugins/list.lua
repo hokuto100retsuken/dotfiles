@@ -5,6 +5,7 @@ local list = {
 
     -- completion
     'completion/copilot',
+    'completion/copilot-chat',
     'completion/emmet',
     'completion/formatting',
     'completion/linting',

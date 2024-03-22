@@ -7,7 +7,7 @@ local list = {
     'completion/copilot',
     'completion/copilot-chat',
     'completion/emmet',
-    'completion/formatting',
+    -- 'completion/formatting',
     'completion/linting',
     'completion/nvim-cmp',
     'completion/nvim-surround',

@@ -1,9 +1,6 @@
-local utils = require('my/utils')
-local imap = utils.keymaps.imap
-
 local config = function()
   vim.g['copilot_no_tab_map'] = 1
-  imap('<Plug>(vimrc:copilot-dummy-map)', 'copilot#Accept("\\<Tab>")', { expr = true })
+  vim.api.nvim_set_keymap('i', '<Plug>(vimrc:copilot-dummy-map)', 'copilot#Accept("\\<Tab>")', { expr = true })
 end
 
 local copilot = {

@@ -1,5 +1,6 @@
-local utils = require('my/utils')
-local nmap = utils.keymaps.nmap
+local nmap = function(lhs, rhs, opts)
+  vim.api.nvim_set_keymap('n', lhs, rhs, opts)
+end
 
 local config = function()
   vim.g['fern#renderer'] = 'nerdfont'

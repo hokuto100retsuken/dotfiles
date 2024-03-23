@@ -1,5 +1,3 @@
-local utils = require("my/utils")
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -14,11 +12,11 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-local plugins = utils.array_map(
-  require('my/plugins/list'),
-  function (plugin)
-    return require('my/plugins/' .. plugin)
-  end
-)
+local plugins = {}
+local pluginList = require('my/plugins/list')
+
+for _, plugin in ipairs(pluginList) do
+  table.insert(plugins, require('my/plugins/' .. plugin))
+end
 
 require("lazy").setup(plugins)

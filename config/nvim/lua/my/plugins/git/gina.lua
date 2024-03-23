@@ -1,4 +1,4 @@
-local utils = require('utils')
+local utils = require('my/utils')
 local vmap = utils.keymaps.vmap
 local nmap = utils.keymaps.nmap
 

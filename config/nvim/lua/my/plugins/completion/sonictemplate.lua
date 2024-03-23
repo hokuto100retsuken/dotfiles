@@ -1,4 +1,4 @@
-local utils = require('utils')
+local utils = require('my/utils')
 local imap = utils.keymaps.imap
 
 local sonictemplate_config = function()

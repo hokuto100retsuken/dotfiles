@@ -62,6 +62,6 @@ keymap.set('n', 'sl', '<C-w>l')
 -- Emacs風
 -- keymap.set('i', '<C-f>', '<Right>')
 -- jjでEscする
-keymap.set('i','jj','<Esc>')
+-- keymap.set('i','jj','<Esc>')
 -- 設定ファイルを開く
 keymap.set('n','<F1>',':edit $MYVIMRC<CR>')

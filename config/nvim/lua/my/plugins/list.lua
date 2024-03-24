@@ -49,6 +49,9 @@ local list = {
     'statusline/bufferline',
     'statusline/lualine',
 
+    -- terminal
+    'terminal/toggleterm',
+
     -- ui
     'ui/dressing',
     'ui/harpoon',
@@ -65,7 +68,7 @@ local list = {
     'util/nvim-autopairs',
 
     -- window
-    'window/alpha-nvim',
+    -- 'window/alpha-nvim',
 
 }
 

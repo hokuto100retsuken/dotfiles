@@ -32,15 +32,16 @@ install_ubuntu() {
 # Install packages for archlinux
 install_archlinux() {
   install_common_packages
-  yay paru
+  yay -S paru
   yay -Syyu
-  yay ghq
-  yay fzf
-  yay bat
-  yay exa
-  yay fd
+  yay -S ghq
+  yay -S fzf
+  yay -S bat
+  yay -S exa
+  yay -S fd
 
   # sudo pacman -S starship
+  yay -S starship
   
   # setup japanese
   sudo pacman -S noto-fonts-cjk

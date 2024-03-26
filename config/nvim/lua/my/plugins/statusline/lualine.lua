@@ -55,6 +55,12 @@ local nvim_auto_session = {
                 theme = my_lualine_theme,
             },
             sections = {
+                lualine_c = {
+                    {
+                        'filename',
+                        path = 3,
+                    }
+                },
                 lualine_x = {
                     {
                         lazy_status.updates,

@@ -11,6 +11,6 @@ ln -sfv $PWD/wezterm/ ~/.config/wezterm
 [ -d ~/config/nvim ] || mv ~/.config/nvim ~/.config/nvim.bak
 ln -sfv $PWD/nvim ~/.config/nvim
 
-if [[ ! -e ~/.config/starship.toml ]]; then
+if [ ! -e ~/.config/starship.toml ]; then
   ln -sfv $PWD/starship.toml ~/.config/starship.toml
 fi

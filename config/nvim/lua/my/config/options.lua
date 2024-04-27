@@ -1,32 +1,38 @@
-vim.opt.encoding = 'utf-8'
-vim.opt.fileencoding = 'utf-8,euc-jp'
-vim.opt.termencoding = 'utf-8'
+-- Set encoding options
+local opt = vim.opt
+opt.encoding = 'utf-8' -- Set the character encoding
+opt.fileencoding = 'utf-8,euc-jp' -- Set the file encoding
+opt.fileencodings = 'utf-8,euc-jp,shift-jis' -- Set the file encodings
+opt.termencoding = 'utf-8' -- Set the terminal encoding
 
-vim.g.mapleader = " "
-vim.g["markdown_recommended_style"] = 0
-vim.opt.breakindent = true
-vim.opt.number = false
-vim.opt.incsearch = true
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.hlsearch = true
-vim.opt.autoindent = true
-vim.opt.smartindent = true
-vim.opt.virtualedit = "block"
-vim.opt.showtabline = 1
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.softtabstop = 2
-vim.opt.completeopt = 'menu,menuone,noselect'
-vim.opt.laststatus = 3
-vim.opt.scrolloff = 100
-vim.opt.cursorline = true
-vim.opt.helplang = 'ja'
-vim.opt.autowrite = true
-vim.opt.swapfile = false
-vim.opt.showtabline = 1
-vim.opt.diffopt = 'vertical,internal'
-vim.opt.clipboard:append({ vim.fn.has('mac') == 1 and 'unnamed' or 'unnamedplus' })
-vim.opt.grepprg = 'rg --vimgrep'
-vim.opt.grepformat = '%f:%l:%c:%m'
-vim.opt.mouse = {}
+-- Set global options
+local g = vim.g
+g.mapleader = " " -- Set the leader key
+g["markdown_recommended_style"] = 0 -- Disable the recommended style for markdown
+
+-- Set various options
+opt.breakindent = true -- Enable break indent
+opt.number = false -- Disable line numbers
+opt.incsearch = true -- Enable incremental search
+opt.ignorecase = true -- Ignore case in search
+opt.smartcase = true -- Enable smart case in search
+opt.hlsearch = true -- Highlight search results
+opt.autoindent = true -- Enable auto indent
+opt.smartindent = true -- Enable smart indent
+opt.virtualedit = "block" -- Enable virtual edit in block mode
+opt.showtabline = 1 -- Show the tab line
+opt.tabstop = 2 -- Set the tab stop width
+opt.shiftwidth = 2 -- Set the shift width
+opt.softtabstop = 2 -- Set the soft tab stop width
+opt.completeopt = 'menu,menuone,noselect' -- Set the complete options
+opt.laststatus = 3 -- Set the last status line option
+opt.scrolloff = 100 -- Set the scroll off option
+opt.cursorline = true -- Highlight the cursor line
+opt.helplang = 'ja' -- Set the help language to Japanese
+opt.autowrite = true -- Enable auto write
+opt.swapfile = false -- Disable swap file
+opt.diffopt = 'vertical,internal' -- Set the diff options
+opt.clipboard:append({ vim.fn.has('mac') == 1 and 'unnamed' or 'unnamedplus' }) -- Set the clipboard option
+opt.grepprg = 'rg --vimgrep' -- Set the grep program
+opt.grepformat = '%f:%l:%c:%m' -- Set the grep format
+opt.mouse = {} -- Disable mouse

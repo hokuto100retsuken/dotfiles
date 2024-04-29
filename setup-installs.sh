@@ -21,7 +21,6 @@ install_ubuntu() {
   sudo apt install -y gnome-tweaks \
         peco \
         bat \
-        tig
 
   # curl https://rtx.pub/install.sh | sh
 

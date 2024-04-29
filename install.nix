@@ -1,14 +1,15 @@
 { pkgs ? import <nixpkgs> {} }:
 [
-  pkgs.zsh
+  pkgs.asdf
   pkgs.bat
-  pkgs.exa
   pkgs.docker
   pkgs.docker-compose
+  pkgs.ghq
+  pkgs.exa
   pkgs.lazygit
   pkgs.neovim
-  pkgs.sheldon
   pkgs.peco
-  pkgs.ghq
+  pkgs.sheldon
   pkgs.starship
+  pkgs.zsh
 ]

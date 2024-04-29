@@ -79,6 +79,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   # install_mac
   echo 'mac'
+  install_mac
 else
   echo "Unsupported OS"
   exit 1

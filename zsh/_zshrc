@@ -9,7 +9,7 @@ autoload -U compinit
 compinit -u
 
 export HISTFILE=${HOME}/.zsh_history
-export HISTSIZE=1000
+export HISTSIZE=100000
 export SAVEHIST=100000
 setopt extended_history
 export PATH="$HOME/.asdf/bin:$HOME/.asdf/shims:$PATH"

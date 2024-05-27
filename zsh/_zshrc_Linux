@@ -4,5 +4,10 @@ if [ -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
-alias dc="docker-compose"
+if command -v sheldon &> /dev/null; then
+  eval "$(sheldon source)"
+fi
 
+eval "$(starship init zsh)"
+
+alias dc="docker-compose"

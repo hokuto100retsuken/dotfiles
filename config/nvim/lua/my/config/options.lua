@@ -4,7 +4,7 @@ local opt = vim.opt
 opt.encoding = 'utf-8'                       -- Set the character encoding
 opt.fileencoding = 'utf-8'                   -- Set the file encoding
 opt.fileencodings = 'utf-8,euc-jp,shift-jis' -- Set the file encodings
-opt.termencoding = 'utf-8'                   -- Set the terminal encoding
+-- opt.termencoding = 'utf-8'                   -- Set the terminal encoding
 
 -- Set global options
 local g = vim.g

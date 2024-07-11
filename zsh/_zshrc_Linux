@@ -10,4 +10,5 @@ fi
 
 eval "$(starship init zsh)"
 
-alias dc="docker-compose"
+alias docker-compose="docker compose"
+alias dc="docker compose"

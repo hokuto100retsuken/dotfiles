@@ -1,4 +1,4 @@
-!/bin/bash
+#/bin/bash
 
 # Function to install common packages
 install_common_packages() {
@@ -30,24 +30,25 @@ install_ubuntu() {
 
 # Install packages for archlinux
 install_archlinux() {
-  install_common_packages
-  yay -S paru
+  echo 'start install arch linux'
   yay -Syyu
   yay -S ghq
   yay -S fzf
   yay -S bat
   yay -S exa
   yay -S fd
+  yay -S neovim
 
   # sudo pacman -S starship
   yay -S starship
   
-  # setup japanese
-  sudo pacman -S noto-fonts-cjk
+  # # setup japanese
+  # sudo pacman -S noto-fonts-cjk
 
-  sudo pacman -S fcitx5-mozc fcitx5-im
-  # /etc/environment に以下を追記  
-  sudo echo -e "\n# Fcitx5 env\nGTK_IM_MODULE=fcitx\nQT_IM_MODULE=fcitx\nXMODIFIERS=@im=fcitx" >> /etc/environment
+  # sudo pacman -S fcitx5-mozc fcitx5-im
+  # # /etc/environment に以下を追記  
+  # sudo echo -e "\n# Fcitx5 env\nGTK_IM_MODULE=fcitx\nQT_IM_MODULE=fcitx\nXMODIFIERS=@im=fcitx" >> /etc/environment
+  echo 'end  install arch linux' 
 }
 
 # Install packages for macOS

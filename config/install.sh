@@ -5,10 +5,15 @@
 [ -d ~/.config/sheldon ] || mkdir -p ~/.config/sheldon
 ln -sfv $PWD/sheldon/plugins.toml ~/.config/sheldon/plugins.toml
 
-[ -d ~/.config/wezterm ] || mv ~/.config/wezterm ~/.config/wezterm.bak
+
+if [ -d ~/.config/wezterm ]; then
+  mv ~/.config/wezterm ~/.config/wezterm.bak
+fi
 ln -sfv $PWD/wezterm/ ~/.config/wezterm
 
-[ -d ~/config/nvim ] || mv ~/.config/nvim ~/.config/nvim.bak
+if [ -d ~/config/nvim ]; then
+   mv ~/.config/nvim ~/.config/nvim.bak
+fi
 ln -sfv $PWD/nvim ~/.config/nvim
 
 if [ ! -e ~/.config/starship.toml ]; then

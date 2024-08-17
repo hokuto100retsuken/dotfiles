@@ -13,7 +13,7 @@ g["markdown_recommended_style"] = 0 -- Disable the recommended style for markdow
 
 -- Set various options
 opt.breakindent = true                                                          -- Enable break indent
-opt.number = false                                                              -- Disable line numbers
+opt.number = true                                                               -- Disable line numbers
 opt.incsearch = true                                                            -- Enable incremental search
 opt.ignorecase = true                                                           -- Ignore case in search
 opt.smartcase = true                                                            -- Enable smart case in search

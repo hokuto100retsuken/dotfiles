@@ -49,9 +49,9 @@ config.colors = {
 
 -- タブの形をカスタマイズ
 -- タブの左側の装飾
-local SOLID_LEFT_ARROW = wezterm.nerdfonts.ple_lower_right_triangle
+local SOLID_LEFT_ARROW = wezterm.nerdfonts.ple_left_half_circle_thick
 -- タブの右側の装飾
-local SOLID_RIGHT_ARROW = wezterm.nerdfonts.ple_upper_left_triangle
+local SOLID_RIGHT_ARROW = wezterm.nerdfonts.ple_right_half_circle_thick
 
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
   local background = "#5c6d74"

@@ -1,51 +1,77 @@
 format = """
 $directory\
+[ ](fg:#88C0D0 bg:#1d2230)\
 $git_branch\
-$git_commit\
-$git_state\
-$git_metrics\
 $git_status\
-$cmd_duration\
-$line_break\
-$character\
+[ ](fg:#1d2230)\
+\n$character
 """
 
-scan_timeout = 10
+right_format = """
+$cmd_duration\
+$username\
+✨
+$time
+"""
 
-[cmd_duration]
-min_time = 5000 # ms
-
-[character]
-error_symbol = "[❯](bold red)"
-success_symbol = "[❯](bold green)"
-
-[directory]
-truncation_length = 100
-truncate_to_repo = false
-truncation_symbol = "…/"
-
-[aws]
-format = 'on [$symbol($profile )(\($region\) )]($style)'
-style = "bold blue"
-
-[aws.region_aliases]
-ap-northeast-1 = "jp"
-
-[custom.arch]
-command = "uname -m"
-when = """ test $(uname -m) = "x86_64" """
-style = "bold yellow"
-format = "[$output]($style)"
-
-[docker_context]
-format = "via [🐋 $context](blue bold)"
-
-[git_branch]
-symbol = " "
+# コマンドラインに1行分のスペースを入れる
+add_newline = true
 
 [username]
 style_user = "white bold"
 style_root = "black bold"
-format = "[$user🌱]($style) "
+format = "user: [$user]($style) "
 disabled = false
-show_always = true
+
+
+# left_promptとright_promptの間を何で埋めるか設定
+[fill]
+symbol = ' '
+
+[directory]
+style = "fg:#2E3440 bg:#88C0D0 bold"
+# format = "[ $path ]($style)"
+truncation_length = 10
+truncate_to_repo = false
+truncation_symbol = "…/"
+# truncation_symbol = ' ' # nf-fa-folder_open
+# truncate_to_repo = false
+# style = 'fg:#7aa2f7 bg:#1a1b26'
+read_only = ' 󰌾 ' # nf-md-lock
+read_only_style = 'fg:#f7768e bg:#1a1b26'
+format = '[ $path ]($style)[$read_only]($read_only_style)'
+
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+
+[aws]
+disabled = true
+[gcloud]
+disabled = true
+
+[git_branch]
+symbol = ""
+style = "bg:#1d2230"
+format = '[[ $symbol $branch ](fg:#769ff0 bg:#1d2230)]($style)'
+
+[git_status]
+style = "bg:#1d2230"
+format = '[[($all_status$ahead_behind )](fg:#769ff0 bg:#1d2230)]($style)'
+
+[cmd_duration]
+min_time = 1
+style = 'fg:#e0af68'
+format = "[$duration]($style)" # nf-pl-right_soft_divider, nf-mdi-clock
+
+[time]
+disabled = false
+time_format = "%R" # Hour:Minute Format
+# style = "bg:#1d2230"
+format = '[[   $time ](fg:#a0a9cb)]($style)'
+
+[character]
+vimcmd_symbol = '[V](bold green) '

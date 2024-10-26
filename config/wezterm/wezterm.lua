@@ -8,7 +8,7 @@ end
 config.automatically_reload_config = true
 config.font_size = 12.0
 config.use_ime = true
-config.window_background_opacity = 0.9
+config.window_background_opacity = 0.85
 config.macos_window_background_blur = 20
 
 ----------------------------------------------------
@@ -58,7 +58,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
   local foreground = "#FFFFFF"
   local edge_background = "none"
   if tab.is_active then
-    background = "#ae8b2d"
+    background = "#ADD8E6"
     foreground = "#FFFFFF"
   end
   local edge_foreground = background

@@ -19,3 +19,5 @@ ln -sfv $PWD/nvim ~/.config/nvim
 if [ ! -e ~/.config/starship.toml ]; then
   ln -sfv $PWD/starship.toml ~/.config/starship.toml
 fi
+
+ln -sfv $PWD/fish ~/.config/fish

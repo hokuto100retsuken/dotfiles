@@ -36,4 +36,4 @@ bindkey '^r' anyframe-widget-execute-history
 bindkey '^t' anyframe-widget-tmux-attach
 
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
-add-zsh-hook chpwd chpwd_recent_dirs
+add-zsh-hook chpwd chpwd_recent_dirseval "$(nodenv init -)"

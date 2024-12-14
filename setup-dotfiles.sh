@@ -20,3 +20,7 @@ ln -sfv $PWD/tmux/_tmux.conf ~/.tmux.conf
 
 # git config
 cp $PWD/git/_gitconfig ~/.gitconfig
+
+# fish
+[ -d ~/.config/fish ] || mkdir -p ~/.config/fish
+ln -sfv $PWD/config/fish ~/.config/fish

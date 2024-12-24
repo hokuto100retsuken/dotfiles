@@ -1,9 +1,9 @@
 #/bin/bash
 
 # Function to install common packages
-install_common_packages() {
-  git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
-}
+# install_common_packages() {
+#   git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
+# }
 
 # Install packages for Ubuntu
 install_ubuntu() {

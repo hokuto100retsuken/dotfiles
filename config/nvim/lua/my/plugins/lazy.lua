@@ -13,7 +13,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {}
-local pluginList = require('my/plugins/list')
+local pluginList = require('my/plugins/_list')
 
 for _, plugin in ipairs(pluginList) do
   table.insert(plugins, require('my/plugins/' .. plugin))

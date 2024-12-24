@@ -12,6 +12,7 @@ return {
     'nvim-cmp',          -- 高機能な補完エンジン
     'nvim-surround',     -- テキストを囲む操作を簡単に
     'sonictemplate',     -- テンプレートベースのコード生成
+    'luasnip',
 
     -- 開発支援
     'vital-whiskey',     -- Vimスクリプト用ユーティリティ

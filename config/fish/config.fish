@@ -27,14 +27,7 @@ alias docker-compose="docker compose"
 
 eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
-function list_git_branches
-    if test -d .git
-        set branch (git branch -a | fzf | sed 's/^[* ] //')
-        git checkout $branch
-    else
-        echo "This is not a Git repository."
-    end
+bind \cb '__git_branch'
+if bind -M insert > /dev/null 2>/dev/null
+    bind -M insert \cb '__git_branch'
 end
-
-bind \cb 'list_git_branches'
-

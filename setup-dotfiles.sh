@@ -9,12 +9,6 @@ ln -sfv $PWD/zsh/_zshrc ~/.zshrc
 [ -d ~/.config/sheldon ] || mkdir -p ~/.config/sheldon
 ln -sfv $PWD/config/sheldon/plugins.toml ~/.config/sheldon/plugins.toml
 
-## nvim
-# ~/.config/astronvim/lua/user/plugins のフォルダがないなら作成
-[ -d ~/.config/astronvim/lua/user/plugins ] || mkdir -p ~/.config/astronvim/lua/user/plugins
-ln -sfv $PWD/config/astronvim/lua/user/plugins/user.lua ~/.config/astronvim/lua/user/plugins/user.lua
-# ln -sfv $PWD/dotfiles/_config/starship.toml ~/.config/starship.toml
-
 # tmux config
 ln -sfv $PWD/tmux/_tmux.conf ~/.tmux.conf
 

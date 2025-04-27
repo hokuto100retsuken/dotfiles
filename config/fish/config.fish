@@ -37,3 +37,13 @@ end
 # key bind
 bind \cb 'switch_branch'
 
+set env_file "$HOME/.config/fish/envvars.txt"
+
+if test -f $env_file
+    while read -l key value
+        # 空行やコメント行をスキップ
+        if test -n "$key"; and not string match -q "#*" $key
+            set -gx $key $value
+        end
+    end < $env_file
+end

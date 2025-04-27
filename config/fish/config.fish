@@ -39,6 +39,7 @@ bind \cb 'switch_branch'
 
 set env_file "$HOME/.config/fish/envvars.txt"
 
+# スペース区切りの環境変数ファイルを読み込む
 if test -f $env_file
     while read -l key value
         # 空行やコメント行をスキップ

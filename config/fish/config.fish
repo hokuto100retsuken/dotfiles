@@ -48,3 +48,9 @@ if test -f $env_file
         end
     end < $env_file
 end
+
+# Load OS-specific config
+set os_specific_conf "$HOME/.config/fish/conf.d/(uname).fish"
+if test -f "$os_specific_conf"
+    source "$os_specific_conf"
+end

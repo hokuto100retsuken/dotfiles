@@ -1,86 +1,64 @@
-#/bin/bash
+#!/bin/bash
 
-# Function to install common packages
-# install_common_packages() {
-#   git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
-# }
+# This script installs necessary packages based on the operating system.
 
-# Install packages for Ubuntu
+# Function to install packages for Ubuntu
 install_ubuntu() {
-  install_common_packages
-  
+  echo "--- Installing packages for Ubuntu ---"
   sudo apt-get -y update
   sudo apt-get -y upgrade
-  sudo apt-get install -y git \
-        build-essential \
-        procps \
-        curl \
-        file \
-        ripgrep \
-        nvim
-  sudo apt install -y gnome-tweaks \
-        peco \
-        bat \
-
-  # curl https://rtx.pub/install.sh | sh
-
-  # Install docker
-  sudo apt-get install -y docker.io
-}
-
-# Install packages for archlinux
-install_archlinux() {
-  echo 'start install arch linux'
-  yay -Syyu
-  yay -S ghq
-  yay -S fzf
-  yay -S bat
-  yay -S exa
-  yay -S fd
-  yay -S neovim
-
-  # sudo pacman -S starship
-  yay -S starship
+  sudo apt-get install -y git build-essential procps curl file nvim gnome-tweaks peco
   
-  # # setup japanese
-  # sudo pacman -S noto-fonts-cjk
+  echo "--- Installing mise ---"
+  curl https://mise.run | sh
 
-  # sudo pacman -S fcitx5-mozc fcitx5-im
-  # # /etc/environment に以下を追記  
-  # sudo echo -e "\n# Fcitx5 env\nGTK_IM_MODULE=fcitx\nQT_IM_MODULE=fcitx\nXMODIFIERS=@im=fcitx" >> /etc/environment
-  echo 'end  install arch linux' 
+  echo "--- Installing aqua ---"
+  curl -sL https://raw.githubusercontent.com/aquaproj/aqua-installer/v2.2.0/aqua-installer | bash
+
+  echo "--- Installing Docker ---"
+  sudo apt-get install -y docker.io
+  echo "--------------------------------------"
 }
 
-# Install packages for macOS
+# Function to install packages for Arch Linux
+install_archlinux() {
+  echo "--- Installing packages for Arch Linux ---"
+  yay -Syyu
+  yay -S --noconfirm ghq neovim mise aqua-bin
+
+  echo "------------------------------------------"
+}
+
+# Function to install packages for macOS
 install_mac() {
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  echo "--- Installing packages for macOS ---"
+  # Check for Homebrew and install if we don't have it
+  if test ! $(which brew); then
+    echo "Installing homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
+
   brew update
-  brew install visual-studio-code --cask
-  brew install docker --cask
-  brew install iterm2 --cask
-  brew install sequel-pro --cask
-  brew install peco
-  brew install ghq
-  brew install asdf
-  brew install exa
-  brew install bat
-  brew install sheldon
-  install_common_packages
-  brew install docker-compose
+  brew install ghq sheldon
+  brew install --cask visual-studio-code docker iterm2 sequel-pro
+
+  # Install mise & aqua
+  brew install mise aqua
+  echo "-----------------------------------"
 }
 
 # Determine the OS and call the appropriate function
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  # Check for Arch Linux
   if [ -f "/etc/arch-release" ]; then
     install_archlinux
+  # Assume Ubuntu otherwise
   else
     install_ubuntu
   fi
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-  # install_mac
-  echo 'mac'
   install_mac
 else
-  echo "Unsupported OS"
+  echo "Unsupported OS: $OSTYPE"
   exit 1
 fi

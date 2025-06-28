@@ -1,0 +1,19 @@
+---
+# aqua.yaml
+# aqua - Declarative CLI Version Manager
+# https://aquaproj.github.io/
+registries:
+  - type: standard
+    ref: v4.93.0 # renovate: depName=aquaproj/aqua-registry
+
+packages:
+  # CLI
+  - name: cli/cli # gh
+  - name: junegunn/fzf
+  - name: BurntSushi/ripgrep # rg
+  - name: sharkdp/bat
+  - name: sharkdp/fd
+  - name: ogham/exa
+  - name: stedolan/jq
+  - name: mikefarah/yq
+  - name: starship/starship

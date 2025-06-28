@@ -2,8 +2,6 @@
 
 DOTPATH=$(pwd)
 
-ln -sfv $PWD/zsh/_zshrc ~/.zshrc
-
 ## sheldon
 # ~/.config/sheldon/ のフォルダがないなら作成
 [ -d ~/.config/sheldon ] || mkdir -p ~/.config/sheldon
@@ -16,5 +14,14 @@ ln -sfv $PWD/tmux/_tmux.conf ~/.tmux.conf
 cp $PWD/git/_gitconfig ~/.gitconfig
 
 # fish
-[ -d ~/.config/fish ] || mkdir -p ~/.config/fish
-ln -sfv $PWD/config/fish ~/.config/fish
+[ -d ~/.config/fish/functions ] || mkdir -p ~/.config/fish/functions
+ln -sfv $PWD/config/fish/config.fish ~/.config/fish/config.fish
+ln -sfv $PWD/config/fish/functions ~/.config/fish/functions
+
+# mise
+[ -d ~/.config/mise ] || mkdir -p ~/.config/mise
+ln -sfv $PWD/config/mise/config.toml ~/.config/mise/config.toml
+
+# aqua
+[ -d ~/.config/aqua ] || mkdir -p ~/.config/aqua
+ln -sfv $PWD/config/aqua/aqua.yaml ~/.config/aqua/aqua.yaml

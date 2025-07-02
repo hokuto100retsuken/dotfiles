@@ -5,8 +5,7 @@ set -g theme_display_git_default_branch yes
 set -g theme_color_scheme dark
 
 # ghq select option
-set -g GHQ_SELECTOR fzf
-set -g GHQ_SELECTOR_OPTS --reverse --height=40% --ansi --color bg+:13,hl:3,pointer:7
+set -g GHQ_SELECTOR peco
 
 # functions
 function switch_branch
@@ -17,7 +16,7 @@ function switch_branch
     set branches (git branch --format="%(refname:short)")
     if test (count $branches) -gt 0
         # fzf で選択（画面全体を消さず、入力下に表示）
-        set branch (string join \n $branches | fzf --height 20% --border --ansi)
+        set branch (string join $branches | peco)
         if test -n "$branch"
             set -l output (git checkout $branch 2>&1)
             set -l exit_status $status
@@ -36,6 +35,17 @@ end
 
 # key bind
 bind \cb 'switch_branch'
+
+# ghq select and cd
+function ghq_select
+    set selected_dir (ghq list -p | peco)
+    if test -n "$selected_dir"
+        cd "$selected_dir"
+    end
+    commandline -f repaint
+end
+
+bind \cg 'ghq_select'
 
 set env_file "$HOME/.config/fish/envvars.txt"
 

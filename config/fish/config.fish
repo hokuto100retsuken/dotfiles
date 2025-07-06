@@ -5,7 +5,7 @@ set -g theme_display_git_default_branch yes
 set -g theme_color_scheme dark
 
 # ghq select option
-set -g GHQ_SELECTOR peco
+set -g GHQ_SELECTOR fzf
 
 # functions
 function switch_branch
@@ -16,7 +16,7 @@ function switch_branch
     set branches (git branch --format="%(refname:short)")
     if test (count $branches) -gt 0
         # fzf で選択（画面全体を消さず、入力下に表示）
-        set branch (string join $branches | peco)
+        set branch (string join $branches | fzf --height 40% --layout=reverse)
         if test -n "$branch"
             set -l output (git checkout $branch 2>&1)
             set -l exit_status $status
@@ -38,7 +38,7 @@ bind \cb 'switch_branch'
 
 # ghq select and cd
 function ghq_select
-    set selected_dir (ghq list -p | peco)
+    set selected_dir (ghq list -p | fzf --height 40% --layout=reverse)
     if test -n "$selected_dir"
         cd "$selected_dir"
     end

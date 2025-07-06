@@ -19,9 +19,3 @@ ln -sfv $PWD/config/fish/config.fish ~/.config/fish/config.fish
 ln -sfv $PWD/config/fish/conf.d ~/.config/fish/conf.d
 ln -sfv $PWD/config/fish/functions ~/.config/fish/functions
 
-# aqua
-[ -d ~/.config/aqua ] || mkdir -p ~/.config/aqua
-ln -sfv $PWD/config/aqua/aqua.yaml ~/.config/aqua/aqua.yaml
-
-# Install aqua packages
-aqua i

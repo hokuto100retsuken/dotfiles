@@ -23,7 +23,6 @@
 │   ├── starship.toml # starship prompt
 │   └── ghostty/    # ghostty
 ├── git/            # Git関連の設定
-├── tmux/           # tmuxの設定
 ├── setup-all.sh    # すべてをセットアップするスクリプト
 └── ...
 ```

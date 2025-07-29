@@ -7,6 +7,10 @@ set -g theme_color_scheme dark
 # ghq select option
 set -g GHQ_SELECTOR fzf
 
+# fzf settings
+set -g FZF_DEFAULT_OPTS "--height 40% --layout=reverse-list --border --info=inline --cycle"
+set -g FZF_DEFAULT_COMMAND "fd --type f"
+
 # functions
 function switch_branch
     # 入力欄の再描画（fzf開始前に実行）
@@ -16,7 +20,7 @@ function switch_branch
     set branches (git branch --format="%(refname:short)")
     if test (count $branches) -gt 0
         # fzf で選択（画面全体を消さず、入力下に表示）
-        set branch (string join $branches | fzf --height 40% --layout=reverse)
+        set branch (printf '%s\n' $branches | fzf --preview-window=right:60% --preview="git log --oneline --graph --decorate --all -10 {}")
         if test -n "$branch"
             set -l output (git checkout $branch 2>&1)
             set -l exit_status $status

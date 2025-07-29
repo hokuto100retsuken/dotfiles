@@ -1,16 +1,26 @@
 format = """
 $directory\
-[ ](fg:#88C0D0 bg:#1d2230)\
+[ > ](fg:#ffffff bg:#1d2230)\
 $git_branch\
 $git_status\
-[ ](fg:#1d2230)\
+[ > ](fg:#ffffff bg:#1d2230)\
+$nodejs\
+$rust\
+$golang\
+$python\
+$docker_context\
+$kubernetes\
+$terraform\
+$aws\
+$gcloud\
 \n$character
 """
 
 right_format = """
 $cmd_duration\
+$memory_usage\
+$battery\
 $username\
-✨
 $time
 """
 
@@ -18,11 +28,10 @@ $time
 add_newline = true
 
 [username]
-style_user = "white bold"
-style_root = "black bold"
-format = "user: [$user]($style) "
+style_user = "white bold bg:#1d2230"
+style_root = "black bold bg:#1d2230"
+format = "[ $user ]($style)"
 disabled = false
-
 
 # left_promptとright_promptの間を何で埋めるか設定
 [fill]
@@ -30,48 +39,108 @@ symbol = ' '
 
 [directory]
 style = "fg:#2E3440 bg:#88C0D0 bold"
-# format = "[ $path ]($style)"
-truncation_length = 10
-truncate_to_repo = false
+truncation_length = 8
+truncate_to_repo = true
 truncation_symbol = "…/"
-# truncation_symbol = ' ' # nf-fa-folder_open
-# truncate_to_repo = false
-# style = 'fg:#7aa2f7 bg:#1a1b26'
-read_only = ' 󰌾 ' # nf-md-lock
+read_only = ' [RO] '
 read_only_style = 'fg:#f7768e bg:#1a1b26'
 format = '[ $path ]($style)[$read_only]($read_only_style)'
 
-
 [directory.substitutions]
-"Documents" = "󰈙 "
-"Downloads" = " "
-"Music" = " "
-"Pictures" = " "
+"Documents" = "DOC "
+"Downloads" = "DL "
+"Music" = "MUSIC "
+"Pictures" = "PIC "
+"Desktop" = "DESK "
+"src" = "SRC "
+"projects" = "PROJ "
+"work" = "WORK "
+"personal" = "PERS "
 
 [aws]
-disabled = true
+disabled = false
+symbol = "AWS"
+style = "fg:#ff9900 bg:#1d2230"
+format = '[ $symbol $profile ]($style)'
+
 [gcloud]
-disabled = true
+disabled = false
+symbol = "GCP"
+style = "fg:#4285f4 bg:#1d2230"
+format = '[ $symbol $project ]($style)'
 
 [git_branch]
-symbol = ""
-style = "bg:#1d2230"
-format = '[[ $symbol $branch ](fg:#769ff0 bg:#1d2230)]($style)'
+symbol = "󰘬"
+style = "fg:#769ff0 bg:#1d2230"
+format = '[ $symbol $branch ]($style)'
 
 [git_status]
-style = "bg:#1d2230"
-format = '[[($all_status$ahead_behind )](fg:#769ff0 bg:#1d2230)]($style)'
+style = "fg:#769ff0 bg:#1d2230"
+format = '[($all_status$ahead_behind )]($style)'
 
 [cmd_duration]
-min_time = 1
-style = 'fg:#e0af68'
-format = "[$duration]($style)" # nf-pl-right_soft_divider, nf-mdi-clock
+min_time = 2
+style = 'fg:#e0af68 bg:#1d2230'
+format = '[ ⏱ $duration ]($style)'
 
 [time]
 disabled = false
-time_format = "%R" # Hour:Minute Format
-# style = "bg:#1d2230"
-format = '[[   $time ](fg:#a0a9cb)]($style)'
+time_format = "%H:%M"
+style = "fg:#a0a9cb bg:#1d2230"
+format = '[ CLOCK $time ]($style)'
 
 [character]
 vimcmd_symbol = '[V](bold green) '
+
+# 新しいモジュールの追加
+[nodejs]
+symbol = "󰎙"
+style = "fg:#f7df1e bg:#1d2230"
+format = '[ $symbol $version ]($style)'
+
+[rust]
+symbol = "󱘗"
+style = "fg:#ce422b bg:#1d2230"
+format = '[ $symbol $version ]($style)'
+
+[golang]
+symbol = "󰟓"
+style = "fg:#00add8 bg:#1d2230"
+format = '[ $symbol $version ]($style)'
+
+[python]
+symbol = "󰌠"
+style = "fg:#3776ab bg:#1d2230"
+format = '[ $symbol $version ]($style)'
+
+[docker_context]
+symbol = "󰡨"
+style = "fg:#2496ed bg:#1d2230"
+format = '[ $symbol $context ]($style)'
+
+[kubernetes]
+symbol = "󰻈"
+style = "fg:#326ce5 bg:#1d2230"
+format = '[ $symbol $context ]($style)'
+
+[terraform]
+symbol = "󱁢"
+style = "fg:#7b42bc bg:#1d2230"
+format = '[ $symbol $workspace ]($style)'
+
+[memory_usage]
+symbol = "󰍛"
+style = "fg:#a0a9cb bg:#1d2230"
+format = '[ $symbol $ram ]($style)'
+threshold = 75
+disabled = false
+
+[battery]
+full_symbol = "󰁹"
+charging_symbol = "󰂄"
+discharging_symbol = "󰂃"
+unknown_symbol = "󰂑"
+empty_symbol = "󰂎"
+style = "fg:#a0a9cb bg:#1d2230"
+format = '[ $symbol$percentage ]($style)'
+disabled = false

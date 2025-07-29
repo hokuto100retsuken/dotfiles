@@ -11,8 +11,8 @@ end)
 local HEADER = ''
 local SYMBOL_COLOR = { '#ffb2cc', '#a4a4a4' }
 local FONT_COLOR = { '#dddddd', '#888888' }
-local BACK_COLOR = '#2d2d2d'
-local HOVER_COLOR = '#434343'
+local BACK_COLOR = '#2a2a2a'
+local HOVER_COLOR = '#3a3a3a'
 
 wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
   local index = tab.is_active and 1 or 2

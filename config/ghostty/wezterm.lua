@@ -8,7 +8,7 @@ end
 config.automatically_reload_config = true
 config.font_size = 12.0
 config.use_ime = true
-config.window_background_opacity = 0.85
+config.window_background_opacity = 0.9
 config.macos_window_background_blur = 20
 
 ----------------------------------------------------
@@ -31,7 +31,7 @@ config.window_frame = {
 
 -- タブバーを背景色に合わせる
 config.window_background_gradient = {
-  colors = { "#000000" },
+  colors = { "#0a0a0a" },
 }
 
 -- タブの追加ボタンを非表示

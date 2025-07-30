@@ -1,26 +1,13 @@
 format = """
+$username\
 $directory\
-[ > ](fg:#ffffff bg:#1d2230)\
 $git_branch\
 $git_status\
-[ > ](fg:#ffffff bg:#1d2230)\
-$nodejs\
-$rust\
-$golang\
-$python\
-$docker_context\
-$kubernetes\
-$terraform\
-$aws\
-$gcloud\
-\n$character
+$character
 """
 
 right_format = """
 $cmd_duration\
-$memory_usage\
-$battery\
-$username\
 $time
 """
 
@@ -28,23 +15,19 @@ $time
 add_newline = true
 
 [username]
-style_user = "white bold bg:#1d2230"
-style_root = "black bold bg:#1d2230"
+style_user = "fg:#ffffff bg:#a855f7 bold"
+style_root = "fg:#ffffff bg:#f87171 bold"
 format = "[ $user ]($style)"
 disabled = false
 
-# left_promptとright_promptの間を何で埋めるか設定
-[fill]
-symbol = ' '
-
 [directory]
-style = "fg:#2E3440 bg:#88C0D0 bold"
-truncation_length = 8
+style = "fg:#89b4fa"
+truncation_length = 3
 truncate_to_repo = true
-truncation_symbol = "…/"
+truncation_symbol = " > "
 read_only = ' [RO] '
-read_only_style = 'fg:#f7768e bg:#1a1b26'
-format = '[ $path ]($style)[$read_only]($read_only_style)'
+read_only_style = 'fg:#f87171'
+format = '[ $path ]($style)'
 
 [directory.substitutions]
 "Documents" = "DOC "
@@ -57,90 +40,110 @@ format = '[ $path ]($style)[$read_only]($read_only_style)'
 "work" = "WORK "
 "personal" = "PERS "
 
-[aws]
-disabled = false
-symbol = "AWS"
-style = "fg:#ff9900 bg:#1d2230"
-format = '[ $symbol $profile ]($style)'
-
-[gcloud]
-disabled = false
-symbol = "GCP"
-style = "fg:#4285f4 bg:#1d2230"
-format = '[ $symbol $project ]($style)'
-
 [git_branch]
 symbol = "󰘬"
-style = "fg:#769ff0 bg:#1d2230"
+style = "fg:#a6e3a1"
 format = '[ $symbol $branch ]($style)'
 
 [git_status]
-style = "fg:#769ff0 bg:#1d2230"
+style = "fg:#f87171"
 format = '[($all_status$ahead_behind )]($style)'
 
 [cmd_duration]
 min_time = 2
-style = 'fg:#e0af68 bg:#1d2230'
+style = 'fg:#fbbf24'
 format = '[ ⏱ $duration ]($style)'
 
 [time]
 disabled = false
 time_format = "%H:%M"
-style = "fg:#a0a9cb bg:#1d2230"
-format = '[ CLOCK $time ]($style)'
+style = "fg:#89b4fa"
+format = '[ 󰅐 $time ]($style)'
 
 [character]
-vimcmd_symbol = '[V](bold green) '
+success_symbol = "[❯](fg:#a6e3a1)"
+error_symbol = "[❯](fg:#f87171)"
+vimcmd_symbol = '[V](fg:#a6e3a1 bold) '
 
-# 新しいモジュールの追加
+# 言語モジュール（必要に応じて表示）
 [nodejs]
 symbol = "󰎙"
-style = "fg:#f7df1e bg:#1d2230"
+style = "fg:#a6e3a1"
 format = '[ $symbol $version ]($style)'
+disabled = true
+
+[ruby]
+symbol = "󰴾"
+style = "fg:#f87171"
+format = '[ $symbol $version ]($style)'
+disabled = true
 
 [rust]
 symbol = "󱘗"
-style = "fg:#ce422b bg:#1d2230"
+style = "fg:#f87171"
 format = '[ $symbol $version ]($style)'
+disabled = true
 
 [golang]
 symbol = "󰟓"
-style = "fg:#00add8 bg:#1d2230"
+style = "fg:#74c7ec"
 format = '[ $symbol $version ]($style)'
+disabled = true
 
 [python]
 symbol = "󰌠"
-style = "fg:#3776ab bg:#1d2230"
+style = "fg:#fbbf24"
 format = '[ $symbol $version ]($style)'
+disabled = true
 
 [docker_context]
-symbol = "󰡨"
-style = "fg:#2496ed bg:#1d2230"
-format = '[ $symbol $context ]($style)'
+disabled = true
 
 [kubernetes]
-symbol = "󰻈"
-style = "fg:#326ce5 bg:#1d2230"
-format = '[ $symbol $context ]($style)'
+disabled = true
 
 [terraform]
-symbol = "󱁢"
-style = "fg:#7b42bc bg:#1d2230"
-format = '[ $symbol $workspace ]($style)'
+disabled = true
+
+[aws]
+disabled = true
+
+[gcloud]
+disabled = true
 
 [memory_usage]
-symbol = "󰍛"
-style = "fg:#a0a9cb bg:#1d2230"
-format = '[ $symbol $ram ]($style)'
-threshold = 75
-disabled = false
+disabled = true
 
 [battery]
-full_symbol = "󰁹"
-charging_symbol = "󰂄"
-discharging_symbol = "󰂃"
-unknown_symbol = "󰂑"
-empty_symbol = "󰂎"
-style = "fg:#a0a9cb bg:#1d2230"
-format = '[ $symbol$percentage ]($style)'
-disabled = false
+disabled = true
+
+# その他の言語も無効化
+[java]
+disabled = true
+
+[php]
+disabled = true
+
+[typescript]
+disabled = true
+
+[c]
+disabled = true
+
+[csharp]
+disabled = true
+
+[swift]
+disabled = true
+
+[scala]
+disabled = true
+
+[elixir]
+disabled = true
+
+[haskell]
+disabled = true
+
+[zig]
+disabled = true

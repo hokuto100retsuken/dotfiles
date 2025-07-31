@@ -1,5 +1,5 @@
 # Set the theme. This can be a path to a file or a theme name.
-theme = "catppuccin-mocha"
+theme = "IR_Black"
 
 # Font configuration
 font-family = "HackGenConsole"

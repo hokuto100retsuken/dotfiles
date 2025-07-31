@@ -124,26 +124,5 @@ disabled = true
 [php]
 disabled = true
 
-[typescript]
-disabled = true
-
 [c]
-disabled = true
-
-[csharp]
-disabled = true
-
-[swift]
-disabled = true
-
-[scala]
-disabled = true
-
-[elixir]
-disabled = true
-
-[haskell]
-disabled = true
-
-[zig]
 disabled = true

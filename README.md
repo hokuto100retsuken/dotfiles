@@ -3,13 +3,21 @@
 個人用の設定ファイル（dotfiles）を管理するリポジトリです。
 `fish`, `mise`, `Neovim`, `ghostty` を中心とした、一貫性のある開発環境の構築を目指しています。
 
-## ✨ 特徴 (Features)
+## ✨ 主な使用ツール (Main Tools)
 
-- **シェル**: `fish` をデフォルトシェルとし、`sheldon` でプラグインを管理します。プロンプトには `starship` を使用します。
-- **ツール管理**: `mise` を使用して、CLIツールと各種言語のランタイム（Node.js, Python, Goなど）を宣言的に管理します。
-- **エディタ**: `Neovim` をメインエディタとし、`lazy.nvim` を用いてLuaでプラグインを構成しています。
-- **ターミナル**: `ghostty` を使用します。
-- **クロスプラットフォーム**: Linux (Ubuntu, Arch Linux) と macOS に対応しています。
+この開発環境を構成する主要なツールです。各ツールの設定は `config/` ディレクトリにまとめています。
+
+| カテゴリ | ツール | 役割 |
+| :--- | :--- | :--- |
+| **ターミナル** | [ghostty](https://github.com/ghostty/ghostty) | 高速でGPUアクセラレーションが効いたターミナルエミュレータ |
+| **シェル** | [fish](https://fishshell.com/) | 使いやすく高機能なシェル |
+| ├ **プロンプト** | [starship](https://starship.rs/) | 高速でカスタマイズ可能なプロンプト |
+| └ **ﾌﾟﾗｸﾞｲﾝ管理** | [sheldon](https://github.com/rossmacarthur/sheldon) | `fish` のプラグインマネージャ |
+| **エディタ** | [Neovim](https://neovim.io/) | 高速で拡張性の高いVimベースのエディタ |
+| **ツール管理** | [mise](https.mise.jdx.dev/) | CLIツールとランタイムのバージョン管理 |
+| **Git** | [gina.vim](https://github.com/lambdalisue/gina.vim) | Neovim上でのGit操作を非同期で行うプラグイン |
+
+クロスプラットフォーム (Linux / macOS) での一貫した操作性を目指しています。
 
 ## 📂 ディレクトリ構成
 

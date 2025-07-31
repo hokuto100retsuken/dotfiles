@@ -1,128 +1,64 @@
 format = """
-$username\
+[░▒▓](#a3aed2)\
+[  ](bg:#a3aed2 fg:#090c0c)\
+[](bg:#769ff0 fg:#a3aed2)\
 $directory\
+[](fg:#769ff0 bg:#394260)\
 $git_branch\
 $git_status\
-$character
-"""
-
-right_format = """
-$cmd_duration\
-$time
-"""
-
-# コマンドラインに1行分のスペースを入れる
-add_newline = true
-
-[username]
-style_user = "fg:#ffffff bg:#a855f7 bold"
-style_root = "fg:#ffffff bg:#f87171 bold"
-format = "[ $user ]($style)"
-disabled = false
+[](fg:#394260 bg:#212736)\
+$nodejs\
+$rust\
+$golang\
+$php\
+[](fg:#212736 bg:#1d2230)\
+$time\
+[ ](fg:#1d2230)\
+\n$character"""
 
 [directory]
-style = "fg:#89b4fa"
+style = "fg:#e3e5e5 bg:#769ff0"
+format = "[ $path ]($style)"
 truncation_length = 3
-truncate_to_repo = true
-truncation_symbol = " > "
-read_only = ' [RO] '
-read_only_style = 'fg:#f87171'
-format = '[ $path ]($style)'
+truncation_symbol = "…/"
 
 [directory.substitutions]
-"Documents" = "DOC "
-"Downloads" = "DL "
-"Music" = "MUSIC "
-"Pictures" = "PIC "
-"Desktop" = "DESK "
-"src" = "SRC "
-"projects" = "PROJ "
-"work" = "WORK "
-"personal" = "PERS "
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
 
 [git_branch]
-symbol = "󰘬"
-style = "fg:#a6e3a1"
-format = '[ $symbol $branch ]($style)'
+symbol = ""
+style = "bg:#394260"
+format = '[[ $symbol $branch ](fg:#769ff0 bg:#394260)]($style)'
 
 [git_status]
-style = "fg:#f87171"
-format = '[($all_status$ahead_behind )]($style)'
+style = "bg:#394260"
+format = '[[($all_status$ahead_behind )](fg:#769ff0 bg:#394260)]($style)'
 
-[cmd_duration]
-min_time = 2
-style = 'fg:#fbbf24'
-format = '[ ⏱ $duration ]($style)'
+[nodejs]
+symbol = ""
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
+[rust]
+symbol = ""
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
+[golang]
+symbol = ""
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
+[php]
+symbol = ""
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
 
 [time]
 disabled = false
-time_format = "%H:%M"
-style = "fg:#89b4fa"
-format = '[ 󰅐 $time ]($style)'
-
-[character]
-success_symbol = "[❯](fg:#a6e3a1)"
-error_symbol = "[❯](fg:#f87171)"
-vimcmd_symbol = '[V](fg:#a6e3a1 bold) '
-
-# 言語モジュール（必要に応じて表示）
-[nodejs]
-symbol = "󰎙"
-style = "fg:#a6e3a1"
-format = '[ $symbol $version ]($style)'
-disabled = true
-
-[ruby]
-symbol = "󰴾"
-style = "fg:#f87171"
-format = '[ $symbol $version ]($style)'
-disabled = true
-
-[rust]
-symbol = "󱘗"
-style = "fg:#f87171"
-format = '[ $symbol $version ]($style)'
-disabled = true
-
-[golang]
-symbol = "󰟓"
-style = "fg:#74c7ec"
-format = '[ $symbol $version ]($style)'
-disabled = true
-
-[python]
-symbol = "󰌠"
-style = "fg:#fbbf24"
-format = '[ $symbol $version ]($style)'
-disabled = true
-
-[docker_context]
-disabled = true
-
-[kubernetes]
-disabled = true
-
-[terraform]
-disabled = true
-
-[aws]
-disabled = true
-
-[gcloud]
-disabled = true
-
-[memory_usage]
-disabled = true
-
-[battery]
-disabled = true
-
-# その他の言語も無効化
-[java]
-disabled = true
-
-[php]
-disabled = true
-
-[c]
-disabled = true
+time_format = "%R" # Hour:Minute Format
+style = "bg:#1d2230"
+format = '[[  $time ](fg:#a0a9cb bg:#1d2230)]($style)'

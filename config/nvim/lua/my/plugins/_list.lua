@@ -7,9 +7,10 @@ return {
     -- 'copilot',        -- GitHub Copilotによる AI支援コーディング
     -- 'copilot-chat',   -- GitHub Copilotとのチャットインターフェース
     'emmet',             -- HTML/CSSの高速コーディング
-    -- 'formatting',     -- コードフォーマッティング
+    'formatting',     -- コードフォーマッティング
     'linting',           -- コードの静的解析
-    'nvim-cmp',          -- 高機能な補完エンジン
+    -- 'nvim-cmp',          -- 高機能な補完エンジン
+    -- 'codeium',           -- CodeiumによるAI補完
     'nvim-surround',     -- テキストを囲む操作を簡単に
     'sonictemplate',     -- テンプレートベースのコード生成
     'luasnip',
@@ -32,8 +33,8 @@ return {
     -- 'fern',           -- ファイルシステムエクスプローラ
 
     -- ファジーファインダー
-    'telescope',         -- 汎用的なファジーファインダー
-    'telescope-egrepify', -- Telescopeの拡張機能
+    -- 'telescope',         -- 汎用的なファジーファインダー
+    -- 'telescope-egrepify', -- Telescopeの拡張機能
 
     -- Git統合
     'gina',              -- 非同期Gitクライアント
@@ -47,14 +48,14 @@ return {
     'auto-session',      -- 自動セッション管理
 
     -- ステータスライン
-    'bufferline',        -- バッファラインの表示
+    -- 'bufferline',        -- バッファラインの表示
     'lualine',           -- カスタマイズ可能なステータスライン
 
     -- ターミナル
     'toggleterm',        -- トグル可能な組み込みターミナル
 
     -- UI改善
-    'dressing',          -- 入力と選択のUIを改善
+    -- 'dressing',          -- 入力と選択のUIを改善
     'harpoon',           -- ファイル間の素早い移動
     'nvim-treesitter',   -- 構文解析と強調表示
     'nvim-treesitter-textobjects', -- Treesitterベースのテキストオブジェクト
@@ -65,9 +66,10 @@ return {
     -- ユーティリティ
     'comment',           -- コメントアウトの簡易化
     -- 'coppypath',      -- ファイルパスのコピー機能
-    'notice',            -- 通知システム
+    -- 'notice',            -- 通知システム（無効化）
+    'nvim-notify',       -- 美しい通知システム
     'nvim-autopairs',    -- 自動括弧閉じ
 
     -- ウィンドウ
-    -- 'alpha-nvim',     -- 起動画面のカスタマイズ
+    'alpha-nvim',     -- 起動画面のカスタマイズ
 }

@@ -1,39 +1,29 @@
-local alpha_nvim = {
-    "goolord/alpha-nvim",
-    event = "VimEnter",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-        local alpha = require("alpha")
-        local dashboard = require("alpha.themes.dashboard")
+return {
+  'goolord/alpha-nvim',
+  config = function()
+    local alpha = require('alpha')
+    local dashboard = require('alpha.themes.dashboard')
 
-        -- Set header
-        dashboard.section.header.val = {
-            "                                                     ",
-            "  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ",
-            "  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ",
-            "  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ",
-            "  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ",
-            "  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ",
-            "  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
-            "                                                     ",
-        }
+    dashboard.section.header.val = {
+      "",
+      "  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ",
+      "  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ",
+      "  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ",
+      "  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ",
+      "  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ",
+      "  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
+      "",
+    }
 
-        -- Set menu
-        dashboard.section.buttons.val = {
-            dashboard.button("e", "  > New File", "<cmd>ene<CR>"),
-            dashboard.button("SPC ee", "  > Toggle file explorer", "<cmd>NvimTreeToggle<CR>"),
-            dashboard.button("SPC ff", "󰱼 > Find File", "<cmd>Telescope find_files<CR>"),
-            dashboard.button("SPC fs", "  > Find Word", "<cmd>Telescope live_grep<CR>"),
-            dashboard.button("SPC wr", "󰁯  > Restore Session For Current Directory", "<cmd>SessionRestore<CR>"),
-            dashboard.button("q", " > Quit NVIM", "<cmd>qa<CR>"),
-        }
+    dashboard.section.buttons.val = {
+      dashboard.button("f", "  Find File", ":Telescope find_files<CR>"),
+      dashboard.button("n", "  New File", ":ene<CR>"),
+      dashboard.button("r", "  Recent Files", ":Telescope oldfiles<CR>"),
+      dashboard.button("g", "  Live Grep", ":Telescope live_grep<CR>"),
+      dashboard.button("c", "  Config", ":e ~/.config/nvim/init.lua<CR>"),
+      dashboard.button("q", "  Quit", ":qa<CR>"),
+    }
 
-        -- Send config to alpha
-        alpha.setup(dashboard.opts)
-
-        -- Disable folding on alpha buffer
-        vim.cmd([[autocmd FileType alpha setlocal nofoldenable]])
-    end,
+    alpha.setup(dashboard.opts)
+  end
 }
-
-return alpha_nvim

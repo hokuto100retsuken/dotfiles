@@ -52,6 +52,12 @@ local nvim_cmp = {
                 }),
             },
         })
+
+        -- Setup for cmdline completion
+        cmp.setup.cmdline(':', {
+            mapping = cmp.mapping.preset.cmdline(),
+            sources = cmp.config.sources({}),
+        })
     end,
 }
 

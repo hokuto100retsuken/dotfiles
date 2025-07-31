@@ -1,41 +1,14 @@
-# Theme
-theme = catppuccin-mocha
+# Set the theme. This can be a path to a file or a theme name.
+theme = "catppuccin-mocha"
 
-# Font
-font-family = JetBrainsMonoNL Nerd Font Mono
-font-feature = -dlig
-font-size = 13
+# Font configuration
+font-family = "JetBrains Mono"
+font-size = 12
+# font-features = "ss08"
 
-font-style-bold = false
-font-style-italic = false
-font-style-bold-italic = false
-
-font-thicken = true
-font-thicken-strength = 1
-
-alpha-blending = linear
-
-adjust-cell-width = -1
-adjust-cell-height = 2
-
-# macOS
-macos-titlebar-style = hidden
-macos-window-shadow = false
-
-# Window
+# Window padding
 window-padding-x = 10
 window-padding-y = 10
-window-padding-balance = true
 
-# Shell
-shell-integration-features = no-cursor
-
-# Cursor
-cursor-style = block
-cursor-style-blink = false
-cursor-invert-fg-bg = true
-cursor-opacity = 0.8
-
-# Other
-mouse-hide-while-typing = true
-resize-overlay = never
+# Cursor style
+cursor-style = "block"

@@ -47,6 +47,8 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
             "ghostty"
             "nerd-fonts-hack-gen"
             "nerd-fonts-jetbrains-mono"
+            "docker"
+            "docker-compose"
         )
     else
         echo "Unsupported Linux distribution. Please install packages manually."

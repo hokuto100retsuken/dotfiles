@@ -42,6 +42,11 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
             "starship"
             "mise"
             "grc"
+            "zoxide"
+            "zellij"
+            "ghostty"
+            "nerd-fonts-hack-gen"
+            "nerd-fonts-jetbrains-mono"
         )
     else
         echo "Unsupported Linux distribution. Please install packages manually."

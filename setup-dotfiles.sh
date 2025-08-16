@@ -28,3 +28,6 @@ ln -sfv $PWD/config/nvim/init.lua ~/.config/nvim/init.lua
 ln -sfv $PWD/config/nvim/lua ~/.config/nvim/lua
 ln -sfv $PWD/config/nvim/sonictemplate ~/.config/nvim/sonictemplate
 
+# zellij
+[ -d ~/.config/zellij ] || mkdir -p ~/.config/zellij
+ln -sfv $PWD/config/zellij/config.kdl ~/.config/zellij/config.kdl

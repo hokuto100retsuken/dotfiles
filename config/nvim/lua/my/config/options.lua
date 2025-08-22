@@ -46,7 +46,7 @@ opt.smartcase = true        -- Enable smart case in search
 opt.scrolloff = 10          -- Lines of context around cursor
 
 -- Command execution
-opt.shell = 'zsh'           -- Set shell
+opt.shell = 'fish'           -- Set shell
 opt.inccommand = 'split'    -- Live preview for :substitute
 
 -- Completion

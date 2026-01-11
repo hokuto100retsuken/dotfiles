@@ -68,3 +68,4 @@ set os_specific_conf "$HOME/.config/fish/conf.d/(uname).fish"
 if test -f "$os_specific_conf"
     source "$os_specific_conf"
 end
+fish_add_path $HOME/.local/bin

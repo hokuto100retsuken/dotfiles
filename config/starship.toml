@@ -1,15 +1,15 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-[](blue)\
+[](mauve)\
 $os\
 $username\
-[](bg:blue fg:blue)\
+[](bg:blue fg:mauve)\
 $directory\
-[](bg:green fg:blue)\
+[](bg:yellow fg:blue)\
 $git_branch\
 $git_status\
-[](fg:yellow bg:green)\
+[](bg:green fg:yellow)\
 $c\
 $rust\
 $golang\
@@ -32,7 +32,7 @@ palette = 'catppuccin_mocha'
 
 [os]
 disabled = false
-style = "bg:blue fg:crust"
+style = "bg:mauve fg:crust"
 
 [os.symbols]
 Windows = ""
@@ -57,8 +57,8 @@ RedHatEnterprise = "󱄛"
 
 [username]
 show_always = true
-style_user = "bg:blue fg:crust"
-style_root = "bg:blue fg:crust"
+style_user = "bg:mauve fg:crust"
+style_root = "bg:mauve fg:crust"
 format = '[ $user]($style)'
 
 [directory]
@@ -76,12 +76,12 @@ truncation_symbol = "…/"
 
 [git_branch]
 symbol = ""
-style = "bg:green fg:crust"
-format = '[[ $symbol $branch ](fg:crust bg:green)]($style)'
+style = "bg:yellow fg:crust"
+format = '[[ $symbol $branch ](fg:crust bg:yellow)]($style)'
 
 [git_status]
-style = "bg:green fg:crust"
-format = '[[($all_status$ahead_behind )](fg:crust bg:green)]($style)'
+style = "bg:yellow fg:crust"
+format = '[[($all_status$ahead_behind )](fg:crust bg:yellow)]($style)'
 
 [nodejs]
 symbol = ""

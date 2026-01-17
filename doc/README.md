@@ -1,123 +1,131 @@
-# Neovim 使い方まとめ
+# My Neovim Configuration
 
-このドキュメントは、`dotfiles` の Neovim 設定（`config/nvim`）に基づく使い方の要点をまとめたものです。
+This is my personal Neovim configuration, optimized for modern and efficient development.
+これは、モダンで効率的な開発のために最適化された、私の個人的なNeovim設定です。
 
-## 目次
-- 基本設定（オプション）
-- キーマップ（共通）
-- ファイル操作（nvim-tree）
-- 検索/ジャンプ（telescope）
-- Lint/Format
-- Git（gina, git.nvim, gitsigns）
-- ターミナル（toggleterm）
-- ウィンドウ操作（vim-maximizer）
-- マーク/ジャンプ（harpoon）
-- コメント（Comment.nvim）
-- 囲み操作（nvim-surround）
-- 括弧補完（nvim-autopairs）
-- Markdown/Previm/Memolist
-- 起動画面（alpha-nvim）
+## Overview
 
-## 基本設定（オプション）
-- リーダーキー: スペース
-- 行番号表示: 通常行番号（相対行番号は無効）
-- マウス有効化、真の色（termguicolors）有効化
-- `cmdheight = 2`、`laststatus = 3`、`showtabline = 2`
-- インデント: スペース2、`smartindent` 有効
-- 検索: `hlsearch`, `incsearch`, `ignorecase` + `smartcase`
-- スクロール余白: `scrolloff = 10`
-- クリップボード: macOS では `unnamed`
-- シェル: `fish`
-- ヘルプ言語: `ja,en`
+This configuration aims to provide a fast, beautiful, and highly functional development environment. It uses `lazy.nvim` for plugin management and offers a wide range of features including LSP, auto-completion, Git integration, and an improved user interface.
 
-## キーマップ（共通）
-- 画面分割
-  - `ss`: 水平分割 + 次ウィンドウへ
-  - `sv`: 垂直分割 + 次ウィンドウへ
-- ウィンドウ移動: `sh`, `sj`, `sk`, `sl`
-- 設定を開く: `<F1>`
-- 通知履歴: `<leader>nh`
-- 通知クリア: `<leader>nc`
+この設定は、高速で美しく、高機能な開発環境を提供することを目指しています。プラグイン管理には `lazy.nvim` を使用し、LSP、自動補完、Git連携、UI改善など、幅広い機能を提供します。
 
-## ファイル操作（nvim-tree）
-- `<leader>ee`: トグル表示
-- `<leader>ef`: 現在ファイル位置でトグル
-- `<leader>ec`: 折りたたみ
-- `<leader>er`: リフレッシュ
+## Prerequisites
 
-## 検索/ジャンプ（telescope）
-- `<leader>ff`: ファイル検索
-- `<leader>fg`: ライブグレップ
-- `<leader>fe`: egrepify（拡張検索）
-- `<leader>fd`: 診断
-- `<leader>fl`: カレントバッファ検索
-- `<leader>fh`: ヘルプ（日本語指定）
-- `<leader>fo`: 最近使ったファイル
-- `<leader>fs`: Git ステータス
-- `<leader>fc`: コマンド一覧
-- `<leader>s`: LSP シンボル
+*   Neovim (v0.8.0 or later recommended)
+*   `git`
+*   A [Nerd Font](https://www.nerdfonts.com/) (for icons)
+*   [ripgrep](https://github.com/BurntSushi/ripgrep) (for `live_grep`)
+*   [lazygit](https://github.com/jesseduffield/lazygit) (optional, for Git UI)
 
-## Lint/Format
-- Lint（nvim-lint）
-  - 自動実行: `BufEnter`, `BufWritePost`, `InsertLeave`
-  - 手動実行: `<leader>l`
-  - linters: eslint_d（JS/TS/React/Svelte）、pylint（Python）
-- Format（conform.nvim）
-  - 設定済（フォーマッタ個別指定は未設定）。必要に応じて `opts.formatters_by_ft` を拡張。
+## Installation
 
-## Git
-- gina.vim（メインフロー）
-  - 基本起動: `gs`（status）、`gl`（log）、`gm`（blame）、`gb`（branch）
-  - URLコピー: `gu`（ノーマル/ビジュアル）
-  - status バッファ内: `gp` push、`gl` pull、`cm` commit、`ca` amend、`dp` パッチ、`gc` chaperon ほか
-- git.nvim（補助）
-  - `<leader>gb`: blame、`<leader>gd`: diff、`<leader>gD`: diff close
-  - `<leader>go`: repo を開く、`<leader>gp`: PR を開く、`<leader>gn`: PR 作成
-- gitsigns.nvim: 行差分表示（キーマップはデフォルト）
+1.  Clone this `dotfiles` repository.
+2.  Run the setup script from the root of the repository.
 
-## ターミナル（toggleterm）
-- 既定トグル: `<C-\>`
-- 表示: フロート、開始時 insert 非。
+```bash
+cd /path/to/dotfiles
+./setup-dotfiles.sh
+```
+This script will create symbolic links for the necessary configuration files, including Neovim's, in your home directory.
+Upon first launch, `lazy.nvim` will automatically install all the plugins.
 
-## ウィンドウ操作（vim-maximizer）
-- `<leader>sm`: 分割の最大化/戻す
+## Plugin Management
 
-## マーク/ジャンプ（harpoon）
-- `<leader>hm`: 現在ファイルをマーク
-- `<leader>hn`: 次のマークへ
-- `<leader>hp`: 前のマークへ
+Plugins are managed using [lazy.nvim](https://github.com/folke/lazy.nvim). The configuration is designed to be easily maintainable.
+プラグインは[lazy.nvim](https://github.com/folke/lazy.nvim)を使用して管理されます。メンテナンスが容易になるように設計されています。
 
-## コメント（Comment.nvim）
-- `gc` 系のプレフィックスでトグル（例: `gcc` 行、`gc` 選択範囲）
-- TS コンテキストに応じたコメント文字を自動判定
+*   **Plugin Specs**: Each plugin is configured in its own file under `lua/my/plugins/`.
+*   **各プラグイン設定**: 各プラグインは `lua/my/plugins/` ディレクトリ内の個別のファイルで設定されます。
 
-## 囲み操作（nvim-surround）
-- 代表例
-  - `ysiw"`: 単語を " で囲む
-  - `cs"'`: " を ' に変更
-  - `ds"`: " の囲みを削除
+### Adding a Plugin
 
-## 括弧補完（nvim-autopairs）
-- Insert 中の括弧やクォートの自動補完
-- nvim-cmp と連携（`confirm_done`）
+Simply create a new Lua file in the `lua/my/plugins/` directory. `lazy.nvim` will automatically detect and load it.
+`lua/my/plugins/` ディレクトリに新しいLuaファイルを作成するだけです。`lazy.nvim` が自動的にそれを検出して読み込みます。
 
-## Markdown/Previm/Memolist
-- Markdown: `plasticboy/vim-markdown`（フォールディング無効）
-- Previm: Markdown プレビュー（`ft=markdown` 時）
-- Memolist: `:MemoList`, `:MemoNew`
+Example `lua/my/plugins/new-plugin.lua`:
+```lua
+return {
+  "author/new-plugin.nvim",
+  -- Optional: add configuration below
+  opts = {},
+}
+```
 
-## 起動画面（alpha-nvim）
-- 起動後のダッシュボードに以下ボタン
-  - `f`: Find File、`n`: New File、`r`: Recent Files、`g`: Live Grep、`c`: Config、`q`: Quit
+### Disabling a Plugin
 
-## 補足（Treesitter Textobjects）
-- 移動: `]m`/`[m`（関数定義）、`]c`/`[c`（クラス）など
-- 選択: `am`/`im`（関数）、`ac`/`ic`（クラス） ほか
-- 置換スワップ: `<leader>na`, `<leader>pa` など（パラメータ/関数/プロパティ）
-- リピート: `;` / `,` で直前の move をリピート、`fFtT` もリピート対応
+To disable a plugin, you can either delete its file or add `enabled = false` to its specification.
+プラグインを無効にするには、そのファイルを削除するか、仕様に `enabled = false` を追加します。
 
-## 既知のリーダーキー
-- `<leader>` はスペース
+```lua
+return {
+  "author/some-plugin.nvim",
+  enabled = false,
+}
+```
 
----
-- さらに詳しい設定は `config/nvim/lua/my` 以下の各ファイルを参照してください。
+## Keymaps
+
+The leader key is `Space`.
+リーダーキーは `Space` です。
+
+### General
+
+| Key | Description |
+| :--- | :--- |
+| `<F1>` | Open the main configuration file (`init.lua`) / 設定ファイルを開く |
+| `ss` / `sv` | Split window horizontally / vertically / 画面を水平/垂直に分割 |
+| `s` + `h/j/k/l` | Move between windows / ウィンドウ間を移動 |
+| `<leader>nh` | Show notification history / 通知履歴を表示 |
+| `<leader>nc` | Dismiss all notifications / すべての通知を閉じる |
+
+### Telescope (Fuzzy Finder)
+
+| Key | Description |
+| :--- | :--- |
+| `<leader>ff` | Find files / ファイルを検索 |
+| `<leader>fg` | Grep in project / プロジェクト内をGrep検索 |
+| `<leader>fe` | Grep with `egrepify` / `egrepify`でGrep検索 |
+| `<leader>fd` | Show LSP diagnostics / LSPの診断情報を一覧表示 |
+| `<leader>fo` | Show old files / 最近開いたファイルを表示 |
+| `<leader>fs` | Show Git status / Gitのステータスを表示 |
+
+### Git
+
+| Key | Description |
+| :--- | :--- |
+| `<leader>gg` | Toggle `lazygit` terminal UI / `lazygit`のUIを開閉 |
+
+## Included Plugins
+
+Below is a list of the main plugins, categorized by function.
+以下は、主要なプラグインを機能別に分類したリストです。
+
+### UI
+
+*   [alpha-nvim](https://github.com/goolord/alpha-nvim): A beautiful dashboard.
+*   [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim): Statusline.
+*   [nightfox.nvim](https://github.com/EdenEast/nightfox.nvim): Colorscheme.
+*   [nvim-notify](https://github.com/rcarriga/nvim-notify): Notification manager.
+*   [nvim-tree.lua](https://github.com/nvim-tree/nvim-tree.lua): File explorer.
+*   [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons): Icons for files and UI.
+*   [which-key.nvim](https://github.com/folke/which-key.nvim): Displays keybinding hints.
+
+### Coding Assistance
+
+*   [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter): Advanced syntax highlighting and parsing.
+*   (LSP, completion, and linting plugins are configured in `linting.lua` and other files)
+
+### Git Integration
+
+*   [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim): Git decorations in the sign column.
+*   [toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim) with `lazygit`.
+
+### Utility
+
+*   [auto-session](https://github.com/rmagatti/auto-session): Session manager.
+*   [harpoon](https://github.com/ThePrimeagen/harpoon): File and command quick access.
+*   [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim): Highly extendable fuzzy finder.
+*   [helpful.nvim](https://github.com/loctvl842/helpful.nvim): Better help viewer.
+
+For more details, please refer to the configuration files in the `lua/my/plugins/` directory.
+詳細については `lua/my/plugins/` ディレクトリ内の設定ファイルを参照してください。

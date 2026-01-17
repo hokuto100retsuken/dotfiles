@@ -18,6 +18,14 @@ local toggleterm = {
             close_on_exit = true,
             shell = vim.o.shell,
         }
+
+        -- Lazygit terminal
+        local Terminal = require('toggleterm.terminal').Terminal
+        local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = 'float' })
+
+        function _LAZYGIT_TOGGLE()
+            lazygit:toggle()
+        end
     end,
 }
 

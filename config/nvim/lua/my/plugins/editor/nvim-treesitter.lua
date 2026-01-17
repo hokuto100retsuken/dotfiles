@@ -6,6 +6,7 @@ local nvim_treesitter = {
         dependencies = {
             "nvim-treesitter/nvim-treesitter-textobjects",
             "windwp/nvim-ts-autotag",
+            "JoosepAlviste/nvim-ts-context-commentstring",
         },
         config = function()
             -- import nvim-treesitter plugin
@@ -52,6 +53,11 @@ local nvim_treesitter = {
                         node_decremental = "<bs>",
                     },
                 },
+                rainbow = {
+                    enable = true,
+                    extended_mode = true,
+                    max_file_lines = nil,
+                }
             })
 
             -- enable nvim-ts-context-commentstring plugin for commenting tsx and jsx

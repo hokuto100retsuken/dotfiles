@@ -1,2 +1,26 @@
+# Neovim
 lazy-lock.json
+
+# Fish shell
 config/fish/functions/
+
+# バックアップファイル
+*.bak
+*.back
+*.backup
+*.old
+*.orig
+*.swp
+*.tmp
+
+# OS固有ファイル
+.DS_Store
+Thumbs.db
+
+# エディタ固有ファイル
+.vscode/
+.idea/
+*.sublime-*
+
+# 一時ファイル
+*.log

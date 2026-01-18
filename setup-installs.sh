@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -uo pipefail
 
 # This script installs essential packages using the appropriate package manager for the OS.
 
@@ -113,16 +113,38 @@ else
 fi
 
 echo "Installing packages using $PACKAGE_MANAGER..."
+echo ""
 
 # Install packages one by one to handle errors better
+failed_packages=()
+success_count=0
+total_count=${#packages[@]}
+
 for package in "${packages[@]}"; do
-    echo "Installing $package..."
-    if $INSTALL_CMD "$package"; then
-        echo "✓ $package installed successfully"
+    echo -n "Installing $package... "
+    if $INSTALL_CMD "$package" &>/dev/null; then
+        echo "✓"
+        ((success_count++))
     else
-        echo "✗ Failed to install $package"
-        # Continue with other packages instead of exiting
+        echo "✗"
+        failed_packages+=("$package")
     fi
 done
 
-echo "Package installation completed."
+echo ""
+echo "=========================================="
+echo "パッケージインストール結果:"
+echo "  成功: $success_count / $total_count"
+if [[ ${#failed_packages[@]} -gt 0 ]]; then
+    echo "  失敗: ${#failed_packages[@]}"
+    echo ""
+    echo "失敗したパッケージ:"
+    for pkg in "${failed_packages[@]}"; do
+        echo "  - $pkg"
+    done
+    echo ""
+    echo "これらのパッケージは手動でインストールしてください"
+else
+    echo "  すべてのパッケージが正常にインストールされました"
+fi
+echo "=========================================="

@@ -26,3 +26,31 @@ macos-icon-screen-color = FF88FF
 macos-icon-frame = plastic
 
 font-feature = -dlig
+
+# ┃ Pane/Split Management ┃
+# Neovimのウィンドウ分割の代わりにGhosttyの画面分割を使用
+# 画面分割の作成
+keybind = super+d=new_split:right
+keybind = super+shift+d=new_split:down
+
+# 画面分割間の移動（vim-style）
+keybind = ctrl+h=goto_split:left
+keybind = ctrl+j=goto_split:bottom
+keybind = ctrl+k=goto_split:top
+keybind = ctrl+l=goto_split:right
+
+# 画面分割のリサイズ
+keybind = super+ctrl+shift+left=resize_split:left,10
+keybind = super+ctrl+shift+down=resize_split:down,10
+keybind = super+ctrl+shift+up=resize_split:up,10
+keybind = super+ctrl+shift+right=resize_split:right,10
+
+# 画面分割のズーム（最大化/復元）
+keybind = super+shift+enter=toggle_split_zoom
+
+# 画面分割を閉じる
+# ctrl+wは削除（Neovimのウィンドウ操作で使用するため）
+keybind = super+w=close_surface
+
+# 最後の分割を閉じてもGhosttyを終了しないように設定
+quit-after-last-window-closed = false

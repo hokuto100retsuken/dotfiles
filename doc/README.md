@@ -68,32 +68,102 @@ return {
 The leader key is `Space`.
 リーダーキーは `Space` です。
 
-### General
+### General / 一般
 
 | Key | Description |
 | :--- | :--- |
 | `<F1>` | Open the main configuration file (`init.lua`) / 設定ファイルを開く |
-| `ss` / `sv` | Split window horizontally / vertically / 画面を水平/垂直に分割 |
-| `s` + `h/j/k/l` | Move between windows / ウィンドウ間を移動 |
-| `<leader>nh` | Show notification history / 通知履歴を表示 |
-| `<leader>nc` | Dismiss all notifications / すべての通知を閉じる |
+| `<leader>h` | Clear search highlights / 検索ハイライトをクリア |
+| `<leader>ww` | Save file / ファイルを保存 |
+| `<leader>qq` | Quit / 終了 |
 
-### Telescope (Fuzzy Finder)
+### Window Management / ウィンドウ管理
+
+| Key | Description |
+| :--- | :--- |
+| `ss` | Split window horizontally / 画面を水平に分割 |
+| `sv` | Split window vertically / 画面を垂直に分割 |
+| `<leader>wh` | Move to left window / 左のウィンドウに移動 |
+| `<leader>wj` | Move to lower window / 下のウィンドウに移動 |
+| `<leader>wk` | Move to upper window / 上のウィンドウに移動 |
+| `<leader>wl` | Move to right window / 右のウィンドウに移動 |
+| `<leader>wq` | Close window / ウィンドウを閉じる |
+
+### Telescope (Fuzzy Finder) / Telescope（ファジーファインダー）
 
 | Key | Description |
 | :--- | :--- |
 | `<leader>ff` | Find files / ファイルを検索 |
 | `<leader>fg` | Grep in project / プロジェクト内をGrep検索 |
-| `<leader>fe` | Grep with `egrepify` / `egrepify`でGrep検索 |
-| `<leader>fd` | Show LSP diagnostics / LSPの診断情報を一覧表示 |
-| `<leader>fo` | Show old files / 最近開いたファイルを表示 |
+| `<leader>fb` | Find buffers / バッファを検索 |
+| `<leader>fh` | Find help tags / ヘルプタグを検索 |
+| `<leader>fo` | Find old files / 最近開いたファイルを検索 |
 | `<leader>fs` | Show Git status / Gitのステータスを表示 |
+| `<leader>fc` | Find commands / コマンドを検索 |
+| `<leader>fd` | Show LSP diagnostics / LSPの診断情報を一覧表示 |
+| `<leader>s` | Search document symbols / ドキュメントシンボルを検索 |
 
-### Git
+### LSP / 言語サーバープロトコル
+
+| Key | Description |
+| :--- | :--- |
+| `gD` | Go to declaration / 宣言へ移動 |
+| `gd` | Go to definition / 定義へ移動 |
+| `K` | Show hover information / ホバー情報を表示 |
+| `gi` | Go to implementation / 実装へ移動 |
+| `<C-k>` | Show signature help / シグネチャヘルプを表示 |
+| `<leader>rn` | Rename symbol / シンボルをリネーム |
+| `<leader>ca` | Code action / コードアクション |
+| `gr` | Show references / 参照を表示 |
+| `<leader>f` | Format code / コードをフォーマット |
+| `[d` | Go to previous diagnostic / 前の診断へ移動 |
+| `]d` | Go to next diagnostic / 次の診断へ移動 |
+| `<leader>q` | Show diagnostics in location list / ロケーションリストに診断を表示 |
+
+### Git / Git
 
 | Key | Description |
 | :--- | :--- |
 | `<leader>gg` | Toggle `lazygit` terminal UI / `lazygit`のUIを開閉 |
+
+### File Explorer (nvim-tree) / ファイルエクスプローラー
+
+| Key | Description |
+| :--- | :--- |
+| `<leader>ee` | Toggle file explorer / ファイルエクスプローラーの表示/非表示を切り替え |
+| `<leader>ef` | Toggle file explorer on current file / 現在のファイルの場所でファイルエクスプローラーを開く/閉じる |
+| `<leader>ec` | Collapse file explorer / ファイルエクスプローラーを折りたたむ |
+| `<leader>er` | Refresh file explorer / ファイルエクスプローラーを更新 |
+
+### Harpoon / Harpoon
+
+| Key | Description |
+| :--- | :--- |
+| `<leader>hm` | Mark file with harpoon / ファイルをハープーンでマーク |
+| `<leader>hn` | Go to next harpoon mark / 次のハープーンマークへ移動 |
+| `<leader>hp` | Go to previous harpoon mark / 前のハープーンマークへ移動 |
+
+### Session Management / セッション管理
+
+| Key | Description |
+| :--- | :--- |
+| `<leader>wr` | Restore session for current directory / 現在のディレクトリのセッションを復元 |
+| `<leader>ws` | Save session for current directory / 現在のディレクトリのセッションを保存 |
+
+### Notifications / 通知
+
+| Key | Description |
+| :--- | :--- |
+| `<leader>nh` | Show notification history / 通知履歴を表示 |
+| `<leader>nc` | Dismiss all notifications / すべての通知を閉じる |
+
+### Flash Navigation / Flashナビゲーション
+
+| Key | Description |
+| :--- | :--- |
+| `s` | Flash jump (forward) / Flashジャンプ（前方） |
+| `S` | Flash treesitter search / Flash treesitter検索 |
+| `r` (in visual/operator mode) | Flash remote / Flashリモート |
 
 ## Included Plugins
 

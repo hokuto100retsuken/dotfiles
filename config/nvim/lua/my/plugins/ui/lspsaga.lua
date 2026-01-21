@@ -28,9 +28,11 @@ local lspsaga = {
 
       -- Symbol in winbar configuration.
       -- winbarでのシンボル設定。
+      -- Disabled because lualine.nvim manages winbar.
+      -- lualine.nvimがwinbarを管理するため無効化します。
       symbol_in_winbar = {
-        enable = true, -- Enable symbol in winbar.
-        -- winbarでシンボルを有効化します。
+        enable = false, -- Disable symbol in winbar to avoid conflict with lualine.
+        -- lualineとの競合を避けるため、winbarでのシンボルを無効化します。
       },
 
       -- Lightbulb configuration.

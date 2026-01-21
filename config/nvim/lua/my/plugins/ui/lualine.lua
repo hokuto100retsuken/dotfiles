@@ -5,83 +5,50 @@ local lualine = {
   "nvim-lualine/lualine.nvim",
   dependencies = {
     "nvim-tree/nvim-web-devicons",
-    "SmiteshP/nvim-navic", -- For code context display in winbar.
-    -- winbarでコードコンテキストを表示するために使用します。
+    "EdenEast/nightfox.nvim", -- Ensure nightfox is loaded before lualine.
+    -- lualineの前にnightfoxが読み込まれるようにします。
   },
   config = function()
-    local lualine = require("lualine")
-    local navic = require("nvim-navic")
+    -- According to nightfox.nvim documentation, colorscheme must be set before lualine setup.
+    -- nightfox.nvimのドキュメントによると、カラースキームはlualineのsetupの前に設定する必要があります。
+    -- Wait for colorscheme to be loaded.
+    -- カラースキームが読み込まれるまで待機します。
+    vim.schedule(function()
+      if not vim.g.colors_name then
+        vim.cmd.colorscheme("carbonfox")
+      end
 
-    -- Helper function to check if navic is available.
-    -- navicが利用可能かどうかを確認するヘルパー関数。
-    local function navic_component()
-      return navic.get_location()
-    end
-
-    -- Configure lualine with oxocarbon theme.
-    -- oxocarbonテーマでlualineを設定します。
-    lualine.setup({
+      require("lualine").setup({
       options = {
-        theme = "oxocarbon", -- Use oxocarbon theme to match colorscheme.
-        -- カラースキームに合わせてoxocarbonテーマを使用します。
+        theme = "auto", -- Use auto theme detection from vim.g.colors_name.
+        -- vim.g.colors_nameから自動テーマ検出を使用します。
       },
       sections = {
-        lualine_a = { "mode" }, -- Show current mode.
-        -- 現在のモードを表示します。
-        lualine_b = { "branch", "diff", "diagnostics" }, -- Show git branch, diff, and diagnostics.
-        -- Gitブランチ、差分、診断情報を表示します。
-        lualine_c = {
-          {
-            "filename",
-            path = 1, -- Show relative path (0 = filename only, 1 = relative path, 2 = absolute path, 3 = full path).
-            -- 相対パスを表示します（0 = ファイル名のみ、1 = 相対パス、2 = 絶対パス、3 = フルパス）。
-          },
-        },
-        lualine_x = {
-          { "encoding" }, -- Show file encoding.
-          -- ファイルエンコーディングを表示します。
-          { "fileformat" }, -- Show file format (unix, dos, mac).
-          -- ファイルフォーマットを表示します（unix、dos、mac）。
-          { "filetype" }, -- Show file type.
-          -- ファイルタイプを表示します。
-        },
-        lualine_y = { "progress" }, -- Show cursor position.
-        -- カーソル位置を表示します。
-        lualine_z = { "location" }, -- Show cursor location.
-        -- カーソル位置を表示します。
+        lualine_a = { "mode" },
+        lualine_b = { "branch", "diff", "diagnostics" },
+        lualine_c = { "filename" },
+        lualine_x = { "encoding", "fileformat", "filetype" },
+        lualine_y = { "progress" },
+        lualine_z = { "location" },
       },
       winbar = {
-        -- Winbar configuration for code context display.
-        -- コードコンテキスト表示用のwinbar設定。
         lualine_a = {},
         lualine_b = {},
-        lualine_c = {
-          {
-            navic_component,
-            cond = navic.is_available, -- Only show if navic is available.
-            -- navicが利用可能な場合のみ表示します。
-          },
-        },
+        lualine_c = { "filename" },
         lualine_x = {},
         lualine_y = {},
         lualine_z = {},
       },
       inactive_winbar = {
-        -- Inactive winbar configuration.
-        -- 非アクティブなwinbar設定。
         lualine_a = {},
         lualine_b = {},
-        lualine_c = {
-          {
-            "filename",
-            path = 1,
-          },
-        },
+        lualine_c = { "filename" },
         lualine_x = {},
         lualine_y = {},
         lualine_z = {},
       },
-    })
+      })
+    end)
   end,
 }
 

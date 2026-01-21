@@ -47,7 +47,8 @@ opt.laststatus = 3                      -- Always display the status line / 常�
 opt.showtabline = 2                     -- Always display the tab line / 常にタブラインを表示
 opt.winblend = 5                        -- Set transparency for floating windows / フローティングウィンドウの透明度を設定
 opt.scrolloff = 10                      -- Keep 10 lines of context around the cursor / カーソル周辺に10行のコンテキストを維持
-opt.winbar = "%=%{%v:lua.require'nvim-navic'.get_location()%}" -- Show code context in winbar / winbarでコードコンテキストを表示
+-- Note: winbar is managed by lualine.nvim, not set here to avoid conflicts.
+-- 注意: winbarはlualine.nvimによって管理されているため、競合を避けるためにここでは設定しません。
 
 
 -- ┃ Editing Settings / 編集関連の設定 ┃

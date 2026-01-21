@@ -1,74 +1,88 @@
-local nvim_auto_session = {
-    "nvim-lualine/lualine.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-        local lualine = require("lualine")
-        local lazy_status = require("lazy.status") -- to configure lazy pending updates count
+-- This file configures lualine.nvim, a blazing fast and easy to configure statusline plugin.
+-- このファイルは、高速で設定が簡単なステータスラインプラグインであるlualine.nvimを設定します。
 
-        local colors = {
-            blue = "#65D1FF",
-            green = "#3EFFDC",
-            violet = "#FF61EF",
-            yellow = "#FFDA7B",
-            red = "#FF4A4A",
-            fg = "#c3ccdc",
-            bg = "#112638",
-            inactive_bg = "#2c3043",
-        }
+local lualine = {
+  "nvim-lualine/lualine.nvim",
+  dependencies = {
+    "nvim-tree/nvim-web-devicons",
+    "SmiteshP/nvim-navic", -- For code context display in winbar.
+    -- winbarでコードコンテキストを表示するために使用します。
+  },
+  config = function()
+    local lualine = require("lualine")
+    local navic = require("nvim-navic")
 
-        local my_lualine_theme = {
-            normal = {
-                a = { bg = colors.blue, fg = colors.bg, gui = "bold" },
-                b = { bg = colors.bg, fg = colors.fg },
-                c = { bg = colors.bg, fg = colors.fg },
-            },
-            insert = {
-                a = { bg = colors.green, fg = colors.bg, gui = "bold" },
-                b = { bg = colors.bg, fg = colors.fg },
-                c = { bg = colors.bg, fg = colors.fg },
-            },
-            visual = {
-                a = { bg = colors.violet, fg = colors.bg, gui = "bold" },
-                b = { bg = colors.bg, fg = colors.fg },
-                c = { bg = colors.bg, fg = colors.fg },
-            },
-            command = {
-                a = { bg = colors.yellow, fg = colors.bg, gui = "bold" },
-                b = { bg = colors.bg, fg = colors.fg },
-                c = { bg = colors.bg, fg = colors.fg },
-            },
-            replace = {
-                a = { bg = colors.red, fg = colors.bg, gui = "bold" },
-                b = { bg = colors.bg, fg = colors.fg },
-                c = { bg = colors.bg, fg = colors.fg },
-            },
-            inactive = {
-                a = { bg = colors.inactive_bg, fg = colors.semilightgray, gui = "bold" },
-                b = { bg = colors.inactive_bg, fg = colors.semilightgray },
-                c = { bg = colors.inactive_bg, fg = colors.semilightgray },
-            },
-        }
+    -- Helper function to check if navic is available.
+    -- navicが利用可能かどうかを確認するヘルパー関数。
+    local function navic_component()
+      return navic.get_location()
+    end
 
-        -- configure lualine with modified theme
-        lualine.setup({
-            options = {
-                theme = "nightfox",
-            },
-            sections = {
-                lualine_c = {
-                    {
-                        'filename',
-                        path = 3,
-                    }
-                },
-                lualine_x = {
-                    { "encoding" },
-                    { "fileformat" },
-                    { "filetype" },
-                },
-            },
-        })
-    end,
+    -- Configure lualine with lackluster theme.
+    -- lacklusterテーマでlualineを設定します。
+    lualine.setup({
+      options = {
+        theme = "lackluster", -- Use lackluster theme to match colorscheme.
+        -- カラースキームに合わせてlacklusterテーマを使用します。
+      },
+      sections = {
+        lualine_a = { "mode" }, -- Show current mode.
+        -- 現在のモードを表示します。
+        lualine_b = { "branch", "diff", "diagnostics" }, -- Show git branch, diff, and diagnostics.
+        -- Gitブランチ、差分、診断情報を表示します。
+        lualine_c = {
+          {
+            "filename",
+            path = 1, -- Show relative path (0 = filename only, 1 = relative path, 2 = absolute path, 3 = full path).
+            -- 相対パスを表示します（0 = ファイル名のみ、1 = 相対パス、2 = 絶対パス、3 = フルパス）。
+          },
+        },
+        lualine_x = {
+          { "encoding" }, -- Show file encoding.
+          -- ファイルエンコーディングを表示します。
+          { "fileformat" }, -- Show file format (unix, dos, mac).
+          -- ファイルフォーマットを表示します（unix、dos、mac）。
+          { "filetype" }, -- Show file type.
+          -- ファイルタイプを表示します。
+        },
+        lualine_y = { "progress" }, -- Show cursor position.
+        -- カーソル位置を表示します。
+        lualine_z = { "location" }, -- Show cursor location.
+        -- カーソル位置を表示します。
+      },
+      winbar = {
+        -- Winbar configuration for code context display.
+        -- コードコンテキスト表示用のwinbar設定。
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {
+          {
+            navic_component,
+            cond = navic.is_available, -- Only show if navic is available.
+            -- navicが利用可能な場合のみ表示します。
+          },
+        },
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {},
+      },
+      inactive_winbar = {
+        -- Inactive winbar configuration.
+        -- 非アクティブなwinbar設定。
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {
+          {
+            "filename",
+            path = 1,
+          },
+        },
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {},
+      },
+    })
+  end,
 }
 
-return nvim_auto_session
+return lualine

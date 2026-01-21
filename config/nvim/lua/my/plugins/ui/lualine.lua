@@ -18,12 +18,12 @@ local lualine = {
       return navic.get_location()
     end
 
-    -- Configure lualine with lackluster theme.
-    -- lacklusterテーマでlualineを設定します。
+    -- Configure lualine with oxocarbon theme.
+    -- oxocarbonテーマでlualineを設定します。
     lualine.setup({
       options = {
-        theme = "lackluster", -- Use lackluster theme to match colorscheme.
-        -- カラースキームに合わせてlacklusterテーマを使用します。
+        theme = "oxocarbon", -- Use oxocarbon theme to match colorscheme.
+        -- カラースキームに合わせてoxocarbonテーマを使用します。
       },
       sections = {
         lualine_a = { "mode" }, -- Show current mode.

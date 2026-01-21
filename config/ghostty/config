@@ -34,10 +34,10 @@ keybind = super+d=new_split:right
 keybind = super+shift+d=new_split:down
 
 # 画面分割間の移動（vim-style）
-keybind = ctrl+h=goto_split:left
-keybind = ctrl+j=goto_split:bottom
-keybind = ctrl+k=goto_split:top
-keybind = ctrl+l=goto_split:right
+keybind = ctrl+shift+h=goto_split:left
+keybind = ctrl+shift+j=goto_split:bottom
+keybind = ctrl+shift+k=goto_split:top
+keybind = ctrl+shift+l=goto_split:right
 
 # 画面分割のリサイズ
 keybind = super+ctrl+shift+left=resize_split:left,10

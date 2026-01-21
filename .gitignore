@@ -1,5 +1,6 @@
 # Neovim
-lazy-lock.json
+# lazy-lock.json is tracked to ensure consistent plugin versions across environments
+# lazy-lock.jsonは環境間で一貫したプラグインバージョンを確保するために追跡されます
 
 # Fish shell
 config/fish/functions/

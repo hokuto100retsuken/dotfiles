@@ -131,3 +131,4 @@ autocmd("BufWritePre", {
   end,
   desc = "Remove trailing whitespace on save",
 })
+

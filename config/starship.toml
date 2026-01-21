@@ -28,7 +28,7 @@ $cmd_duration\
 $line_break\
 $character"""
 
-palette = 'catppuccin_mocha'
+palette = 'carbonfox'
 
 [os]
 disabled = false
@@ -166,6 +166,34 @@ style = "bg:lavender"
 disabled = false
 show_notifications = true
 min_time_to_notify = 45000
+
+[palettes.carbonfox]
+rosewater = "#f16da6"
+flamingo = "#ff7eb6"
+pink = "#ee5396"
+mauve = "#be95ff"
+red = "#ee5396"
+maroon = "#f16da6"
+peach = "#ee5396"
+yellow = "#08bdba"
+green = "#25be6a"
+teal = "#08bdba"
+sky = "#33b1ff"
+sapphire = "#52bdff"
+blue = "#78a9ff"
+lavender = "#c8a5ff"
+text = "#f2f4f8"
+subtext1 = "#dfdfe0"
+subtext0 = "#6e6f70"
+overlay2 = "#484848"
+overlay1 = "#2a2a2a"
+overlay0 = "#282828"
+surface2 = "#484848"
+surface1 = "#2a2a2a"
+surface0 = "#282828"
+base = "#161616"
+mantle = "#0c0c0c"
+crust = "#0c0c0c"
 
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"

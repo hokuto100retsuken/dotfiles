@@ -53,17 +53,57 @@ return {
   -- This function is executed to configure the plugin.
   -- この関数はプラグインの設定を行うために実行されます。
   config = function()
-    -- Telescopeとactionsモジュールを取得
+    -- Get Telescope and actions modules.
+    -- Telescopeとactionsモジュールを取得します。
     local telescope = require("telescope")
-    local actions = require('telescope.actions')
+    local actions = require("telescope.actions")
 
-    -- Telescopeのセットアップ
+    -- Setup Telescope with enhanced configuration.
+    -- 拡張設定でTelescopeをセットアップします。
     telescope.setup({
-      -- Default options for all pickers
-      -- 全てのピッカーに適用されるデフォルトオプション
+      -- Default options for all pickers.
+      -- 全てのピッカーに適用されるデフォルトオプション。
       defaults = {
-        -- Your default settings go here
-        -- ここにデフォルト設定を追加できます
+        -- Mappings for normal mode.
+        -- 通常モードのマッピング。
+        mappings = {
+          i = {
+            -- Close on escape.
+            -- Escapeで閉じる。
+            ["<Esc>"] = actions.close,
+            -- Move to next item.
+            -- 次の項目に移動。
+            ["<C-n>"] = actions.move_selection_next,
+            -- Move to previous item.
+            -- 前の項目に移動。
+            ["<C-p>"] = actions.move_selection_previous,
+            -- Send to quickfix list.
+            -- quickfixリストに送る。
+            ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+          },
+          n = {
+            -- Close on escape.
+            -- Escapeで閉じる。
+            ["<Esc>"] = actions.close,
+            -- Send to quickfix list.
+            -- quickfixリストに送る。
+            ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+          },
+        },
+        -- Layout configuration.
+        -- レイアウト設定。
+        layout_config = {
+          width = 0.9, -- Width of the picker window.
+          -- ピッカーウィンドウの幅。
+          height = 0.8, -- Height of the picker window.
+          -- ピッカーウィンドウの高さ。
+        },
+        -- Border configuration.
+        -- ボーダー設定。
+        border = true, -- Show border.
+        -- ボーダーを表示します。
+        borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }, -- Border characters.
+        -- ボーダー文字。
       },
       -- Options for specific pickers
       -- 特定のピッカーに対するオプション

@@ -28,6 +28,8 @@ return {
         -- JSXフォーマッター。
         typescriptreact = { "prettierd", "prettier" }, -- TSX formatters.
         -- TSXフォーマッター。
+        vue = { "prettierd", "prettier" }, -- Vue formatters.
+        -- Vueフォーマッター。
         json = { "prettierd", "prettier" }, -- JSON formatters.
         -- JSONフォーマッター。
         yaml = { "prettierd", "prettier" }, -- YAML formatters.

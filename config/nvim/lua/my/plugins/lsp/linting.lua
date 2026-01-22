@@ -6,11 +6,14 @@ local linting = {
         local lint = require("lint")
 
         lint.linters_by_ft = {
-            javascript = { "eslint_d" },
-            typescript = { "eslint_d" },
-            javascriptreact = { "eslint_d" },
-            typescriptreact = { "eslint_d" },
-            svelte = { "eslint_d" },
+            javascript = { "eslint_d", "eslint" }, -- Fallback to eslint if eslint_d is not available
+            -- eslint_dが利用できない場合はeslintにフォールバック
+            typescript = { "eslint_d", "eslint" },
+            javascriptreact = { "eslint_d", "eslint" },
+            typescriptreact = { "eslint_d", "eslint" },
+            vue = { "eslint_d", "eslint" }, -- VueファイルでもESLintを使用
+            -- Use ESLint for Vue files as well
+            svelte = { "eslint_d", "eslint" },
             python = { "pylint" },
         }
 

@@ -16,6 +16,9 @@ local nvim_treesitter = {
             treesitter.setup({ -- enable syntax highlighting
                 highlight = {
                     enable = true,
+                    -- Enable language injection for better highlighting in embedded code blocks
+                    -- 埋め込みコードブロックでのより良いハイライトのために言語インジェクションを有効化
+                    additional_vim_regex_highlighting = false,
                 },
                 -- enable indentation
                 indent = { enable = true },
@@ -29,6 +32,8 @@ local nvim_treesitter = {
                     "javascript",
                     "typescript",
                     "tsx",
+                    "vue", -- Vue file support for better TypeScript highlighting in <script> tags
+                    -- <script>タグ内のTypeScriptハイライトを改善するためのVueファイルサポート
                     "yaml",
                     "html",
                     "css",

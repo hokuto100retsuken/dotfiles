@@ -10,8 +10,16 @@ window-padding-balance = true
 cursor-color = F2F4F8
 cursor-style-blink = true
 
+# 分割境界の色を設定（縦分割時の境界をわかりやすくする）
+split-divider-color = #606060
 
 macos-titlebar-style = tabs
+# タブの背景色と前景色を設定（タブの境界をわかりやすくするため）
+# 注意: macOSのタブスタイルでは、タブ間の境界線の色を直接設定する
+# オプションは現在提供されていませんが、背景色を調整することで
+# タブの境界がより見やすくなります。
+window-titlebar-background = #1a1a1a
+window-titlebar-foreground = #f2f4f8
 macos-titlebar-proxy-icon= hidden
 macos-window-shadow = true
 

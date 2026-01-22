@@ -55,6 +55,9 @@ local lspconfig = {
     -- Neovim 0.11+のネイティブAPIを使用したTypeScript/JavaScript用のLSP設定。
     vim.lsp.config("ts_ls", {
       capabilities = capabilities,
+      filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact", "vue" },
+      -- VueファイルでもTypeScript LSPを有効化
+      -- Enable TypeScript LSP for Vue files as well
       settings = {
         typescript = {
           inlayHints = {
@@ -62,6 +65,11 @@ local lspconfig = {
           },
         },
         javascript = {
+          inlayHints = {
+            enabled = true,
+          },
+        },
+        vue = {
           inlayHints = {
             enabled = true,
           },

@@ -143,6 +143,13 @@ The leader key is `Space`.
 | `<leader>hn` | Go to next harpoon mark / 次のハープーンマークへ移動 |
 | `<leader>hp` | Go to previous harpoon mark / 前のハープーンマークへ移動 |
 
+### Commenting / コメント
+
+| Key | Description |
+| :--- | :--- |
+| `gcc` | (Normal Mode) Toggle comment for the current line / （ノーマルモード）現在の行をコメントアウト/アンコメント |
+| `gc` | (Visual Mode) Toggle comment for the selected lines / （ビジュアルモード）選択範囲をコメントアウト/アンコメント |
+
 ### Session Management / セッション管理
 
 | Key | Description |

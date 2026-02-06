@@ -40,5 +40,10 @@
     hunk-header-line-number-style = "#067a00"
     hunk-header-style = file line-number syntax
 [user]
-	email = hokuto100retsuken@gmail.com
-	name = hkt100rtkn
+	email = hokuto100retsuken@pepabo.com
+	name = aibo
+
+[includeIf "gitdir:/Users/hokuto100retsuken/src/github.com/"]
+    [user]
+        name = hkt100rtkn
+        email = hokuto100retsuken@gmail.com

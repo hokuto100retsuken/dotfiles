@@ -11,8 +11,8 @@
 | :--- | :--- | :--- |
 | **ターミナル** | [ghostty](https://github.com/ghostty/ghostty) | 高速でGPUアクセラレーションが効いたターミナルエミュレータ |
 | **シェル** | [fish](https://fishshell.com/) | 使いやすく高機能なシェル |
-| ├ **プロンプト** | [starship](https://starship.rs/) | 高速でカスタマイズ可能なプロンプト |
-| └ **ﾌﾟﾗｸﾞｲﾝ管理** | [sheldon](https://github.com/rossmacarthur/sheldon) | `fish` のプラグインマネージャ |
+| ├ **プロンプト** | [pure](https://github.com/pure-fish/pure) | 高速で美しいプロンプト |
+| └ **ﾌﾟﾗｸﾞｲﾝ管理** | [fisher](https://github.com/jorgebucaran/fisher) | `fish` のプラグインマネージャ |
 | **エディタ** | [Neovim](https://neovim.io/) | 高速で拡張性の高いVimベースのエディタ |
 | **ツール管理** | [mise](https.mise.jdx.dev/) | CLIツールとランタイムのバージョン管理 |
 | **Git** | [gina.vim](https://github.com/lambdalisue/gina.vim) | Neovim上でのGit操作を非同期で行うプラグイン |
@@ -27,8 +27,6 @@
 │   ├── fish/       # fish shell
 │   ├── mise/       # mise (CLI/Runtime version manager)
 │   ├── nvim/       # Neovim
-│   ├── sheldon/    # sheldon (fish plugin manager)
-│   ├── starship.toml # starship prompt
 │   └── ghostty/    # ghostty
 ├── git/            # Git関連の設定
 ├── setup-all.sh    # すべてをセットアップするスクリプト
@@ -152,4 +150,4 @@ chsh -s $(which fish)
 
 - **fish**: 新しいターミナルセッションを開く
 - **Neovim**: `:source $MYVIMRC` または再起動
-- **starship**: 新しいプロンプトが表示される際に自動反映
+- **pure**: プロンプトの更新（設定変更時に自動反映）

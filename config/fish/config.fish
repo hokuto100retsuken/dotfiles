@@ -4,6 +4,57 @@ set -g theme_date_format "+%F %H:%M"
 set -g theme_display_git_default_branch yes
 set -g theme_color_scheme dark
 
+# pure-fish settings to match the provided Starship example
+set -g pure_enable_single_line_prompt no
+set -g pure_symbol_prompt "❯"
+set -g pure_symbol_git_untracked " ?"
+set -g pure_symbol_git_dirty " *"
+set -g pure_symbol_git_pull " ⇣"
+set -g pure_symbol_git_push " ⇡"
+
+# Use Powerline symbols for Git
+set -g pure_symbol_git_branch " "
+
+# Colors (Carbonfox-like)
+set -g pure_color_primary blue
+set -g pure_color_info cyan
+set -g pure_color_mute brblack
+set -g pure_color_success green
+set -g pure_color_danger red
+set -g pure_color_warning yellow
+set -g pure_color_git_branch yellow
+set -g pure_color_git_dirty yellow
+
+# Custom function to show extra info (via Node, via Ruby, etc.)
+# This will be prepended to the pure prompt
+function _pure_prompt_extra_info
+    set -l info ""
+    
+    # Docker/Colima check
+    if command -v colima >/dev/null; and colima status >/dev/null 2>&1
+        set info "$info via 🐳 colima"
+    end
+    
+    # Node.js
+    if command -v node >/dev/null
+        set -l node_v (node -v)
+        set info "$info via  $node_v"
+    end
+    
+    # Ruby
+    if command -v ruby >/dev/null
+        set -l ruby_v (ruby -v | awk '{print $2}')
+        set info "$info via 💎 v$ruby_v"
+    end
+    
+    echo -n -s (set_color brblack) $info (set_color normal)
+end
+
+# Pure allows prepending to its prompt
+# Note: pure might not have a direct 'prepend' variable for the top line,
+# so we might need to override the fish_prompt slightly or use its hooks.
+# For now, let's set the basic variables.
+
 # ghq select option
 set -g GHQ_SELECTOR fzf
 

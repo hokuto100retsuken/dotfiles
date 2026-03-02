@@ -4,7 +4,6 @@ if test (uname) = "Linux"
     # set -x LANG ja_JP.UTF-8
 
     /usr/bin/mise activate fish | source
-    starship init fish | source
 
     # Initialize zoxide
     if command -v zoxide &> /dev/null

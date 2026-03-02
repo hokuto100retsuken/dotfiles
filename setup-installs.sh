@@ -39,7 +39,6 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
             "eza"
             "jq"
             "go-yq"
-            "starship"
             "mise"
             "grc"
             "zoxide"
@@ -69,7 +68,6 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
             "eza"
             "jq"
             "yq"
-            "starship"
             "mise"
             "grc"
         )
@@ -98,7 +96,6 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
             "eza"
             "jq"
             "yq"
-            "starship"
             "mise"
             "colima"
             "docker"

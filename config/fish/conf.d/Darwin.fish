@@ -26,7 +26,4 @@ if test (uname) = "Darwin"
     else if test -d /usr/local/bin/mise
         /usr/local/bin/mise activate fish | source
     end
-
-    # starship setup
-    starship init fish | source
 end

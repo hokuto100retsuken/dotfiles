@@ -1,1 +1,1 @@
-/home/hkt100rtkn/src/github.com/hokuto100retsuken/dotfiles/config/fish/conf.d
+/Users/hokuto100retsuken/src/github.com/hokuto100retsuken/dotfiles/config/fish/conf.d

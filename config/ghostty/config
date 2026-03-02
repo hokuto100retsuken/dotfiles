@@ -62,3 +62,4 @@ keybind = super+w=close_surface
 
 # 最後の分割を閉じてもGhosttyを終了しないように設定
 quit-after-last-window-closed = false
+unfocused-split-opacity = 0.85

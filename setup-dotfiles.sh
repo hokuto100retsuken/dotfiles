@@ -39,9 +39,6 @@ create_symlink() {
 echo "dotfilesのセットアップを開始します..."
 echo "バックアップディレクトリ: $BACKUP_DIR"
 
-# starship
-create_symlink "$DOTPATH/config/starship.toml" "$HOME/.config/starship.toml"
-
 # git config
 create_symlink "$DOTPATH/git/_gitconfig" "$HOME/.gitconfig"
 
@@ -50,14 +47,8 @@ create_symlink "$DOTPATH/config/fish/config.fish" "$HOME/.config/fish/config.fis
 create_symlink "$DOTPATH/config/fish/conf.d" "$HOME/.config/fish/conf.d"
 create_symlink "$DOTPATH/config/fish/functions" "$HOME/.config/fish/functions"
 
-# sheldon
-create_symlink "$DOTPATH/config/sheldon/plugins.toml" "$HOME/.config/sheldon/plugins.toml"
-
 # ghostty
 create_symlink "$DOTPATH/config/ghostty/config" "$HOME/.config/ghostty/config"
-
-# mise
-create_symlink "$DOTPATH/config/mise/config.toml" "$HOME/.config/mise/config.toml"
 
 # nvim
 create_symlink "$DOTPATH/config/nvim/init.lua" "$HOME/.config/nvim/init.lua"

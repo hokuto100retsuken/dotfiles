@@ -58,6 +58,9 @@ create_symlink "$DOTPATH/config/nvim/sonictemplate" "$HOME/.config/nvim/sonictem
 # zellij
 create_symlink "$DOTPATH/config/zellij/config.kdl" "$HOME/.config/zellij/config.kdl"
 
+# claude
+create_symlink "$DOTPATH/claude/skills" "$HOME/.claude/skills"
+
 echo ""
 echo "✓ dotfilesのセットアップが完了しました"
 if [[ -d "$BACKUP_DIR" ]]; then

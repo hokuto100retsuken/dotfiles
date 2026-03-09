@@ -4,7 +4,8 @@ set -g theme_date_format "+%F %H:%M"
 set -g theme_display_git_default_branch yes
 set -g theme_color_scheme dark
 
-# pure-fish settings to match the provided Starship example
+# pure-fish settings to match the provided example
+# Example: dotfiles as hokuto100retsuken on  main via 🐳 colima took 2.3s
 set -g pure_enable_single_line_prompt no
 set -g pure_symbol_prompt "❯"
 set -g pure_symbol_git_untracked " ?"

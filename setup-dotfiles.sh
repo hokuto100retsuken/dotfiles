@@ -61,6 +61,9 @@ create_symlink "$DOTPATH/config/zellij/config.kdl" "$HOME/.config/zellij/config.
 # claude
 create_symlink "$DOTPATH/claude/skills" "$HOME/.claude/skills"
 
+# gemini
+create_symlink "$DOTPATH/gemini/skills" "$HOME/.gemini/skills"
+
 echo ""
 echo "✓ dotfilesのセットアップが完了しました"
 if [[ -d "$BACKUP_DIR" ]]; then

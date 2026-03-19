@@ -56,6 +56,27 @@ end
 # so we might need to override the fish_prompt slightly or use its hooks.
 # For now, let's set the basic variables.
 
+# abbreviations (展開されるので履歴に正式コマンドが残る)
+abbr -a g git
+abbr -a ga "git add"
+abbr -a gaa "git add -A"
+abbr -a gc "git commit"
+abbr -a gcm "git commit -m"
+abbr -a gco "git checkout"
+abbr -a gsw "git switch"
+abbr -a gswc "git switch -c"
+abbr -a gst "git status -sb"
+abbr -a gd "git diff"
+abbr -a gdc "git diff --cached"
+abbr -a gp "git push"
+abbr -a gpf "git push --force-with-lease"
+abbr -a gl "git pull"
+abbr -a glog "git log --oneline --graph -20"
+abbr -a gloga "git log --oneline --graph --all -20"
+abbr -a ll "eza -la --icons --git"
+abbr -a lt "eza --tree --level=2 --icons"
+abbr -a cat bat
+
 # ghq select option
 set -g GHQ_SELECTOR fzf
 

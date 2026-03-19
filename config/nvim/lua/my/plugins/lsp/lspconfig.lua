@@ -38,7 +38,7 @@ local lspconfig = {
       -- 診断のキーマップ。
       vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
       vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-      vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, opts)
+      vim.keymap.set("n", "<leader>xl", vim.diagnostic.setloclist, opts)
 
       -- Attach navic to LSP client for code context display.
       -- コードコンテキスト表示のためにnavicをLSPクライアントにアタッチします。

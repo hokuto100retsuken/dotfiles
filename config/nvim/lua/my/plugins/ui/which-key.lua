@@ -5,15 +5,24 @@ local wk = {
   "folke/which-key.nvim",
   event = "VeryLazy",
   init = function()
-    -- Enable timeout for which-key to trigger.
-    -- which-keyがトリガーされるためのタイムアウトを有効化します。
     vim.o.timeout = true
-    vim.o.timeoutlen = 500 -- Timeout length in milliseconds.
-    -- タイムアウトの長さ（ミリ秒）。
+    vim.o.timeoutlen = 400
   end,
-  -- Use default settings to avoid configuration warnings.
-  -- 設定警告を避けるためにデフォルト設定を使用します。
-  opts = {},
+  config = function()
+    local which_key = require("which-key")
+    which_key.setup({})
+    which_key.add({
+      { "<leader>f", group = "Find (Telescope)" },
+      { "<leader>e", group = "Explorer" },
+      { "<leader>g", group = "Git" },
+      { "<leader>x", group = "Diagnostics" },
+      { "<leader>h", group = "Harpoon" },
+      { "<leader>b", group = "Buffer" },
+      { "<leader>n", group = "Notification" },
+      { "<leader>w", desc = "Save file" },
+      { "<leader>q", desc = "Quit" },
+    })
+  end,
 }
 
 return wk

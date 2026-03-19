@@ -46,6 +46,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
             "ghostty"
             "nerd-fonts-hack-gen"
             "nerd-fonts-jetbrains-mono"
+            "direnv"
             "docker"
             "docker-compose"
         )
@@ -70,6 +71,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
             "yq"
             "mise"
             "grc"
+            "direnv"
         )
     else
         echo "Homebrew is not installed. Installing Homebrew..."
@@ -101,6 +103,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
             "docker"
             "docker-compose"
             "grc"
+            "direnv"
         )
         echo "Homebrew installation completed."
     fi
@@ -118,6 +121,12 @@ success_count=0
 total_count=${#packages[@]}
 
 for package in "${packages[@]}"; do
+    # すでにインストール済みならスキップ
+    if command -v "$package" &>/dev/null; then
+        echo "Already installed: $package ✓"
+        ((success_count++))
+        continue
+    fi
     echo -n "Installing $package... "
     if $INSTALL_CMD "$package" &>/dev/null; then
         echo "✓"

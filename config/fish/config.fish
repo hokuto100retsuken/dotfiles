@@ -142,3 +142,8 @@ if test -f "$os_specific_conf"
     source "$os_specific_conf"
 end
 fish_add_path $HOME/.local/bin
+
+# direnv (プロジェクトごとの環境変数を .envrc で自動切替)
+if command -v direnv >/dev/null
+    direnv hook fish | source
+end

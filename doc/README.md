@@ -1,208 +1,226 @@
-# My Neovim Configuration
+# Neovim 使いこなしガイド
 
-This is my personal Neovim configuration, optimized for modern and efficient development.
-これは、モダンで効率的な開発のために最適化された、私の個人的なNeovim設定です。
+## はじめに
 
-## Overview
+このNeovim設定は **Space** をリーダーキーとして使います。
+`Space` を押すと which-key が起動し、使えるキーの一覧がポップアップで表示されます。
+迷ったらまず **Space を押して待つ** ことを覚えてください。
 
-This configuration aims to provide a fast, beautiful, and highly functional development environment. It uses `lazy.nvim` for plugin management and offers a wide range of features including LSP, auto-completion, Git integration, and an improved user interface.
+## 基本操作 — まずこれだけ覚える
 
-この設定は、高速で美しく、高機能な開発環境を提供することを目指しています。プラグイン管理には `lazy.nvim` を使用し、LSP、自動補完、Git連携、UI改善など、幅広い機能を提供します。
+| やりたいこと | キー | 補足 |
+|:---|:---|:---|
+| ファイルを保存 | `Space w` | |
+| 終了 | `Space q` | |
+| 全て終了 | `Space Q` | |
+| 検索ハイライトを消す | `Esc` | ノーマルモードで |
+| 設定ファイルを開く | `F1` | init.lua を開く |
 
-## Prerequisites
+## ファイルを探す・開く（Telescope）
 
-*   Neovim (v0.8.0 or later recommended)
-*   `git`
-*   A [Nerd Font](https://www.nerdfonts.com/) (for icons)
-*   [ripgrep](https://github.com/BurntSushi/ripgrep) (for `live_grep`)
-*   [lazygit](https://github.com/jesseduffield/lazygit) (optional, for Git UI)
+`Space f` を押すと検索系のキーが表示されます。
 
-## Installation
+| キー | 機能 |
+|:---|:---|
+| `Space ff` | ファイル名で検索 |
+| `Space fg` | ファイル内容をGrep検索（最重要） |
+| `Space fb` | 開いているバッファ一覧 |
+| `Space fo` | 最近開いたファイル |
+| `Space fs` | Git の変更ファイル一覧 |
+| `Space fc` | コマンド一覧 |
+| `Space fd` | 診断（エラー/警告）一覧 |
+| `Space s` | ドキュメントシンボル検索（関数名など） |
 
-1.  Clone this `dotfiles` repository.
-2.  Run the setup script from the root of the repository.
+**Telescope 内の操作:**
+- `Ctrl+n` / `Ctrl+p` — 次/前の候補
+- `Esc` — 閉じる
+- `Ctrl+q` — 結果を quickfix リストに送る
 
-```bash
-cd /path/to/dotfiles
-./setup-dotfiles.sh
+## バッファ操作（タブ的に使う）
+
+画面上部にバッファが番号付きで表示されます。
+
+| キー | 機能 |
+|:---|:---|
+| `H` | 前のバッファへ |
+| `L` | 次のバッファへ |
+| `Space 1`〜`Space 5` | 番号指定でバッファにジャンプ |
+| `Space bd` | 現在のバッファを閉じる |
+
+## ウィンドウ分割
+
+| キー | 機能 |
+|:---|:---|
+| `ss` | 水平分割 |
+| `sv` | 垂直分割 |
+| `Ctrl+h/j/k/l` | ウィンドウ間移動 |
+| `Space wq` | ウィンドウを閉じる |
+
+## ファイルエクスプローラー
+
+2つのファイラーが使えます。
+
+### nvim-tree（サイドバー型）
+
+| キー | 機能 |
+|:---|:---|
+| `Space ee` | エクスプローラーの表示/非表示 |
+| `Space ef` | 現在のファイルの場所で開く |
+| `Space ec` | すべて折りたたむ |
+
+nvim-tree 内の操作:
+- `Enter` — ファイルを開く / フォルダを開閉
+- `a` — 新規ファイル作成
+- `d` — 削除
+- `r` — リネーム
+- `c` / `p` — コピー / ペースト
+
+### oil.nvim（バッファ型ファイラー）
+
+| キー | 機能 |
+|:---|:---|
+| `-` | 親ディレクトリをバッファとして開く |
+
+oil 内の操作:
+- 通常のテキスト編集と同じ感覚でファイル名を変更・削除できる
+- `Enter` — ファイルを開く / ディレクトリに入る
+- `-` — 親ディレクトリに戻る
+- `q` — 閉じる
+
+## コード移動（LSP）
+
+ファイルを開くと LSP が自動起動します。
+
+| キー | 機能 |
+|:---|:---|
+| `gd` | 定義にジャンプ |
+| `gD` | 宣言にジャンプ |
+| `gr` | 参照一覧 |
+| `gi` | 実装にジャンプ |
+| `K` | ホバー情報（型やドキュメント） |
+| `Space rn` | リネーム |
+| `Space ca` | コードアクション（自動修正など） |
+| `Space f` | コードフォーマット |
+| `[d` / `]d` | 前/次のエラー・警告にジャンプ |
+
+## 診断・TODO管理
+
+| キー | 機能 |
+|:---|:---|
+| `Space xx` | 全ファイルの診断一覧（Trouble） |
+| `Space xX` | 現在のバッファの診断一覧 |
+| `Space xq` | quickfix リスト |
+| `Space xl` | location リスト |
+| `Space xt` | TODO/FIXME/HACK 一覧 |
+| `]t` / `[t` | 次/前の TODO にジャンプ |
+
+## 高速移動（Flash）
+
+| キー | 機能 |
+|:---|:---|
+| `s` | 2文字入力で画面内の任意の位置にジャンプ |
+| `S` | Treesitterベースで構文単位を選択 |
+| `f` / `F` | 行内の文字にジャンプ（拡張版） |
+
+**使い方:** `s` を押す → 移動先の文字を2文字入力 → 表示されるラベルを押す
+
+## スクロール・検索を快適に
+
+| キー | 機能 |
+|:---|:---|
+| `Ctrl+d` / `Ctrl+u` | 半ページ移動（画面中央を維持） |
+| `n` / `N` | 検索結果のジャンプ（画面中央を維持） |
+| `J`（ノーマルモード） | 行結合（カーソル位置を維持） |
+
+## テキスト編集の便利技
+
+| キー | 機能 |
+|:---|:---|
+| `V` → `J` / `K` | 選択行を上下に移動 |
+| `Space p`（ビジュアルモード） | ペースト時にレジスタを上書きしない |
+| `gcc` | 行のコメントアウト切替 |
+| `gc`（ビジュアルモード） | 選択範囲のコメントアウト切替 |
+| `sa` + 対象 + 記号 | テキストを囲む（mini.surround） |
+| `sd` + 記号 | 囲みを削除 |
+| `sr` + 旧記号 + 新記号 | 囲みを変更 |
+
+## Git
+
+| キー | 機能 |
+|:---|:---|
+| `Space gg` | Lazygit を開く（全操作が可能） |
+
+gitsigns（エディタ左端のサインカラム）:
+- 追加行は緑、変更行は青、削除行は赤で表示
+
+## Harpoon（よく使うファイルのブックマーク）
+
+| キー | 機能 |
+|:---|:---|
+| `Space hm` | 現在のファイルをマーク |
+| `Space hn` | 次のマークへ |
+| `Space hp` | 前のマークへ |
+
+## よくある操作のレシピ
+
+### 「この関数の定義を見たい」
+1. 関数名の上にカーソルを置く
+2. `gd` で定義にジャンプ
+3. `Ctrl+o` で元の場所に戻る
+
+### 「プロジェクト全体から文字列を検索したい」
+1. `Space fg` で Telescope grep を開く
+2. 検索ワードを入力
+3. `Ctrl+q` で結果を quickfix に送り、順番に確認
+
+### 「ファイル名はわかっているけど場所がわからない」
+1. `Space ff` でファイル名を入力
+
+### 「変数名を一括リネームしたい」
+1. 変数名の上にカーソルを置く
+2. `Space rn` で新しい名前を入力（LSPが全参照を更新）
+
+### 「この行とあの行を入れ替えたい」
+1. `V` で行を選択（複数行も可）
+2. `J` / `K` で上下に移動
+
+### 「さっき開いていたファイルに戻りたい」
+- `Space fo` で最近のファイル一覧
+- `H` / `L` でバッファを切り替え
+- `Ctrl+o` で前の位置に戻る
+
+## ディレクトリ構成
+
 ```
-This script will create symbolic links for the necessary configuration files, including Neovim's, in your home directory.
-Upon first launch, `lazy.nvim` will automatically install all the plugins.
+config/nvim/
+├── init.lua                    # エントリーポイント
+├── lua/my/
+│   ├── core/
+│   │   ├── options.lua         # 基本設定（インデント、検索など）
+│   │   ├── keymaps.lua         # キーマップ定義
+│   │   └── autocmds.lua        # 自動コマンド
+│   ├── lazy.lua                # プラグインマネージャー設定
+│   └── plugins/
+│       ├── ui/                 # 見た目系（カラー、ステータスライン等）
+│       ├── editor/             # 編集支援（treesitter、flash等）
+│       ├── git/                # Git連携
+│       ├── lsp/                # 言語サーバー・補完・フォーマット
+│       └── utility/            # Telescope、ターミナル等
+└── sonictemplate/              # コードテンプレート
+```
 
-## Plugin Management
+### プラグインの追加方法
 
-Plugins are managed using [lazy.nvim](https://github.com/folke/lazy.nvim). The configuration is designed to be easily maintainable.
-プラグインは[lazy.nvim](https://github.com/folke/lazy.nvim)を使用して管理されます。メンテナンスが容易になるように設計されています。
+`lua/my/plugins/<カテゴリ>/` に `.lua` ファイルを作るだけで自動読み込みされます。
 
-*   **Plugin Specs**: Each plugin is configured in its own file under `lua/my/plugins/`.
-*   **各プラグイン設定**: 各プラグインは `lua/my/plugins/` ディレクトリ内の個別のファイルで設定されます。
-
-### Adding a Plugin
-
-Simply create a new Lua file in the `lua/my/plugins/` directory. `lazy.nvim` will automatically detect and load it.
-`lua/my/plugins/` ディレクトリに新しいLuaファイルを作成するだけです。`lazy.nvim` が自動的にそれを検出して読み込みます。
-
-Example `lua/my/plugins/new-plugin.lua`:
 ```lua
 return {
-  "author/new-plugin.nvim",
-  -- Optional: add configuration below
+  "author/plugin-name.nvim",
+  keys = {
+    { "<leader>xx", "<cmd>PluginCommand<CR>", desc = "説明" },
+  },
   opts = {},
 }
 ```
 
-### Disabling a Plugin
-
-To disable a plugin, you can either delete its file or add `enabled = false` to its specification.
-プラグインを無効にするには、そのファイルを削除するか、仕様に `enabled = false` を追加します。
-
-```lua
-return {
-  "author/some-plugin.nvim",
-  enabled = false,
-}
-```
-
-## Keymaps
-
-The leader key is `Space`.
-リーダーキーは `Space` です。
-
-### General / 一般
-
-| Key | Description |
-| :--- | :--- |
-| `<F1>` | Open the main configuration file (`init.lua`) / 設定ファイルを開く |
-| `<leader>h` | Clear search highlights / 検索ハイライトをクリア |
-| `<leader>ww` | Save file / ファイルを保存 |
-| `<leader>qq` | Quit / 終了 |
-
-### Window Management / ウィンドウ管理
-
-| Key | Description |
-| :--- | :--- |
-| `ss` | Split window horizontally / 画面を水平に分割 |
-| `sv` | Split window vertically / 画面を垂直に分割 |
-| `<leader>wh` | Move to left window / 左のウィンドウに移動 |
-| `<leader>wj` | Move to lower window / 下のウィンドウに移動 |
-| `<leader>wk` | Move to upper window / 上のウィンドウに移動 |
-| `<leader>wl` | Move to right window / 右のウィンドウに移動 |
-| `<leader>wq` | Close window / ウィンドウを閉じる |
-
-### Telescope (Fuzzy Finder) / Telescope（ファジーファインダー）
-
-| Key | Description |
-| :--- | :--- |
-| `<leader>ff` | Find files / ファイルを検索 |
-| `<leader>fg` | Grep in project / プロジェクト内をGrep検索 |
-| `<leader>fb` | Find buffers / バッファを検索 |
-| `<leader>fh` | Find help tags / ヘルプタグを検索 |
-| `<leader>fo` | Find old files / 最近開いたファイルを検索 |
-| `<leader>fs` | Show Git status / Gitのステータスを表示 |
-| `<leader>fc` | Find commands / コマンドを検索 |
-| `<leader>fd` | Show LSP diagnostics / LSPの診断情報を一覧表示 |
-| `<leader>s` | Search document symbols / ドキュメントシンボルを検索 |
-
-### LSP / 言語サーバープロトコル
-
-| Key | Description |
-| :--- | :--- |
-| `gD` | Go to declaration / 宣言へ移動 |
-| `gd` | Go to definition / 定義へ移動 |
-| `K` | Show hover information / ホバー情報を表示 |
-| `gi` | Go to implementation / 実装へ移動 |
-| `<C-k>` | Show signature help / シグネチャヘルプを表示 |
-| `<leader>rn` | Rename symbol / シンボルをリネーム |
-| `<leader>ca` | Code action / コードアクション |
-| `gr` | Show references / 参照を表示 |
-| `<leader>f` | Format code / コードをフォーマット |
-| `[d` | Go to previous diagnostic / 前の診断へ移動 |
-| `]d` | Go to next diagnostic / 次の診断へ移動 |
-| `<leader>q` | Show diagnostics in location list / ロケーションリストに診断を表示 |
-
-### Git / Git
-
-| Key | Description |
-| :--- | :--- |
-| `<leader>gg` | Toggle `lazygit` terminal UI / `lazygit`のUIを開閉 |
-
-### File Explorer (nvim-tree) / ファイルエクスプローラー
-
-| Key | Description |
-| :--- | :--- |
-| `<leader>ee` | Toggle file explorer / ファイルエクスプローラーの表示/非表示を切り替え |
-| `<leader>ef` | Toggle file explorer on current file / 現在のファイルの場所でファイルエクスプローラーを開く/閉じる |
-| `<leader>ec` | Collapse file explorer / ファイルエクスプローラーを折りたたむ |
-| `<leader>er` | Refresh file explorer / ファイルエクスプローラーを更新 |
-
-### Harpoon / Harpoon
-
-| Key | Description |
-| :--- | :--- |
-| `<leader>hm` | Mark file with harpoon / ファイルをハープーンでマーク |
-| `<leader>hn` | Go to next harpoon mark / 次のハープーンマークへ移動 |
-| `<leader>hp` | Go to previous harpoon mark / 前のハープーンマークへ移動 |
-
-### Commenting / コメント
-
-| Key | Description |
-| :--- | :--- |
-| `gcc` | (Normal Mode) Toggle comment for the current line / （ノーマルモード）現在の行をコメントアウト/アンコメント |
-| `gc` | (Visual Mode) Toggle comment for the selected lines / （ビジュアルモード）選択範囲をコメントアウト/アンコメント |
-
-### Session Management / セッション管理
-
-| Key | Description |
-| :--- | :--- |
-| `<leader>wr` | Restore session for current directory / 現在のディレクトリのセッションを復元 |
-| `<leader>ws` | Save session for current directory / 現在のディレクトリのセッションを保存 |
-
-### Notifications / 通知
-
-| Key | Description |
-| :--- | :--- |
-| `<leader>nh` | Show notification history / 通知履歴を表示 |
-| `<leader>nc` | Dismiss all notifications / すべての通知を閉じる |
-
-### Flash Navigation / Flashナビゲーション
-
-| Key | Description |
-| :--- | :--- |
-| `s` | Flash jump (forward) / Flashジャンプ（前方） |
-| `S` | Flash treesitter search / Flash treesitter検索 |
-| `r` (in visual/operator mode) | Flash remote / Flashリモート |
-
-## Included Plugins
-
-Below is a list of the main plugins, categorized by function.
-以下は、主要なプラグインを機能別に分類したリストです。
-
-### UI
-
-*   [alpha-nvim](https://github.com/goolord/alpha-nvim): A beautiful dashboard.
-*   [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim): Statusline.
-*   [nightfox.nvim](https://github.com/EdenEast/nightfox.nvim): Colorscheme.
-*   [nvim-notify](https://github.com/rcarriga/nvim-notify): Notification manager.
-*   [nvim-tree.lua](https://github.com/nvim-tree/nvim-tree.lua): File explorer.
-*   [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons): Icons for files and UI.
-*   [which-key.nvim](https://github.com/folke/which-key.nvim): Displays keybinding hints.
-
-### Coding Assistance
-
-*   [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter): Advanced syntax highlighting and parsing.
-*   (LSP, completion, and linting plugins are configured in `linting.lua` and other files)
-
-### Git Integration
-
-*   [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim): Git decorations in the sign column.
-*   [toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim) with `lazygit`.
-
-### Utility
-
-*   [auto-session](https://github.com/rmagatti/auto-session): Session manager.
-*   [harpoon](https://github.com/ThePrimeagen/harpoon): File and command quick access.
-*   [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim): Highly extendable fuzzy finder.
-*   [helpful.nvim](https://github.com/loctvl842/helpful.nvim): Better help viewer.
-
-For more details, please refer to the configuration files in the `lua/my/plugins/` directory.
-詳細については `lua/my/plugins/` ディレクトリ内の設定ファイルを参照してください。
+`keys` に `desc` を付けると which-key に自動表示されます。

@@ -58,6 +58,9 @@ create_symlink "$DOTPATH/config/nvim/sonictemplate" "$HOME/.config/nvim/sonictem
 # zellij
 create_symlink "$DOTPATH/config/zellij/config.kdl" "$HOME/.config/zellij/config.kdl"
 
+# mise
+create_symlink "$DOTPATH/config/mise/config.toml" "$HOME/.config/mise/config.toml"
+
 # claude
 create_symlink "$DOTPATH/claude/skills" "$HOME/.claude/skills"
 

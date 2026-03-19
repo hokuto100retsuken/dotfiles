@@ -17,6 +17,19 @@
   process = git-lfs filter-process
   required = true
 [alias]
+  aliases = "!git config --get-regexp ^alias\\. | sed 's/^alias\\.//; s/ /\t= /' | sort"
+  s = status -sb
+  d = diff
+  dc = diff --cached
+  l = log --oneline --graph -20
+  la = log --oneline --graph --all -20
+  co = checkout
+  sw = switch
+  swc = switch -c
+  unstage = reset HEAD --
+  amend = commit --amend --no-edit
+  wip = "!git add -A && git commit -m 'wip'"
+  pushf = push --force-with-lease
   delete-merged-branch = "!f () { git checkout $1; git branch --merged|egrep -v '\\*|develop|main|master'|xargs git branch -d; };f"
   branch-date = "!f() { git checkout -b $(git config user.name)-$(date +'%Y%m%d%H%M%S'); }; f"
 [core]

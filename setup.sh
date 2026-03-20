@@ -27,16 +27,16 @@ dotfiles セットアップスクリプト
     ./setup.sh [オプション]
 
 オプション:
-    -a, --all       すべてのセットアップを実行 (デフォルト)
+    -a, --all       すべてのセットアップを実行
     -i, --install   パッケージのインストールのみ
     -d, --dotfiles  dotfilesのシンボリックリンク作成のみ
     -f, --fish      fishシェルのプラグインインストールのみ
-    --docker        Dockerのインストールのみ
     --interactive   インタラクティブモード（何を実行するか選択）
     -h, --help      このヘルプを表示
 
 例:
-    ./setup.sh              # すべてのセットアップを実行
+    ./setup.sh              # インタラクティブモードで起動
+    ./setup.sh --all        # すべてのセットアップを実行
     ./setup.sh --dotfiles   # dotfilesのリンクのみ作成
     ./setup.sh -i -d        # パッケージインストールとdotfilesのみ
 
@@ -89,30 +89,18 @@ run_dotfiles() {
 # fishセットアップ
 run_fish() {
     info "fishシェルのプラグインをインストールします..."
-    
+
     if ! command -v fish &> /dev/null; then
         warn "fishシェルがインストールされていません"
         echo "  先に 'setup.sh --install' を実行してfishをインストールしてください"
         return 1
     fi
-    
+
     if bash "$SCRIPT_DIR/setup-fish.sh"; then
         success "fishシェルのセットアップが完了しました"
         return 0
     else
         error "fishシェルのセットアップ中にエラーが発生しました"
-        return 1
-    fi
-}
-
-# Dockerセットアップ
-run_docker() {
-    info "Dockerのインストールを開始します..."
-    if bash "$SCRIPT_DIR/setup-docker.sh"; then
-        success "Dockerのインストールが完了しました"
-        return 0
-    else
-        error "Dockerのインストール中にエラーが発生しました"
         return 1
     fi
 }
@@ -125,10 +113,9 @@ run_all() {
     echo "OS: $(uname -s) ($(uname -m))"
     echo "=========================================="
     echo ""
-    
+
     local has_error=false
-    
-    # パッケージインストール
+
     if ! run_install; then
         if ! confirm "続行しますか？"; then
             error "セットアップを中断しました"
@@ -137,14 +124,12 @@ run_all() {
         has_error=true
     fi
     echo ""
-    
-    # dotfiles
+
     if ! run_dotfiles; then
         has_error=true
     fi
     echo ""
-    
-    # fish (fishがインストールされている場合のみ)
+
     if command -v fish &> /dev/null; then
         if ! run_fish; then
             has_error=true
@@ -154,7 +139,7 @@ run_all() {
         warn "fishシェルが見つかりません。fishのセットアップをスキップします"
         echo ""
     fi
-    
+
     echo "=========================================="
     if [[ "$has_error" == true ]]; then
         warn "セットアップが完了しましたが、一部エラーがありました"
@@ -179,65 +164,54 @@ run_interactive() {
     echo ""
     echo "実行するセットアップを選択してください:"
     echo ""
-    
+
     local run_install_flag=false
     local run_dotfiles_flag=false
     local run_fish_flag=false
-    local run_docker_flag=false
-    
+
     if confirm "1. パッケージをインストールしますか？" "Y"; then
         run_install_flag=true
     fi
-    
+
     if confirm "2. dotfilesのシンボリックリンクを作成しますか？" "Y"; then
         run_dotfiles_flag=true
     fi
-    
+
     if confirm "3. fishシェルのプラグインをインストールしますか？" "N"; then
         run_fish_flag=true
     fi
-    
-    if confirm "4. Dockerをインストールしますか？" "N"; then
-        run_docker_flag=true
-    fi
-    
+
     echo ""
-    
+
     if [[ "$run_install_flag" == false ]] && \
        [[ "$run_dotfiles_flag" == false ]] && \
-       [[ "$run_fish_flag" == false ]] && \
-       [[ "$run_docker_flag" == false ]]; then
+       [[ "$run_fish_flag" == false ]]; then
         warn "何も選択されていません。終了します"
         exit 0
     fi
-    
+
     echo "=========================================="
     info "セットアップを開始します..."
     echo "=========================================="
     echo ""
-    
+
     local has_error=false
-    
+
     if [[ "$run_install_flag" == true ]]; then
         run_install || has_error=true
         echo ""
     fi
-    
+
     if [[ "$run_dotfiles_flag" == true ]]; then
         run_dotfiles || has_error=true
         echo ""
     fi
-    
+
     if [[ "$run_fish_flag" == true ]]; then
         run_fish || has_error=true
         echo ""
     fi
-    
-    if [[ "$run_docker_flag" == true ]]; then
-        run_docker || has_error=true
-        echo ""
-    fi
-    
+
     echo "=========================================="
     if [[ "$has_error" == true ]]; then
         warn "セットアップが完了しましたが、一部エラーがありました"
@@ -249,7 +223,6 @@ run_interactive() {
 
 # メイン処理
 main() {
-    # 引数がない場合はヘルプを表示してインタラクティブモードを提案
     if [[ $# -eq 0 ]]; then
         show_help
         echo ""
@@ -261,16 +234,13 @@ main() {
         fi
         exit 0
     fi
-    
-    # フラグ初期化
+
     local do_install=false
     local do_dotfiles=false
     local do_fish=false
-    local do_docker=false
     local do_all=false
     local do_interactive=false
-    
-    # 引数解析
+
     while [[ $# -gt 0 ]]; do
         case "$1" in
             -h|--help)
@@ -293,10 +263,6 @@ main() {
                 do_fish=true
                 shift
                 ;;
-            --docker)
-                do_docker=true
-                shift
-                ;;
             --interactive)
                 do_interactive=true
                 shift
@@ -309,52 +275,44 @@ main() {
                 ;;
         esac
     done
-    
-    # 実行
+
     if [[ "$do_interactive" == true ]]; then
         run_interactive
         exit 0
     fi
-    
+
     if [[ "$do_all" == true ]]; then
         run_all
         exit 0
     fi
-    
-    # 個別実行
+
     local has_error=false
     local ran_something=false
-    
+
     if [[ "$do_install" == true ]]; then
         run_install || has_error=true
         ran_something=true
         echo ""
     fi
-    
+
     if [[ "$do_dotfiles" == true ]]; then
         run_dotfiles || has_error=true
         ran_something=true
         echo ""
     fi
-    
+
     if [[ "$do_fish" == true ]]; then
         run_fish || has_error=true
         ran_something=true
         echo ""
     fi
-    
-    if [[ "$do_docker" == true ]]; then
-        run_docker || has_error=true
-        ran_something=true
-        echo ""
-    fi
-    
+
     if [[ "$ran_something" == false ]]; then
         warn "実行するタスクが指定されていません"
         show_help
         exit 1
     fi
-    
+
     if [[ "$has_error" == true ]]; then
         exit 1
     fi

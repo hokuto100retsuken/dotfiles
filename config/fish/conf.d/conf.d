@@ -1,1 +1,0 @@
-/Users/hokuto100retsuken/src/github.com/hokuto100retsuken/dotfiles/config/fish/conf.d

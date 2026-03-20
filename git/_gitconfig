@@ -1,16 +1,12 @@
 [core]
-	editor = nvim
-[ghq]
-	root = ~/src
-[ghq]
-  root = ~/src
-[ghq "CODECOMMIT-URL"]
-  vcs = git
-[core]
+  editor = nvim
   autocrlf = false
   quotepath = false
+  pager = delta
 [color]
   ui = true
+[ghq]
+  root = ~/src
 [filter "lfs"]
   clean = git-lfs clean -- %f
   smudge = git-lfs smudge -- %f
@@ -32,31 +28,22 @@
   pushf = push --force-with-lease
   delete-merged-branch = "!f () { git checkout $1; git branch --merged|egrep -v '\\*|develop|main|master'|xargs git branch -d; };f"
   branch-date = "!f() { git checkout -b $(git config user.name)-$(date +'%Y%m%d%H%M%S'); }; f"
-[core]
-    pager = delta
-
 [interactive]
-    diffFilter = delta --color-only --features=interactive
-
+  diffFilter = delta --color-only --features=interactive
 [delta]
-    features = decorations
-
+  features = decorations
 [delta "interactive"]
-    keep-plus-minus-markers = false
-
+  keep-plus-minus-markers = false
 [delta "decorations"]
-    commit-decoration-style = blue ol
-    commit-style = raw
-    file-style = omit
-    hunk-header-decoration-style = blue box
-    hunk-header-file-style = red
-    hunk-header-line-number-style = "#067a00"
-    hunk-header-style = file line-number syntax
+  commit-decoration-style = blue ol
+  commit-style = raw
+  file-style = omit
+  hunk-header-decoration-style = blue box
+  hunk-header-file-style = red
+  hunk-header-line-number-style = "#067a00"
+  hunk-header-style = file line-number syntax
 [user]
-	email = hokuto100retsuken@pepabo.com
-	name = aibo
-
-[includeIf "gitdir:/Users/hokuto100retsuken/src/github.com/"]
-    [user]
-        name = hkt100rtkn
-        email = hokuto100retsuken@gmail.com
+  email = hokuto100retsuken@pepabo.com
+  name = aibo
+[includeIf "gitdir:~/src/github.com/"]
+  path = ~/src/github.com/.gitconfig

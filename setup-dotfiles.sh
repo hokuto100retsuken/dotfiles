@@ -41,6 +41,7 @@ echo "バックアップディレクトリ: $BACKUP_DIR"
 
 # git config
 create_symlink "$DOTPATH/git/_gitconfig" "$HOME/.gitconfig"
+create_symlink "$DOTPATH/git/_gitconfig-github" "$HOME/src/github.com/.gitconfig"
 
 # fish
 create_symlink "$DOTPATH/config/fish/config.fish" "$HOME/.config/fish/config.fish"

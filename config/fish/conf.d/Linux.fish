@@ -1,12 +1,12 @@
 # Linux specific settings for fish shell
 if test (uname) = "Linux"
-    # Set locale
-    # set -x LANG ja_JP.UTF-8
+    # mise
+    if command -v mise >/dev/null
+        mise activate fish | source
+    end
 
-    /usr/bin/mise activate fish | source
-
-    # Initialize zoxide
-    if command -v zoxide &> /dev/null
-    zoxide init fish | source
+    # zoxide
+    if command -v zoxide >/dev/null
+        zoxide init fish | source
     end
 end

@@ -56,57 +56,32 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     fi
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     # macOS
-    if command -v brew &> /dev/null; then
-        PACKAGE_MANAGER="brew"
-        INSTALL_CMD="brew install"
-        packages=(
-            "gh"
-            "ghq"
-            "fzf"
-            "ripgrep"
-            "bat"
-            "fd"
-            "eza"
-            "jq"
-            "yq"
-            "mise"
-            "grc"
-            "direnv"
-        )
-    else
+    if ! command -v brew &> /dev/null; then
         echo "Homebrew is not installed. Installing Homebrew..."
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        
-        # Setup Homebrew PATH
         setup_homebrew_path
-        
-        # Verify brew is available
         if ! command -v brew &> /dev/null; then
             echo "Error: Homebrew installation failed or brew command not found in PATH"
             exit 1
         fi
-        
-        PACKAGE_MANAGER="brew"
-        INSTALL_CMD="brew install"
-        packages=(
-            "gh"
-            "ghq"
-            "fzf"
-            "ripgrep"
-            "bat"
-            "fd"
-            "eza"
-            "jq"
-            "yq"
-            "mise"
-            "colima"
-            "docker"
-            "docker-compose"
-            "grc"
-            "direnv"
-        )
         echo "Homebrew installation completed."
     fi
+    PACKAGE_MANAGER="brew"
+    INSTALL_CMD="brew install"
+    packages=(
+        "gh"
+        "ghq"
+        "fzf"
+        "ripgrep"
+        "bat"
+        "fd"
+        "eza"
+        "jq"
+        "yq"
+        "mise"
+        "grc"
+        "direnv"
+    )
 else
     echo "Unsupported operating system: $OSTYPE"
     exit 1

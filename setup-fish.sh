@@ -1,15 +1,15 @@
 #!/bin/bash
 
+set -euo pipefail
+
 # fisherのインストール
-fish -c "curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher"
+if ! fish -c "type -q fisher" 2>/dev/null; then
+    echo "Installing fisher..."
+    fish -c "curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher"
+fi
 
-# プラグインのインストール
-fish -c "fisher install jethrokuan/z"               # z - ディレクトリジャンプ
-fish -c "fisher install edc/bass"                   # bass - bashコマンド使用
-fish -c "fisher install oh-my-fish/plugin-peco"     # peco - インタラクティブな検索
-fish -c "fisher install oh-my-fish/plugin-grc"      # grc - カラーリング出力
-fish -c "fisher install decors/fish-ghq"            # ghq - リポジトリ管理
-fish -c "fisher install PatrickF1/fzf.fish"         # fzf - 履歴検索とファイル検索
-fish -c "fisher install pure-fish/pure"             # pure - プロンプト
+# fish_plugins に基づいてプラグインをインストール
+echo "Installing fish plugins from fish_plugins..."
+fish -c "fisher update"
 
-echo "fishとプラグインの連携が完了しました。"
+echo "fishプラグインのセットアップが完了しました。"

@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./*.pem)",
+      "Read(./*.key)",
+      "Read(./credentials.json)",
+      "Read(./secrets/**)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.command' | grep -qE 'rm\\s+(-[a-zA-Z]*f[a-zA-Z]*\\s+|.*--force\\s+)*(\\/|~|\\$HOME)\\s*$' && echo '{\"decision\":\"block\",\"reason\":\"危険な削除コマンドをブロックしました\"}' || echo '{\"decision\":\"allow\"}'",
+            "statusMessage": "危険なコマンドチェック中..."
+          }
+        ]
+      }
+    ]
+  }
+}

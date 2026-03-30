@@ -67,11 +67,6 @@ if test -f $env_file
     end < $env_file
 end
 
-# OS別設定の読み込み
-set os_specific_conf "$HOME/.config/fish/conf.d/(uname).fish"
-if test -f "$os_specific_conf"
-    source "$os_specific_conf"
-end
 fish_add_path $HOME/.local/bin
 
 # direnv (プロジェクトごとの環境変数を .envrc で自動切替)

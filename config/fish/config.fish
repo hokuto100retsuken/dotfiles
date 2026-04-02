@@ -18,6 +18,9 @@ abbr -a gloga "git log --oneline --graph --all -20"
 abbr -a ll "eza -la --icons --git"
 abbr -a lt "eza --tree --level=2 --icons"
 abbr -a cat bat
+abbr -a .. 'cd ..'
+abbr -a ... 'cd ../..'
+abbr -a .... 'cd ../../..'
 
 # fzf settings
 set -g FZF_DEFAULT_OPTS "--height 40% --layout=reverse-list --border --info=inline --cycle"

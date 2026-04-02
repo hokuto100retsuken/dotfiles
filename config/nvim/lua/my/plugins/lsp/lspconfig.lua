@@ -7,12 +7,11 @@ local lspconfig = {
   dependencies = {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
-    "hrsh7th/cmp-nvim-lsp",
+    "saghen/blink.cmp",
     "SmiteshP/nvim-navic", -- For code context display in winbar.
     -- winbarでコードコンテキストを表示するために使用します。
   },
   config = function()
-    local cmp_nvim_lsp = require("cmp_nvim_lsp")
     local navic = require("nvim-navic")
 
     -- Function to set up LSP keymaps.
@@ -49,7 +48,7 @@ local lspconfig = {
 
     -- Enhanced LSP capabilities configuration.
     -- LSPの機能を拡張する設定。
-    local capabilities = cmp_nvim_lsp.default_capabilities()
+    local capabilities = require("blink.cmp").get_lsp_capabilities()
 
     -- TypeScript/JavaScript LSP configuration using Neovim 0.11+ native API.
     -- Neovim 0.11+のネイティブAPIを使用したTypeScript/JavaScript用のLSP設定。

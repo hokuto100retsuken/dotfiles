@@ -31,10 +31,6 @@ keymap.set("n", "<leader>bd", "<cmd>bdelete<CR>", { silent = true, desc = "Close
 -- ┃ Applications / アプリケーション ┃
 keymap.set("n", "<leader>gg", "<Cmd>lua _LAZYGIT_TOGGLE()<CR>", { silent = true, desc = "Toggle Lazygit" })
 
--- Notification management
-keymap.set("n", "<leader>nh", ":lua require('notify').history()<CR>", { silent = true, desc = "Show notification history" })
-keymap.set("n", "<leader>nc", ":lua require('notify').dismiss()<CR>", { silent = true, desc = "Dismiss all notifications" })
-
 -- ┃ Editor Behavior / エディタの動作 ┃
 keymap.set("n", "<F1>", ":edit $MYVIMRC<CR>", { silent = true, desc = "Edit init.lua" })
 keymap.set("n", "<Esc>", ":nohlsearch<CR>", { silent = true, desc = "Clear search highlights" })

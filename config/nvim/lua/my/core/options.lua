@@ -15,6 +15,13 @@ local g = vim.g     -- For setting global variables (e.g., vim.g.mapleader) / �
 g.mapleader = " "
 g.maplocalleader = " "
 
+-- Disable unused providers for faster startup
+-- 使用しないプロバイダーを無効化して起動を高速化
+g.loaded_python3_provider = 0
+g.loaded_ruby_provider = 0
+g.loaded_perl_provider = 0
+g.loaded_node_provider = 0
+
 -- For markdown preview
 -- markdown-preview.nvim用の設定
 g["markdown_recommended_style"] = 0

@@ -17,27 +17,25 @@ local lspconfig = {
     -- Function to set up LSP keymaps.
     -- LSPのキーマップを設定する関数。
     local on_attach = function(client, bufnr)
-      local opts = { buffer = bufnr, silent = true }
+      local function opts(desc)
+        return { buffer = bufnr, silent = true, desc = desc }
+      end
 
-      -- Keymaps for LSP functions.
-      -- LSP機能のキーマップ。
-      vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-      vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-      vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-      vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
-      vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-      vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-      vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+      vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts("Go to declaration"))
+      vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts("Go to definition"))
+      vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Hover documentation"))
+      vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts("Go to implementation"))
+      vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts("Signature help"))
+      vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts("Rename symbol"))
+      vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts("Code action"))
+      vim.keymap.set("n", "gr", vim.lsp.buf.references, opts("Show references"))
       vim.keymap.set("n", "<leader>f", function()
         vim.lsp.buf.format({ async = true })
-      end, opts)
+      end, opts("Format file"))
 
-      -- Keymaps for diagnostics.
-      -- 診断のキーマップ。
-      vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-      vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-      vim.keymap.set("n", "<leader>xl", vim.diagnostic.setloclist, opts)
+      vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts("Previous diagnostic"))
+      vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts("Next diagnostic"))
+      vim.keymap.set("n", "<leader>xl", vim.diagnostic.setloclist, opts("Diagnostics to loclist"))
 
       -- Attach navic to LSP client for code context display.
       -- コードコンテキスト表示のためにnavicをLSPクライアントにアタッチします。

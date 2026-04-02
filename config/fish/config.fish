@@ -21,6 +21,8 @@ abbr -a cat bat
 abbr -a .. 'cd ..'
 abbr -a ... 'cd ../..'
 abbr -a .... 'cd ../../..'
+abbr -a zj zellij
+abbr -a zjd "zellij --layout dev"
 
 # fzf settings
 set -g FZF_DEFAULT_OPTS "--height 40% --layout=reverse-list --border --info=inline --cycle"

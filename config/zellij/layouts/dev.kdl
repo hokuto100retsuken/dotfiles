@@ -1,0 +1,18 @@
+// dev.kdl — 左にNvim、右にClaude Code の開発レイアウト
+// 使い方: zellij --layout dev
+
+layout {
+    pane split_direction="vertical" {
+        // 左: Nvim（メインエディタ）— 60%
+        pane size="60%" {
+            command "nvim"
+        }
+        // 右: Claude Code — 40%
+        pane size="40%" {
+            command "claude"
+        }
+    }
+    pane size=1 borderless=true {
+        plugin location="compact-bar"
+    }
+}

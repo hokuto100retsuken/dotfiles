@@ -253,7 +253,7 @@ load_plugins {
 // Choose the path to the default shell that zellij will use for opening new panes
 // Default: $SHELL
 //
-// default_shell "fish"
+default_shell "fish"
 
 // Choose the path to override cwd that zellij will use for opening new panes
 //
@@ -300,26 +300,23 @@ load_plugins {
 // For more examples, see: https://github.com/zellij-org/zellij/tree/main/example/themes
 // Once these themes are defined, one of them should to be selected in the "theme" section of this file
 //
-// themes {
-//     dracula {
-//         fg 248 248 242
-//         bg 40 42 54
-//         red 255 85 85
-//         green 80 250 123
-//         yellow 241 250 140
-//         blue 98 114 164
-//         magenta 255 121 198
-//         orange 255 184 108
-//         cyan 139 233 253
-//         black 0 0 0
-//         white 255 255 255
-//     }
-// }
+themes {
+    carbonfox {
+        fg 242 244 248
+        bg 22 22 22
+        red 238 83 150
+        green 37 190 106
+        yellow 8 189 186
+        blue 120 169 255
+        magenta 190 149 255
+        orange 255 192 185
+        cyan 51 177 255
+        black 40 40 40
+        white 223 223 224
+    }
+}
 
-// Choose the theme that is specified in the themes section.
-// Default: default
-//
-// theme "default"
+theme "carbonfox"
 
 // The name of the default layout to load on startup
 // Default: "default"

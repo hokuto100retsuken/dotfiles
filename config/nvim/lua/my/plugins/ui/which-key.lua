@@ -12,7 +12,7 @@ local wk = {
     local which_key = require("which-key")
     which_key.setup({})
     which_key.add({
-      { "<leader>f", group = "Find" },
+      { "<leader>f", group = "Find (Telescope)" },
       { "<leader>e", group = "Explorer" },
       { "<leader>g", group = "Git" },
       { "<leader>x", group = "Diagnostics" },

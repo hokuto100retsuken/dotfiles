@@ -34,7 +34,7 @@ function switch_branch
 
     set branches (git branch --format="%(refname:short)")
     if test (count $branches) -gt 0
-        set branch (printf '%s\n' $branches | fzf --preview-window=right:60% --preview="git log --oneline --graph --decorate --all -10 {}")
+        set branch (printf '%s\n' $branches | fzf --height 40% --layout=reverse --preview-window=right:60% --preview="git log --oneline --graph --decorate --all -10 {}")
         if test -n "$branch"
             set -l output (git checkout $branch 2>&1)
             set -l exit_status $status

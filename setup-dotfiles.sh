@@ -67,6 +67,7 @@ create_symlink "$DOTPATH/config/mise/config.toml" "$HOME/.config/mise/config.tom
 create_symlink "$DOTPATH/claude/skills" "$HOME/.claude/skills"
 
 # gemini
+create_symlink "$DOTPATH/gemini/GEMINI.md" "$HOME/.gemini/GEMINI.md"
 create_symlink "$DOTPATH/gemini/skills" "$HOME/.gemini/skills"
 
 echo ""

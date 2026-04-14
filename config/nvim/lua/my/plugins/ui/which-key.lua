@@ -19,7 +19,8 @@ local wk = {
       { "<leader>h", group = "Harpoon" },
       { "<leader>b", group = "Buffer" },
       { "<leader>n", group = "Notification" },
-      { "<leader>w", desc = "Save file" },
+      { "<leader>w", group = "Window / Save" },
+      { "<leader>t", group = "Tab" },
       { "<leader>q", desc = "Quit" },
     })
   end,

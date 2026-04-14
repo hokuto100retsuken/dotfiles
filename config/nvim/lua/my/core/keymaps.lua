@@ -5,8 +5,9 @@
 local keymap = vim.keymap
 
 -- ┃ Window Management / ウィンドウ管理 ┃
-keymap.set("n", "ss", ":split<Return><C-w>w", { silent = true, desc = "Split horizontally" })
-keymap.set("n", "sv", ":vsplit<Return><C-w>w", { silent = true, desc = "Split vertically" })
+keymap.set("n", "<leader>ws", ":split<Return><C-w>w", { silent = true, desc = "Split horizontally" })
+keymap.set("n", "<leader>wv", ":vsplit<Return><C-w>w", { silent = true, desc = "Split vertically" })
+keymap.set("n", "<leader>wq", "<C-w>q", { silent = true, desc = "Close window" })
 
 -- Window navigation (Ctrl+h/j/k/l — Ghosttyはctrl+shift+h/j/k/lなので競合しない)
 keymap.set("n", "<C-h>", "<C-w>h", { silent = true, desc = "Move to left window" })
@@ -14,8 +15,17 @@ keymap.set("n", "<C-j>", "<C-w>j", { silent = true, desc = "Move to lower window
 keymap.set("n", "<C-k>", "<C-w>k", { silent = true, desc = "Move to upper window" })
 keymap.set("n", "<C-l>", "<C-w>l", { silent = true, desc = "Move to right window" })
 
--- Close window
-keymap.set("n", "<leader>wq", "<C-w>q", { silent = true, desc = "Close window" })
+-- ┃ Tab Management / タブ管理 ┃
+keymap.set("n", "<leader>tn", "<cmd>tabnew<CR>", { silent = true, desc = "New tab" })
+keymap.set("n", "<leader>tc", function()
+  if vim.fn.tabpagenr("$") > 1 then
+    vim.cmd("tabclose")
+  else
+    vim.notify("Last tab — cannot close", vim.log.levels.WARN)
+  end
+end, { silent = true, desc = "Close tab" })
+keymap.set("n", "<leader>tl", "<cmd>tabnext<CR>", { silent = true, desc = "Next tab" })
+keymap.set("n", "<leader>th", "<cmd>tabprevious<CR>", { silent = true, desc = "Previous tab" })
 
 -- ┃ Buffer Management / バッファ管理 ┃
 -- bufferline の番号で直接ジャンプ

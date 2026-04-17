@@ -1,3 +1,13 @@
 [tools]
 go = "1.25.7"
 node = "24"
+claude = "latest"
+
+[tasks.ccupdate]
+description = 'Claude Codeを最新版に更新'
+run = """
+#!/usr/bin/env fish
+
+mise use claude@latest
+mise prune claude
+"""

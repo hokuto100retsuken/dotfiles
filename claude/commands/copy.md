@@ -13,7 +13,19 @@
 - 不要な前置きや説明は入れない
 
 ## クリップボードへのコピー方法
-- macOS: `pbcopy`
-- Linux: `xclip -selection clipboard` または `xsel --clipboard`
 
-$ARGUMENTS
+生成した Markdown を標準入力から流し込む。ヒアドキュメントまたは一時ファイルでエスケープ事故を避ける。
+
+```bash
+# macOS
+cat <<'EOF' | pbcopy
+<ここに Markdown 本文>
+EOF
+
+# Linux
+cat <<'EOF' | xclip -selection clipboard   # または xsel --clipboard
+<ここに Markdown 本文>
+EOF
+```
+
+$ARGUMENTS（対象テーマ。省略時はユーザーに確認する）

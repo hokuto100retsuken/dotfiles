@@ -14,18 +14,21 @@ autoApply: true
 ## リポジトリ構造
 
 - `config/`: 主要な設定ファイル。ツール別（fish, nvim, ghostty, zellij, mise）に整理。
+- `setup.sh`: エントリポイント。`--all / --dotfiles / --fish / --install` のフラグで下記サブスクリプトを呼び分ける。
 - `setup-dotfiles.sh`: シンボリックリンク作成用スクリプト。`create_symlink` 関数を使用。
 - `setup-installs.sh`: OS別パッケージインストール。
-- `claude/`, `gemini/`: AI ツール固有のスキルディレクトリ。
-- `git/`, `tmux/`, `docker/`: 各ツールセットアップ用ディレクトリ。
+- `setup-fish.sh`: fish プラグインのインストール。
+- `claude/`, `gemini/`: AI ツール固有のスキル・コマンドディレクトリ。
+- `git/`: gitconfig。
 
 ## 基本規約
 
 - **シンボリックリンク**: すべての設定はリポジトリから `~/.config/` または `$HOME` へリンク。新しい設定を追加する際は `setup-dotfiles.sh` に `create_symlink` を追加すること。
+- **ルール類**: グローバル / プロジェクトのルールは `.claude/rules/` 配下に分割配置（`CLAUDE.md` は `.claude/rules/` への移行済み notice のみ）。
 - **Fish Shell**: abbreviation でコマンド短縮。OS固有設定は `conf.d/Darwin.fish` / `conf.d/Linux.fish` に分離。
 - **カラー**: Carbonfox 配色を統一使用。
 - **Neovim**: `config/nvim/lua/my/plugins/` 配下にカテゴリ別（ui, editor, git, lsp, utility）で管理。lazy.nvim でプラグイン管理。
-- **ターミナルマルチプレクサ**: Zellij をメインで使用（tmux は deprecated）。
+- **ターミナルマルチプレクサ**: Zellij をメインで使用。
 
 ## Neovim プラグイン追加手順
 

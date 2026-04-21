@@ -16,7 +16,7 @@
 3. 以下の形式で上書き保存する:
 
 ```markdown
-# Handoff: <YYYY-MM-DD HH:MM>
+# Handoff: <YYYY-MM-DD HH:MM>   # handoff 保存時点の日時 (例: `date '+%Y-%m-%d %H:%M'`)
 
 ## ブランチ
 <branch-name>

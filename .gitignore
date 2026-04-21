@@ -25,3 +25,6 @@ Thumbs.db
 
 # 一時ファイル
 *.log
+
+# Playwright MCP のローカルキャッシュ
+.playwright-mcp/

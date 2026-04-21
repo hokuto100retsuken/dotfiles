@@ -1,11 +1,13 @@
 ---
 name: debug
-description: Railsアプリのデバッグ支援。エラーログやスタックトレースから原因を特定する。
+description: colorme-admin / colorme-user 等の Rails プロジェクトのデバッグ支援。エラーログやスタックトレースから原因を特定する。決済/Doorkeeper/Sidekiq を含むコードベース専用。
 ---
 
 # Debugスキル
 
-Railsアプリケーションのデバッグを支援する。
+colorme-admin / colorme-user 等の Rails アプリケーションのデバッグを支援する。
+
+対象外のプロジェクト（Rails でない、または決済/Doorkeeper/Sidekiq を含まない）では適用せず、汎用的なデバッグに切り替える。
 
 ## 入力
 - エラーメッセージ、スタックトレース、または再現手順

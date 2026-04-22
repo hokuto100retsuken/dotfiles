@@ -1,0 +1,84 @@
+function fish_prompt
+    set -l last_status $status
+    set -l prompt_char "❯"
+    
+    # Git Branch
+    set -l git_branch (git branch --show-current 2>/dev/null)
+    set -l project_name (basename (pwd))
+    
+    # --- Line 1: Rich Info ---
+    
+    # Project Name (blue)
+    set_color 78a9ff # blue from carbonfox
+    echo -n "$project_name"
+    
+    # Git Info (yellow)
+    if test -n "$git_branch"
+        set -l git_user (git config user.name 2>/dev/null)
+        if test -n "$git_user"
+            set_color ffc0b9 # coral/peach from carbonfox
+            echo -n " as $git_user"
+        end
+        
+        set_color 08bdba # yellow/teal from carbonfox
+        echo -n " on  $git_branch"
+        
+        # Git Status indicators
+        set -l git_status (git status --porcelain 2>/dev/null)
+        if test -n "$git_status"
+            set_color 08bdba
+            echo -n " [\$]"
+        end
+    end
+
+    # Docker / Colima (via 🐳 colima)
+    # `colima status` はdaemon問い合わせで遅いので、socketの存在で稼働判定する
+    if test -S "$HOME/.colima/default/docker.sock"
+        set_color 6e6f70 # subtext/brblack
+        echo -n " via 🐳 colima"
+    end
+
+    # Package Version (is 📦 v1.0.0)
+    if test -f package.json
+        set -l pkg_v (cat package.json | jq -r '.version' 2>/dev/null)
+        if test -n "$pkg_v"; and test "$pkg_v" != "null"
+            set_color be95ff # mauve
+            echo -n " is 📦 v$pkg_v"
+        end
+    end
+
+    # Node.js (via  vX.X.X)
+    if command -v node >/dev/null; and test -f package.json -o -d node_modules
+        set_color 25be6a # green
+        echo -n " via  "(node -v)
+    end
+
+    # Ruby (via 💎 vX.X.X)
+    if command -v ruby >/dev/null; and test -f Gemfile -o -f Rakefile
+        set_color ee5396 # pink/red
+        set -l ruby_v (ruby -v | awk '{print $2}')
+        echo -n " via 💎 v$ruby_v"
+    end
+
+    # Command Duration (took Xs)
+    if test $CMD_DURATION
+        set -l duration_ms $CMD_DURATION
+        if test $duration_ms -gt 1000
+            set -l duration_s (math -s1 "$duration_ms / 1000")
+            set_color c8a5ff # lavender
+            echo -n " took $duration_s"s
+        end
+    end
+
+    # --- Line 2: Prompt Character ---
+    echo ""
+    
+    if test $last_status -eq 0
+        set_color 25be6a # success green
+    else
+        set_color ee5396 # error red
+    end
+    
+    echo -n "$prompt_char "
+    set_color normal
+end

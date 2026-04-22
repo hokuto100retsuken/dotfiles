@@ -63,6 +63,8 @@ end
 bind \cg 'ghq_select'
 
 # 環境変数ファイルの読み込み
+# 形式: `KEY VALUE`（空白区切り、`.env`形式の`KEY=VALUE`ではない）
+# `#` で始まる行はコメントとしてスキップ
 set env_file "$HOME/.config/fish/envvars.txt"
 if test -f $env_file
     while read -l key value

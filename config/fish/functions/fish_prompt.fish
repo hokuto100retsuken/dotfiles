@@ -48,9 +48,13 @@ function fish_prompt
     end
 
     # Node.js (via  vX.X.X)
-    if command -v node >/dev/null; and begin; test -f package.json; or test -d node_modules; end
-        set_color 25be6a # green
-        echo -n " via  "(node -v)
+    # `node -v` はmise shim経由で毎回~100ms遅延するため `mise current node` を使う
+    if test -f package.json; or test -d node_modules
+        set -l node_v (mise current node 2>/dev/null)
+        if test -n "$node_v"
+            set_color 25be6a # green
+            echo -n " via  v$node_v"
+        end
     end
 
     # Ruby (via 💎 vX.X.X)

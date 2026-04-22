@@ -2,8 +2,9 @@
 # lazy-lock.json is tracked to ensure consistent plugin versions across environments
 # lazy-lock.jsonは環境間で一貫したプラグインバージョンを確保するために追跡されます
 
-# Fish shell
-config/fish/functions/
+# Fish shell: fisherが管理するプラグインの関数は無視、自作関数だけ追跡する
+config/fish/functions/*
+!config/fish/functions/fish_prompt.fish
 
 # バックアップファイル
 *.bak

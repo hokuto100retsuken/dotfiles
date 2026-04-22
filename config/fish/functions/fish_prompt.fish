@@ -40,7 +40,7 @@ function fish_prompt
 
     # Package Version (is 📦 v1.0.0)
     if test -f package.json
-        set -l pkg_v (cat package.json | jq -r '.version' 2>/dev/null)
+        set -l pkg_v (jq -r '.version' package.json 2>/dev/null)
         if test -n "$pkg_v"; and test "$pkg_v" != "null"
             set_color be95ff # mauve
             echo -n " is 📦 v$pkg_v"
@@ -48,13 +48,13 @@ function fish_prompt
     end
 
     # Node.js (via  vX.X.X)
-    if command -v node >/dev/null; and test -f package.json -o -d node_modules
+    if command -v node >/dev/null; and begin; test -f package.json; or test -d node_modules; end
         set_color 25be6a # green
         echo -n " via  "(node -v)
     end
 
     # Ruby (via 💎 vX.X.X)
-    if command -v ruby >/dev/null; and test -f Gemfile -o -f Rakefile
+    if command -v ruby >/dev/null; and begin; test -f Gemfile; or test -f Rakefile; end
         set_color ee5396 # pink/red
         set -l ruby_v (ruby -v | awk '{print $2}')
         echo -n " via 💎 v$ruby_v"

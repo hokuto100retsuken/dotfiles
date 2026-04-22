@@ -47,10 +47,25 @@ function fish_prompt
         end
     end
 
-    # Node.js (via  vX.X.X)
-    # `node -v` はmise shim経由で毎回~100ms遅延するため `mise current node` を使う
-    if test -f package.json; or test -d node_modules
-        set -l node_v (mise current node 2>/dev/null)
+    # Dockerプロジェクトはコンテナ内の実行版がホストからは見えないので、
+    # 版表示を抑制して🐳バッジだけ出す
+    set -l is_dockerized 0
+    if test -f docker-compose.yml; or test -f docker-compose.yaml; or test -f compose.yaml; or test -f compose.yml; or test -f Dockerfile
+        set is_dockerized 1
+        set_color 33b1ff # blue (carbonfox)
+        echo -n " 🐳 dockerized"
+    end
+
+    # Node.js版はリポジトリの版ファイルから読む（`node -v`はshim経由で遅い & Docker時は不正確）
+    if test $is_dockerized -eq 0; and begin; test -f package.json; or test -d node_modules; end
+        set -l node_v ""
+        if test -f .nvmrc
+            set node_v (string trim (cat .nvmrc))
+        else if test -f .node-version
+            set node_v (string trim (cat .node-version))
+        else if test -f .tool-versions
+            set node_v (awk '/^node / {print $2}' .tool-versions)
+        end
         if test -n "$node_v"
             set_color 25be6a # green
             echo -n " via  v$node_v"
@@ -58,9 +73,16 @@ function fish_prompt
     end
 
     # Ruby (via 💎 vX.X.X)
-    if command -v ruby >/dev/null; and begin; test -f Gemfile; or test -f Rakefile; end
+    # Ruby版もリポジトリの版ファイルから読む。Docker時は抑制
+    if test $is_dockerized -eq 0; and begin; test -f Gemfile; or test -f Rakefile; end
+        set -l ruby_v ""
+        if test -f .ruby-version
+            set ruby_v (string trim (cat .ruby-version))
+        else if test -f .tool-versions
+            set ruby_v (awk '/^ruby / {print $2}' .tool-versions)
+        end
+        test -z "$ruby_v"; and set ruby_v "?"
         set_color ee5396 # pink/red
-        set -l ruby_v (ruby -v | awk '{print $2}')
         echo -n " via 💎 v$ruby_v"
     end
 

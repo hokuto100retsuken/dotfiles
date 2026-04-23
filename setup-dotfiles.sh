@@ -64,10 +64,21 @@ create_symlink "$DOTPATH/config/zellij/layouts" "$HOME/.config/zellij/layouts"
 create_symlink "$DOTPATH/config/mise/config.toml" "$HOME/.config/mise/config.toml"
 
 # claude
+# CLAUDE.md / rulesはディレクトリ（またはファイル）単位でsymlink
 create_symlink "$DOTPATH/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
-create_symlink "$DOTPATH/claude/commands" "$HOME/.claude/commands"
 create_symlink "$DOTPATH/claude/rules" "$HOME/.claude/rules"
-create_symlink "$DOTPATH/claude/skills" "$HOME/.claude/skills"
+
+# skills / commandsはprivate repo (dotfiles-pepabo等) からも個別追加する構成なので、
+# ディレクトリ自体ではなく配下のitemを個別symlinkする
+mkdir -p "$HOME/.claude/skills" "$HOME/.claude/commands"
+for skill in "$DOTPATH"/claude/skills/*/; do
+    [[ -d "$skill" ]] || continue
+    create_symlink "${skill%/}" "$HOME/.claude/skills/$(basename "$skill")"
+done
+for cmd in "$DOTPATH"/claude/commands/*.md; do
+    [[ -f "$cmd" ]] || continue
+    create_symlink "$cmd" "$HOME/.claude/commands/$(basename "$cmd")"
+done
 
 # gemini
 create_symlink "$DOTPATH/gemini/GEMINI.md" "$HOME/.gemini/GEMINI.md"

@@ -14,6 +14,8 @@ claude/
 
 方針は [Zenn: Claude Code の rules / skills を分割してコンテキストを83%削減した話](https://zenn.dev/pepabo/articles/claude-code-rules-skills-split) を参考。
 
+職場固有の skills / commands は別リポジトリ（dotfiles-pepabo 等）に分離し、setup-dotfiles.sh は per-item symlink で両方の内容を `~/.claude/skills` / `~/.claude/commands` に合流させる構成。
+
 ## Rules（常時適用）
 
 | ルール | 用途 |
@@ -37,10 +39,8 @@ claude/
 |--------|------|
 | code-style-quality | コードスタイル・品質ルール |
 | commit-message | 日本語コミットメッセージ生成 |
-| debug | Rails アプリのデバッグ支援 |
 | dotfiles-expert | dotfiles リポジトリの構造・規約理解 |
 | empirical-prompt-tuning | プロンプトを反復改善する手法 |
-| euc-jp-workflow | PHP/.tpl の EUC-JP 編集ワークフロー |
 | explain | コードの処理フロー解説 |
 
 ## Commands

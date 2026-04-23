@@ -26,13 +26,15 @@ create_symlink() {
     fi
     
     backup_if_exists "$target"
-    
+
     local target_dir=$(dirname "$target")
     if [[ ! -d "$target_dir" ]]; then
         mkdir -p "$target_dir"
         echo "ディレクトリを作成: $target_dir"
     fi
-    
+
+    # targetがsymlinkの場合はln -sfvで中にネストされてしまう(macOS ln挙動)ので事前削除
+    [[ -L "$target" ]] && rm "$target"
     ln -sfv "$source" "$target"
 }
 
@@ -51,10 +53,8 @@ create_symlink "$DOTPATH/config/fish/functions" "$HOME/.config/fish/functions"
 # ghostty
 create_symlink "$DOTPATH/config/ghostty/config" "$HOME/.config/ghostty/config"
 
-# nvim
-create_symlink "$DOTPATH/config/nvim/init.lua" "$HOME/.config/nvim/init.lua"
-create_symlink "$DOTPATH/config/nvim/lua" "$HOME/.config/nvim/lua"
-create_symlink "$DOTPATH/config/nvim/sonictemplate" "$HOME/.config/nvim/sonictemplate"
+# nvim (ディレクトリ全体を symlink)
+create_symlink "$DOTPATH/config/nvim" "$HOME/.config/nvim"
 
 # zellij
 create_symlink "$DOTPATH/config/zellij/config.kdl" "$HOME/.config/zellij/config.kdl"

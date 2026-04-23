@@ -64,6 +64,9 @@ create_symlink "$DOTPATH/config/zellij/layouts" "$HOME/.config/zellij/layouts"
 create_symlink "$DOTPATH/config/mise/config.toml" "$HOME/.config/mise/config.toml"
 
 # claude
+create_symlink "$DOTPATH/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+create_symlink "$DOTPATH/claude/commands" "$HOME/.claude/commands"
+create_symlink "$DOTPATH/claude/rules" "$HOME/.claude/rules"
 create_symlink "$DOTPATH/claude/skills" "$HOME/.claude/skills"
 
 # gemini

@@ -1,0 +1,1 @@
+- PR本文の末尾に「Generated with Claude Code」等の生成バッジを入れない

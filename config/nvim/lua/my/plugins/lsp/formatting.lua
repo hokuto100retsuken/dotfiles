@@ -41,13 +41,6 @@ return {
         css = { "prettierd", "prettier" }, -- CSS formatters.
         -- CSSフォーマッター。
       },
-
-      -- Format options.
-      -- フォーマットオプション。
-      format_after_save = {
-        lsp_fallback = true, -- Fallback to LSP formatting if formatter not available.
-        -- フォーマッターが利用できない場合はLSPフォーマットにフォールバックします。
-      },
     })
   end,
 }

@@ -34,6 +34,8 @@ macos-icon-screen-color = 78A9FF
 macos-icon-frame = plastic
 
 font-feature = -dlig
+font-size = 9
+adjust-cell-height = 20%
 
 # ┃ Pane/Split Management ┃
 # Neovimのウィンドウ分割の代わりにGhosttyの画面分割を使用
@@ -64,3 +66,13 @@ keybind = super+w=close_surface
 # 最後の分割を閉じてもGhosttyを終了しないように設定
 quit-after-last-window-closed = false
 unfocused-split-opacity = 0.85
+
+# ┃ Neovim Usability ┃
+# Option キーを Meta として送る（Neovim で <M-...> マッピングが使える）
+macos-option-as-alt = true
+
+# 入力中はマウスカーソルを隠す
+mouse-hide-while-typing = true
+
+# OSC52 で Neovim から pbcopy への yank を許可
+clipboard-write = allow

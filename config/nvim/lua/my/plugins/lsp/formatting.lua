@@ -9,37 +9,27 @@ return {
       -- Configuration options for conform.nvim.
       -- conform.nvimの設定オプション。
 
-      -- Disable auto-format on save (can be triggered manually or via autocmd).
-      -- 保存時の自動フォーマットを無効化（手動またはautocmd経由でトリガー可能）。
+      -- Disable auto-format on save by default.
+      -- 保存時の自動フォーマットをデフォルトで無効化。
       format_on_save = false,
 
       -- Formatters for specific file types.
       -- 特定のファイルタイプのフォーマッター。
       formatters_by_ft = {
-        lua = { "stylua" }, -- Lua formatter.
-        -- Luaフォーマッター。
-        python = { "black" }, -- Python formatter.
-        -- Pythonフォーマッター。
-        javascript = { "prettierd", "prettier" }, -- JavaScript formatters.
-        -- JavaScriptフォーマッター。
-        typescript = { "prettierd", "prettier" }, -- TypeScript formatters.
-        -- TypeScriptフォーマッター。
-        javascriptreact = { "prettierd", "prettier" }, -- JSX formatters.
-        -- JSXフォーマッター。
-        typescriptreact = { "prettierd", "prettier" }, -- TSX formatters.
-        -- TSXフォーマッター。
-        vue = { "prettierd", "prettier" }, -- Vue formatters.
-        -- Vueフォーマッター。
-        json = { "prettierd", "prettier" }, -- JSON formatters.
-        -- JSONフォーマッター。
-        yaml = { "prettierd", "prettier" }, -- YAML formatters.
-        -- YAMLフォーマッター。
-        markdown = { "prettierd", "prettier" }, -- Markdown formatters.
-        -- Markdownフォーマッター。
-        html = { "prettierd", "prettier" }, -- HTML formatters.
-        -- HTMLフォーマッター。
-        css = { "prettierd", "prettier" }, -- CSS formatters.
-        -- CSSフォーマッター。
+        lua = { "stylua" },
+        python = { "black" },
+        go = { "gofumpt", "goimports" },
+        php = { "php_cs_fixer" },
+        javascript = { "prettierd", "prettier" },
+        typescript = { "prettierd", "prettier" },
+        javascriptreact = { "prettierd", "prettier" },
+        typescriptreact = { "prettierd", "prettier" },
+        vue = { "prettierd", "prettier" },
+        json = { "prettierd", "prettier" },
+        yaml = { "prettierd", "prettier" },
+        markdown = { "prettierd", "prettier" },
+        html = { "prettierd", "prettier" },
+        css = { "prettierd", "prettier" },
       },
     })
   end,

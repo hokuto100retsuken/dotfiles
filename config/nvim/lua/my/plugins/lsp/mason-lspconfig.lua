@@ -12,10 +12,10 @@ local mason_lspconfig = {
       -- List of LSP servers to ensure are installed.
       -- インストールを保証するLSPサーバーのリスト。
       ensure_installed = {
-        "ts_ls", -- TypeScript/JavaScript language server (use ts_ls instead of deprecated tsserver).
-        -- TypeScript/JavaScript言語サーバー（非推奨のtsserverの代わりにts_lsを使用）。
-        "lua_ls", -- Lua language server.
-        -- Lua言語サーバー。
+        "ts_ls",        -- TypeScript/JavaScript
+        "lua_ls",       -- Lua
+        "gopls",        -- Go
+        "intelephense", -- PHP
       },
       -- Automatically install missing servers.
       -- 不足しているサーバーを自動的にインストールします。

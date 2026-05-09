@@ -1,0 +1,30 @@
+name: Lint
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install fish
+        run: |
+          sudo apt-add-repository ppa:fish-shell/release-3 -y
+          sudo apt-get update
+          sudo apt-get install fish -y
+
+      - name: Check fish syntax
+        run: |
+          find . -name "*.fish" | xargs -I {} fish -n {}
+          fish -n config/fish/config.fish
+
+      - name: Stylua Check
+        uses: JohnnyMorganz/stylua-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          args: --check .

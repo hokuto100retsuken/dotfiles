@@ -2,6 +2,7 @@
 go = "1.25.7"
 node = "24"
 claude = "latest"
+gemini-cli = "latest"
 neovim = "0.11.7"
 
 [tasks.ccupdate]
@@ -11,4 +12,13 @@ run = """
 
 mise use claude@latest
 mise prune claude
+"""
+
+[tasks.gcupdate]
+description = 'Gemini CLIを最新版に更新'
+run = """
+#!/usr/bin/env fish
+
+mise use gemini-cli@latest
+mise prune gemini-cli
 """

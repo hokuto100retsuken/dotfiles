@@ -1,70 +1,48 @@
 # dotfiles
 
-個人用の設定ファイル（dotfiles）を管理するリポジトリです。
-`fish`, `mise`, `Neovim`, `ghostty` を中心とした、一貫性のある開発環境の構築を目指しています。
+![Lint](https://github.com/hokuto100retsuken/dotfiles/actions/workflows/lint.yml/badge.svg)
 
-## 主な使用ツール
+Carbonfox テーマを基調とした、一貫性のあるモダンな開発環境を構築するための設定群です。
+
+## 🎨 コンセプト
+
+- **Carbonfox Colors**: ターミナル、エディタ、プロンプトをすべて [Carbonfox](https://github.com/EdenEast/nightfox.nvim) カラーで統一。
+- **Modern CLI Tools**: fish, Neovim, ghostty, mise, zellij などの高速で高機能なツールを活用。
+- **Automated Setup**: スクリプト一発で、シンボリックリンク作成からプラグインのインストールまで完了。
+
+## 🛠 主な使用ツール
 
 | カテゴリ | ツール | 役割 |
 | :--- | :--- | :--- |
 | **ターミナル** | [ghostty](https://github.com/ghostty/ghostty) | GPUアクセラレーション対応ターミナル |
-| **シェル** | [fish](https://fishshell.com/) | 高機能シェル |
-| **プラグイン管理** | [fisher](https://github.com/jorgebucaran/fisher) | fish のプラグインマネージャ |
-| **エディタ** | [Neovim](https://neovim.io/) | Vimベースのエディタ |
+| **シェル** | [fish](https://fishshell.com/) | 高機能シェル + fzf プレビュー強化 |
+| **エディタ** | [Neovim](https://neovim.io/) | LSP/フォーマッタ完備のエディタ |
 | **Git UI** | [lazygit](https://github.com/jesseduffield/lazygit) | ターミナルGit UI |
 | **ツール管理** | [mise](https://mise.jdx.dev/) | CLIツール・ランタイムのバージョン管理 |
 
-クロスプラットフォーム (Linux / macOS) 対応。
+## 🚀 インストール
 
-## ディレクトリ構成
-
-```
-.
-├── config/
-│   ├── fish/       # fish shell
-│   ├── ghostty/    # ghostty
-│   ├── mise/       # mise
-│   ├── nvim/       # Neovim
-│   └── zellij/     # zellij
-├── git/            # Git設定
-├── claude/         # Claude Code スキル・コマンド
-├── gemini/         # Gemini CLI スキル
-├── doc/            # ドキュメント
-├── setup.sh        # セットアップ（メインスクリプト）
-├── setup-installs.sh
-├── setup-dotfiles.sh
-└── setup-fish.sh
-```
-
-## インストール
-
-```bash
+\`\`\`bash
 git clone https://github.com/hokuto100retsuken/dotfiles.git
 cd dotfiles
 bash setup.sh --all
-```
+\`\`\`
 
-`setup.sh` のオプション:
+## 📂 ディレクトリ構成
 
-| オプション | 内容 |
-| :--- | :--- |
-| `--all` | すべて実行 |
-| `--install` | パッケージインストールのみ |
-| `--dotfiles` | シンボリックリンク作成のみ |
-| `--fish` | fish プラグインインストールのみ |
-| `--interactive` | 対話モード |
+- \`config/\`: 各ツールの設定ファイル（fish, nvim, ghostty 等）
+- \`git/\`: Git のグローバル設定
+- \`gemini/\`: Gemini CLI 用のスキル・規約
+- \`claude/\`: Claude Code 用のルール・スキル
+- `.github/`: 自動検証（Lint）用ワークフロー
 
-引数なしで実行するとインタラクティブモードを提案します。
+## ⌨️ 主要なキーバインド (Ghostty / Fish)
 
-### macOS: デフォルトシェルをfishに変更
+- \`Cmd + Shift + T\`: クイックターミナルのトグル (Ghostty)
+- \`Ctrl + G\`: リポジトリ選択 (ghq + fzf)
+- \`Ctrl + B\`: Git ブランチ切り替え (fzf)
+- \`Super + D\`: 画面右分割 (Ghostty)
+- \`Super + Shift + D\`: 画面下分割 (Ghostty)
 
-```bash
-sudo sh -c 'echo $(which fish) >> /etc/shells'
-chsh -s $(which fish)
-```
-
-## トラブルシューティング
-
-- **シンボリックリンクの競合**: `setup-dotfiles.sh` が既存ファイルを `~/.dotfiles-backup-*` に自動バックアップ
-- **パッケージインストール失敗**: 失敗したパッケージは表示されるので手動インストール
-- **Neovimプラグイン**: 初回起動時に `lazy.nvim` が自動インストール
+---
+Developed by @hokuto100retsuken

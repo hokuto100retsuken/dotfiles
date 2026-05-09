@@ -45,6 +45,9 @@ keymap.set("n", "<leader>gg", "<Cmd>lua _LAZYGIT_TOGGLE()<CR>", { silent = true,
 keymap.set("n", "<F1>", ":edit $MYVIMRC<CR>", { silent = true, desc = "Edit init.lua" })
 keymap.set("n", "<Esc>", ":nohlsearch<CR>", { silent = true, desc = "Clear search highlights" })
 
+-- Format / 整形
+keymap.set("n", "<leader>f", function() require("conform").format({ lsp_fallback = true, async = true, timeout_ms = 500 }) end, { silent = true, desc = "Format buffer" })
+
 -- Save / Quit
 keymap.set("n", "<leader>w", ":write<CR>", { silent = true, desc = "Save file" })
 keymap.set("n", "<leader>q", ":quit<CR>", { silent = true, desc = "Quit" })

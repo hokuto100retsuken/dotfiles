@@ -47,3 +47,6 @@
   name = aibo
 [includeIf "gitdir:~/src/github.com/"]
   path = ~/src/github.com/.gitconfig
+
+[core]
+    excludesfile = ~/.gitignore_global

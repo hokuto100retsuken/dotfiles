@@ -10,7 +10,7 @@ description = 'Claude Codeを最新版に更新'
 run = """
 #!/usr/bin/env fish
 
-mise use claude@latest
+mise use --global claude@latest
 mise prune claude
 """
 
@@ -19,6 +19,6 @@ description = 'Gemini CLIを最新版に更新'
 run = """
 #!/usr/bin/env fish
 
-mise use gemini-cli@latest
+mise use --global gemini-cli@latest
 mise prune gemini-cli
 """

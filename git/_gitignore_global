@@ -36,3 +36,7 @@ Thumbs.db
 *~
 .vscode/
 .idea/
+
+# Development tools
+mise.toml
+.playwright-mcp/

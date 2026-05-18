@@ -34,8 +34,8 @@ macos-icon-screen-color = 78A9FF
 macos-icon-frame = plastic
 
 font-feature = -dlig
-font-size = 9
-adjust-cell-height = 20%
+font-size = 10
+adjust-cell-height = 0%
 
 # ┃ Pane/Split Management ┃
 # Neovimのウィンドウ分割の代わりにGhosttyの画面分割を使用

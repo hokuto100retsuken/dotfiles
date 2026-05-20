@@ -35,7 +35,7 @@ macos-icon-frame = plastic
 
 font-family = UDEV Gothic NF
 font-feature = -dlig
-font-size = 10
+font-size = 12
 adjust-cell-height = 0%
 
 # ┃ Pane/Split Management ┃

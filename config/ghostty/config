@@ -33,6 +33,7 @@ macos-icon-ghost-color = 010101
 macos-icon-screen-color = 78A9FF
 macos-icon-frame = plastic
 
+font-family = HackGen Console
 font-feature = -dlig
 font-size = 10
 adjust-cell-height = 0%

@@ -65,13 +65,17 @@ create_symlink "$DOTPATH/config/zellij/layouts" "$HOME/.config/zellij/layouts"
 create_symlink "$DOTPATH/config/mise/config.toml" "$HOME/.config/mise/config.toml"
 
 # claude
-# CLAUDE.md / rulesはディレクトリ（またはファイル）単位でsymlink
 create_symlink "$DOTPATH/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
-create_symlink "$DOTPATH/claude/rules" "$HOME/.claude/rules"
 
-# skills / commandsはprivate repo (dotfiles-pepabo等) からも個別追加する構成なので、
-# ディレクトリ自体ではなく配下のitemを個別symlinkする
-mkdir -p "$HOME/.claude/skills" "$HOME/.claude/commands"
+# rules / skills / commandsはprivate repo (dotfiles-pepabo等) からも個別追加する
+# 構成なので、ディレクトリ自体ではなく配下のitemを個別symlinkする
+mkdir -p "$HOME/.claude/rules" "$HOME/.claude/skills" "$HOME/.claude/commands"
+# 旧構成で rules がディレクトリsymlinkになっている場合は実ディレクトリに置き換える
+[[ -L "$HOME/.claude/rules" ]] && rm "$HOME/.claude/rules" && mkdir -p "$HOME/.claude/rules"
+for rule in "$DOTPATH"/claude/rules/*.md; do
+    [[ -f "$rule" ]] || continue
+    create_symlink "$rule" "$HOME/.claude/rules/$(basename "$rule")"
+done
 for skill in "$DOTPATH"/claude/skills/*/; do
     [[ -d "$skill" ]] || continue
     create_symlink "${skill%/}" "$HOME/.claude/skills/$(basename "$skill")"

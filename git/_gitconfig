@@ -43,10 +43,14 @@
   hunk-header-line-number-style = "#067a00"
   hunk-header-style = file line-number syntax
 [user]
-  email = hokuto100retsuken@pepabo.com
-  name = aibo
+  email = hokuto100retsuken@gmail.com
+  name = hkt100rtkn
 [includeIf "gitdir:~/src/github.com/"]
   path = ~/src/github.com/.gitconfig
 
 [core]
     excludesfile = ~/.gitignore_global
+
+# 環境固有の設定（存在しなければ無視される）
+[include]
+  path = ~/.gitconfig.local

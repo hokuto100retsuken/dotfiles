@@ -26,6 +26,11 @@ local nvim_treesitter = {
                 autotag = {
                     enable = true,
                 },
+                -- enable vim-matchup integration for accurate keyword matching (def/end, etc.)
+                -- def/end などのキーワード対応を正確にするため vim-matchup 連携を有効化
+                matchup = {
+                    enable = true,
+                },
                 -- ensure these language parsers are installed
                 ensure_installed = {
                     "json",

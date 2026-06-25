@@ -3,7 +3,7 @@
 ## 手順
 
 1. 保存先パスを決定する:
-   - `~/.claude/projects/$(pwd | sed 's|/|-|g')/handoff.md`
+   - `~/.claude/projects/$(pwd | sed 's|[/.]|-|g')/handoff.md` （`/` と `.` の両方を `-` に変換する。`github.com` → `github-com`）
    - ディレクトリがなければ作成する (`mkdir -p`)
 
 2. 以下の情報を収集する:

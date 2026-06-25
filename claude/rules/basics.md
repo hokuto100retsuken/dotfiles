@@ -3,7 +3,7 @@ description: 基本的な会話・作業方針
 globs:
 ---
 
-- セッション開始時に `~/.claude/projects/$(pwd | sed 's|/|-|g')/handoff.md` が存在すれば内容を確認してから作業を始める
+- 引き継ぎメモ（`~/.claude/projects/<cwdの / と . を - に変換>/handoff.md`）は SessionStart フックで起動時に自動注入される。手動で読みに行く必要はない
 - 日本語で会話する
 - 簡潔に、要点だけ伝える。冗長な説明は不要
 - 作業はゴリゴリ進める。確認より実行を優先

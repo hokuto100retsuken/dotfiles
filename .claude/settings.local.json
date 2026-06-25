@@ -1,24 +1,17 @@
 {
   "permissions": {
     "allow": [
-      "Bash(ls:*)",
-      "Bash(fish -c \"fisher update patrickf1/fzf.fish\" 2>&1)",
-      "Bash(fish --profile-startup /tmp/fish_profile.log -c 'exit')",
-      "Read(//private/tmp/**)",
       "mcp__playwright__browser_navigate",
-      "Bash(curl -s -L -H \"User-Agent: Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36\" -H \"Accept: text/html\" -H \"Accept-Language: ja\" \"https://takarakuji.rakuten.co.jp/backnumber/loto6/202604/\")",
-      "Bash(curl -s -L -H \"User-Agent: Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36\" -H \"Accept: text/html\" -H \"Accept-Language: ja\" \"https://takarakuji.rakuten.co.jp/backnumber/loto7/202604/\")",
       "Bash(go build:*)",
       "Bash(rm:*)",
       "Bash(npm show:*)",
-      "Bash(nvim --version)",
+      "Bash(npm list *)",
       "Bash(brew uninstall *)",
       "Bash(mise install *)",
       "Bash(mise which *)",
       "Bash(mise exec *)",
       "Bash(mise ls *)",
-      "Bash(mise ls-remote *)",
-      "Bash(npm list *)"
+      "Bash(mise ls-remote *)"
     ]
   }
 }

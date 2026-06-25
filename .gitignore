@@ -6,6 +6,9 @@
 config/fish/functions/*
 !config/fish/functions/fish_prompt.fish
 
+# Fish shell: シークレット類（実値）。テンプレ(secrets.fish.example)のみ追跡する
+config/fish/conf.d/secrets.fish
+
 # バックアップファイル
 *.bak
 *.back

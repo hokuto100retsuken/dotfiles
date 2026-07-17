@@ -38,6 +38,19 @@ opt.autowrite = true                    -- Automatically write files when switch
 opt.hidden = true                       -- Allow hidden buffers / バッファを隠すことを許可
 
 
+-- ┃ Filetype Detection / ファイルタイプ判定 ┃
+-- Recognize Thor files (Rails/Thor CLI tasks) as Ruby so treesitter and LSP apply.
+-- Thorファイル（Rails/ThorのCLIタスク）をRubyとして認識させ、treesitterとLSPを効かせる。
+vim.filetype.add({
+  extension = {
+    thor = "ruby",
+  },
+  filename = {
+    Thorfile = "ruby",
+  },
+})
+
+
 -- ┃ UI Settings / UI関連の設定 ┃
 -- Controls the appearance of the Neovim interface.
 -- Neovimインターフェースの外観を制御します。

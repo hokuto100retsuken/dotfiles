@@ -16,6 +16,7 @@ local mason_lspconfig = {
         "lua_ls",       -- Lua
         "gopls",        -- Go
         "intelephense", -- PHP
+        "ruby_lsp",     -- Ruby
       },
       -- Automatically install missing servers.
       -- 不足しているサーバーを自動的にインストールします。

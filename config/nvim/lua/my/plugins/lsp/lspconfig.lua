@@ -114,6 +114,24 @@ local lspconfig = {
     -- Lua LSPサーバーを有効化します。
     vim.lsp.enable("lua_ls")
 
+    -- Ruby LSP configuration using Neovim 0.11+ native API.
+    -- Neovim 0.11+のネイティブAPIを使用したRuby用のLSP設定。
+    -- 診断・定義ジャンプ（gd）・補完を有効化。.thor/Thorfileもruby判定なので同様に効く。
+    vim.lsp.config("ruby_lsp", {
+      capabilities = capabilities,
+      on_attach = function(client, bufnr)
+        -- Disable automatic formatting (keep scope to diagnostics/navigation).
+        -- 自動フォーマットは無効化する（依頼範囲を診断・ジャンプに絞るため）。
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
+        on_attach(client, bufnr)
+      end,
+    })
+
+    -- Enable Ruby LSP server.
+    -- Ruby LSPサーバーを有効化します。
+    vim.lsp.enable("ruby_lsp")
+
     -- Diagnostic display configuration.
     -- 診断の表示設定。
     vim.diagnostic.config({

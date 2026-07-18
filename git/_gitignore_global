@@ -39,3 +39,5 @@ Thumbs.db
 # Development tools
 mise.toml
 .playwright-mcp/
+
+**/.claude/settings.local.json

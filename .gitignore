@@ -32,3 +32,7 @@ Thumbs.db
 
 # Playwright MCP のローカルキャッシュ
 .playwright-mcp/
+.aider*
+
+# Claude Code のワークツリー置き場
+.claude/worktrees/

@@ -34,6 +34,8 @@ bash setup.sh --all
 - \`git/\`: Git のグローバル設定
 - \`gemini/\`: Gemini CLI 用のスキル・規約
 - \`claude/\`: Claude Code 用のルール・スキル
+- \`doc/\`: 各ツールの使いこなしガイド（nvim, claude, gemini）
+- \`scripts/\`: セットアップ用サブスクリプト（`setup.sh` から呼ばれる）
 - `.github/`: 自動検証（Lint）用ワークフロー
 
 ## ⌨️ 主要なキーバインド (Ghostty / Fish)

@@ -15,15 +15,15 @@ autoApply: true
 
 - `config/`: 主要な設定ファイル。ツール別（fish, nvim, ghostty, zellij, mise）に整理。
 - `setup.sh`: エントリポイント。`--all / --dotfiles / --fish / --install` のフラグで下記サブスクリプトを呼び分ける。
-- `setup-dotfiles.sh`: シンボリックリンク作成用スクリプト。`create_symlink` 関数を使用。
-- `setup-installs.sh`: OS別パッケージインストール。
-- `setup-fish.sh`: fish プラグインのインストール。
+- `scripts/setup-dotfiles.sh`: シンボリックリンク作成用スクリプト。`create_symlink` 関数を使用。
+- `scripts/setup-installs.sh`: OS別パッケージインストール。
+- `scripts/setup-fish.sh`: fish プラグインのインストール。
 - `claude/`, `gemini/`: AI ツール固有のスキル・コマンドディレクトリ。
 - `git/`: gitconfig。
 
 ## 基本規約
 
-- **シンボリックリンク**: すべての設定はリポジトリから `~/.config/` または `$HOME` へリンク。新しい設定を追加する際は `setup-dotfiles.sh` に `create_symlink` を追加すること。
+- **シンボリックリンク**: すべての設定はリポジトリから `~/.config/` または `$HOME` へリンク。新しい設定を追加する際は `scripts/setup-dotfiles.sh` に `create_symlink` を追加すること。
 - **ルール類**: グローバル / プロジェクトのルールは `.claude/rules/` 配下に分割配置（`CLAUDE.md` は `.claude/rules/` への移行済み notice のみ）。
 - **Fish Shell**: abbreviation でコマンド短縮。OS固有設定は `conf.d/Darwin.fish` / `conf.d/Linux.fish` に分離。
 - **カラー**: Carbonfox 配色を統一使用。
@@ -39,5 +39,5 @@ autoApply: true
 ## 新しい設定の追加手順
 
 1. `config/<tool>/` にディレクトリ・ファイルを作成
-2. `setup-dotfiles.sh` に `create_symlink` の呼び出しを追加
-3. 必要なパッケージがあれば `setup-installs.sh` の packages 配列に追加
+2. `scripts/setup-dotfiles.sh` に `create_symlink` の呼び出しを追加
+3. 必要なパッケージがあれば `scripts/setup-installs.sh` の packages 配列に追加

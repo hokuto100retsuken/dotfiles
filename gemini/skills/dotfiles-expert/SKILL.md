@@ -10,7 +10,7 @@ description: この dotfiles リポジトリの管理と拡張に特化した知
 ## リポジトリ構造
 
 - `config/`: 主要な設定ファイル。ツール別（fish, nvim, ghosttyなど）に整理されています。
-- `setup-dotfiles.sh`: シンボリックリンク作成用の主要スクリプト。`create_symlink` 関数を使用します。
+- `scripts/setup-dotfiles.sh`: シンボリックリンク作成用の主要スクリプト。`create_symlink` 関数を使用します。
 - `claude/`, `gemini/`: ツール固有のスキルディレクトリ。
 - `git/`, `tmux/`, `docker/`, `vscode/`: 各ツールセットアップ用の `install.sh` を含むディレクトリ。
 
@@ -26,7 +26,7 @@ description: この dotfiles リポジトリの管理と拡張に特化した知
 1. **新しい設定の追加**:
    - `config/` またはルートにディレクトリを作成。
    - スタンドアロンセットアップ用の `install.sh` を追加。
-   - `setup-dotfiles.sh` に `create_symlink` の呼び出しを追加。
+   - `scripts/setup-dotfiles.sh` に `create_symlink` の呼び出しを追加。
 2. **Fish プロンプトの更新**:
    - `config/fish/functions/fish_prompt.fish` を修正。
    - カラー定数が Carbonfox テーマと一致していることを確認。

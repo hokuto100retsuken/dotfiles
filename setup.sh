@@ -21,7 +21,7 @@ error() { echo -e "${RED}[✗]${NC} $1" >&2; }
 
 run_install() {
     info "Starting package installation..."
-    if bash "$SCRIPT_DIR/setup-installs.sh"; then
+    if bash "$SCRIPT_DIR/scripts/setup-installs.sh"; then
         success "Package installation process finished."
         return 0
     else
@@ -32,7 +32,7 @@ run_install() {
 
 run_dotfiles() {
     info "Creating dotfile symbolic links..."
-    if bash "$SCRIPT_DIR/setup-dotfiles.sh"; then
+    if bash "$SCRIPT_DIR/scripts/setup-dotfiles.sh"; then
         success "Dotfiles linking completed successfully."
         return 0
     else
@@ -43,7 +43,7 @@ run_dotfiles() {
 
 run_fish() {
     info "Setting up Fish Shell plugins..."
-    if bash "$SCRIPT_DIR/setup-fish.sh"; then
+    if bash "$SCRIPT_DIR/scripts/setup-fish.sh"; then
         success "Fish shell setup completed successfully."
         return 0
     else

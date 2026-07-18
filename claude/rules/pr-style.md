@@ -1,1 +1,2 @@
 - PR本文の末尾に「Generated with Claude Code」等の生成バッジを入れない
+- PRは必ずドラフトで作成する（`gh pr create --draft`）。Ready化はユーザーが判断するので、こちらで `gh pr ready` しない

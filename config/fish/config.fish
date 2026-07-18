@@ -36,3 +36,11 @@ if status is-interactive
     # Pluginのバインドを確実に上書きするための設定
     bind \cr 'fzf_history'
 end
+
+# Added by LM Studio CLI (lms)
+set -gx PATH $PATH $HOME/.lmstudio/bin
+# End of LM Studio CLI section
+
+
+# opencode
+fish_add_path $HOME/.opencode/bin

@@ -8,7 +8,7 @@
 
 ## 2. 開発サイクル (Research-First)
 - **調査第一**: 実装を開始する前に、必ず `grep_search` や `codebase_investigator` を使用して既存のパターンを調査すること。
-- **規約遵守**: 独自の推測でコードを書かず、常に既存の `config/` 内の設定ファイルや `setup-dotfiles.sh` の書き方に倣うこと。
+- **規約遵守**: 独自の推測でコードを書かず、常に既存の `config/` 内の設定ファイルや `scripts/setup-dotfiles.sh` の書き方に倣うこと。
 
 ## 3. コーディング規約とスタイル
 - **Shell**: `fish` を優先し、スクリプトは `bash` (set -euo pipefail) で記述すること。

@@ -2,7 +2,8 @@
 
 set -euo pipefail
 
-DOTPATH=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+# scripts/ 配下から見てリポジトリルートは1階層上
+DOTPATH=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 BACKUP_DIR="${HOME}/.dotfiles-backup-$(date +%Y%m%d-%H%M%S)"
 
 # --- Helper Functions ---

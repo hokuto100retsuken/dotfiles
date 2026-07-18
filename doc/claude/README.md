@@ -1,6 +1,6 @@
 # Claude Code 設定
 
-Claude Code 関連の設定を管理します。`setup-dotfiles.sh` により `~/.claude/` 配下にシンボリックリンクされます。
+Claude Code 関連の設定を管理します。`scripts/setup-dotfiles.sh` により `~/.claude/` 配下にシンボリックリンクされます。
 
 ## 構造
 
@@ -14,7 +14,7 @@ claude/
 
 方針は [Zenn: Claude Code の rules / skills を分割してコンテキストを83%削減した話](https://zenn.dev/pepabo/articles/claude-code-rules-skills-split) を参考。
 
-職場固有の skills / commands は別リポジトリ（dotfiles-pepabo 等）に分離し、setup-dotfiles.sh は per-item symlink で両方の内容を `~/.claude/skills` / `~/.claude/commands` に合流させる構成。
+職場固有の skills / commands は別リポジトリ（dotfiles-pepabo 等）に分離し、scripts/setup-dotfiles.sh は per-item symlink で両方の内容を `~/.claude/skills` / `~/.claude/commands` に合流させる構成。
 
 ## Rules（常時適用）
 

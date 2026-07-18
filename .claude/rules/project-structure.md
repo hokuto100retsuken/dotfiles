@@ -14,8 +14,15 @@ config/
   mise/       # mise (asdf後継) のツールバージョン管理
   nvim/       # Neovim設定 (lazy.nvim)
   zellij/     # Zellijターミナルマルチプレクサ設定
+claude/       # Claude Code用のルール・スキル・コマンド
+gemini/       # Gemini CLI用のスキル・規約
 git/          # gitconfig
-setup.sh      # セットアップスクリプト (--all, --dotfiles, --fish, --install)
+doc/          # 各ツールの使いこなしガイド (nvim/ claude/ gemini/)
+setup.sh      # セットアップ入口 (--all, --dotfiles, --fish, --install)
+scripts/      # setup.shから呼ばれるサブスクリプト
+  setup-dotfiles.sh  # シンボリックリンク作成
+  setup-fish.sh      # fishプラグイン導入
+  setup-installs.sh  # パッケージ導入
 ```
 
 ## Neovim プラグイン構成

@@ -4,13 +4,15 @@
 #
 # 回避したいときは、コマンドに SKIP_PRE_PR_CHECK=1 を付けて実行する。
 
-IN=$(cat)
-CMD=$(echo "$IN" | jq -r '.tool_input.command // empty')
+. "$(dirname "$0")/hook-lib.sh"
 
-echo "$CMD" | grep -qE 'gh +pr +create' || exit 0
+IN=$(cat)
+CMD=$(hook_field "$IN" '.tool_input.command')
+
+cmd_invokes "$CMD" 'gh[[:space:]]+pr[[:space:]]+create' || exit 0
 echo "$CMD" | grep -q 'SKIP_PRE_PR_CHECK=1' && exit 0
 
-CWD=$(echo "$IN" | jq -r '.cwd // empty')
+CWD=$(hook_field "$IN" '.cwd')
 [ -n "$CWD" ] && cd "$CWD" 2>/dev/null
 
 BASE=$(echo "$CMD" | sed -nE 's/.*--base[= ]+"?([^ "]+).*/\1/p')

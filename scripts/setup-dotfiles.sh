@@ -83,6 +83,7 @@ link_shell() {
 link_claude() {
     echo -e "\n--- Linking Claude Configurations ---"
     create_symlink "$DOTPATH/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+    create_symlink "$DOTPATH/claude/statusline-command.sh" "$HOME/.claude/statusline-command.sh"
 
     # Ensure base directories exist
     mkdir -p "$HOME/.claude/rules" "$HOME/.claude/skills" "$HOME/.claude/commands"

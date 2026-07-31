@@ -35,7 +35,15 @@ local snacks = {
         enabled = true,
         replace_netrw = true,
       },
-      picker = { enabled = true },
+      picker = {
+        enabled = true,
+        sources = {
+          -- .github 等の dotfile を表示する（.gitignore されたファイルは引き続き非表示）
+          explorer = { hidden = true },
+          files = { hidden = true },
+          grep = { hidden = true },
+        },
+      },
       notifier = { enabled = true },
     })
   end,

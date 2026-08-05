@@ -31,6 +31,15 @@ WARNS=()
 block() { BLOCKS+=("$1"); }
 warn()  { WARNS+=("$1"); }
 
+# 指定エンコーディングとして復号できないときだけ真を返す。
+# macOS の iconv は変換を全て終えたあとでも "Inappropriate ioctl for device" で
+# exit 1 を返すことがあり、終了コードで判定すると正常な UTF-8 ファイルまで
+# 不正バイト列と誤検出する。そのため stderr のメッセージで判定する。
+decode_error() {
+  iconv -f "$1" -t UTF-8 "$2" 2>&1 >/dev/null |
+    grep -qiE "illegal input sequence|illegal byte sequence|cannot convert|incomplete character"
+}
+
 # ---- base ブランチの特定 ----
 if [ -z "$BASE" ]; then
   BASE=$(git symbolic-ref --quiet refs/remotes/origin/HEAD 2>/dev/null | sed 's|refs/remotes/origin/||')
@@ -79,9 +88,9 @@ if command -v nkf >/dev/null 2>&1; then
 
     # 宣言されたエンコーディングとして復号できるか
     case "$new_enc" in
-      EUC-JP)   iconv -f EUC-JP   -t UTF-8 "$f" >/dev/null 2>&1 || block "不正バイト列: $f は EUC-JP として解釈できません" ;;
-      Shift_JIS) iconv -f SHIFT_JIS -t UTF-8 "$f" >/dev/null 2>&1 || block "不正バイト列: $f は Shift_JIS として解釈できません" ;;
-      UTF-8)    iconv -f UTF-8    -t UTF-8 "$f" >/dev/null 2>&1 || block "不正バイト列: $f は UTF-8 として解釈できません" ;;
+      EUC-JP)    decode_error EUC-JP    "$f" && block "不正バイト列: $f は EUC-JP として解釈できません" ;;
+      Shift_JIS) decode_error SHIFT_JIS "$f" && block "不正バイト列: $f は Shift_JIS として解釈できません" ;;
+      UTF-8)     decode_error UTF-8     "$f" && block "不正バイト列: $f は UTF-8 として解釈できません" ;;
     esac
   done <<< "$CHANGED"
 fi
@@ -199,6 +208,64 @@ if [ -n "$PHP_FILES" ] && { [ -f phpcs.xml ] || [ -f phpcs.xml.dist ] || [ -f .p
 $(echo "$OUT" | tail -20 | sed 's/^/    /')"
   fi
 fi
+
+# ============================================================
+# 9. JSON.parse の rescue 漏れ（WARN）— 変更ファイルのみ
+#    実績: colorme-api#9820 #9586 #9434「JSON.parse に rescue なし。
+#          他のFincodeクラスは JSON::ParserError を明示rescueしている」
+#    同リポジトリの既存クラスと揃っていないことが指摘の本質なので、
+#    「同一ファイル内に rescue が無い」ものだけを見る。
+#    ast-grep が無い環境では黙ってスキップする。
+# ============================================================
+if command -v ast-grep >/dev/null 2>&1; then
+  while IFS= read -r f; do
+    [ -z "$f" ] && continue
+    case "$f" in *.rb) ;; *) continue ;; esac
+    [ -f "$f" ] || continue
+    ast-grep --lang ruby --pattern 'JSON.parse($$$A)' "$f" 2>/dev/null | grep -q . || continue
+    grep -qE 'rescue[^#]*JSON::ParserError' "$f" && continue
+    warn "$f は JSON.parse を呼んでいますが JSON::ParserError を rescue していません（同種の既存クラスの rescue と揃えてください）"
+  done <<< "$CHANGED"
+fi
+
+# ============================================================
+# 10. nil 危険な .first チェーン（WARN）— 追加行のみ
+#     実績: colorme-api#10200「active.first が nil で NoMethodError → 500」
+#           colorme-api#10028「レコードがないのは基本ないので例外にしておくのが良さげ」
+#     0件時に nil になる .first に直接メソッドを呼んでいる追加行を見る。
+# ============================================================
+while IFS= read -r f; do
+  [ -z "$f" ] && continue
+  case "$f" in *.rb) ;; *) continue ;; esac
+  HITS=$(git diff "$MERGE_BASE"...HEAD -- "$f" 2>/dev/null |
+    grep '^+' | grep -v '^+++' |
+    grep -E '\.first\.[a-z_]' | head -3)
+  [ -z "$HITS" ] && continue
+  warn "nil 危険: $f の追加行で .first の戻り値に直接メソッドを呼んでいます（0件なら NoMethodError→500）。
+    「あり得ない」なら握りつぶさず例外を投げる方針か確認してください:
+$(echo "$HITS" | sed 's/^/      /')"
+done <<< "$CHANGED"
+
+# ============================================================
+# 11. 内部エラー情報の外部出力（WARN）— 変更ファイルのみ
+#     実績: colorme-api#9688「エラー通知メールに @error_message を素通し」
+#     購入者/オーナー向けの画面・メール文面に外部APIの生メッセージを出さない。
+#
+#     対象は ERB (.erb) のみ。colorme-admin / colorme-user の PHP テンプレート
+#     (.tpl) は出力構文が異なるため未対応（Smarty の {$var} 等を未確認）。
+# ============================================================
+while IFS= read -r f; do
+  [ -z "$f" ] && continue
+  case "$f" in
+    *.erb) ;;
+    *) continue ;;
+  esac
+  [ -f "$f" ] || continue
+  HITS=$(grep -nE '<%=[^%]*(@error_message|\.message)' "$f" 2>/dev/null | head -3)
+  [ -z "$HITS" ] && continue
+  warn "情報漏洩の懸念: $f がエラーメッセージをそのまま出力しています（外部APIの生メッセージを購入者/オーナーに見せていないか確認）:
+$(echo "$HITS" | sed 's/^/      /')"
+done <<< "$CHANGED"
 
 # ============================================================
 # 出力

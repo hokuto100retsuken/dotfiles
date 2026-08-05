@@ -79,14 +79,15 @@ link_shell() {
     create_symlink "$DOTPATH/config/mise/config.toml" "$HOME/.config/mise/config.toml"
 }
 
-# Handles the complex, nested linking for claude's rules/skills/commands
+# Handles the complex, nested linking for claude's rules/skills/commands/agents/workflows
 link_claude() {
     echo -e "\n--- Linking Claude Configurations ---"
     create_symlink "$DOTPATH/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
     create_symlink "$DOTPATH/claude/statusline-command.sh" "$HOME/.claude/statusline-command.sh"
 
     # Ensure base directories exist
-    mkdir -p "$HOME/.claude/rules" "$HOME/.claude/skills" "$HOME/.claude/commands"
+    mkdir -p "$HOME/.claude/rules" "$HOME/.claude/skills" "$HOME/.claude/commands" \
+             "$HOME/.claude/agents" "$HOME/.claude/workflows"
 
     # Rules (Individual files)
     echo "  [FILES] Linking Claude rules..."
@@ -110,6 +111,22 @@ link_claude() {
         [[ -f "$cmd" ]] || continue
         basename_file=$(basename "$cmd")
         create_symlink "$cmd" "$HOME/.claude/commands/$basename_file"
+    done
+
+    # Agents (Individual files)
+    echo "  [FILES] Linking Claude agents..."
+    for agent in "$DOTPATH"/claude/agents/*.md; do
+        [[ -f "$agent" ]] || continue
+        basename_file=$(basename "$agent")
+        create_symlink "$agent" "$HOME/.claude/agents/$basename_file"
+    done
+
+    # Workflows (Individual files)
+    echo "  [FILES] Linking Claude workflows..."
+    for workflow in "$DOTPATH"/claude/workflows/*.js; do
+        [[ -f "$workflow" ]] || continue
+        basename_file=$(basename "$workflow")
+        create_symlink "$workflow" "$HOME/.claude/workflows/$basename_file"
     done
 }
 

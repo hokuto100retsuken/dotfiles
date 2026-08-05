@@ -268,6 +268,55 @@ $(echo "$HITS" | sed 's/^/      /')"
 done <<< "$CHANGED"
 
 # ============================================================
+# 12. brakeman（WARN）— 変更した実装ファイルのみ
+#     Gemfile に入っているのに一度も走っていなかった。決済コードを多く扱う
+#     ため、外部入力の取り回しは機械で見ておく。
+#     --only-files で「変更したファイルに関する警告」だけに絞り、
+#     -w2 で信頼度が中以上のものだけを見る（誤検出でノイズにしない）。
+#     ローカルに ruby 実行環境が無い場合は黙ってスキップする（rubocop と同様）。
+# ============================================================
+RB_IMPL=$(echo "$CHANGED" | grep -E '^(app|lib)/.*\.rb$' | while IFS= read -r f; do [ -f "$f" ] && echo "$f"; done)
+if [ -n "$RB_IMPL" ] && [ -f config/application.rb ]; then
+  BRAKEMAN=""
+  if command -v bundle >/dev/null 2>&1 && bundle exec brakeman --version >/dev/null 2>&1; then
+    BRAKEMAN="bundle exec brakeman"
+  elif command -v brakeman >/dev/null 2>&1; then
+    BRAKEMAN="brakeman"
+  fi
+  if [ -n "$BRAKEMAN" ]; then
+    ONLY=$(echo "$RB_IMPL" | paste -sd, -)
+    OUT=$($BRAKEMAN --quiet --no-progress --no-pager -w2 -f plain --only-files "$ONLY" 2>/dev/null)
+    if echo "$OUT" | grep -qE '^(Confidence|[0-9]+ security warning)'; then
+      echo "$OUT" | grep -q '^0 security warnings' || \
+        warn "brakeman が変更ファイルに警告を出しています（誤検出の可能性もあるので中身を確認してください）:
+$(echo "$OUT" | grep -A4 '^Confidence' | head -20 | sed 's/^/      /')"
+    fi
+  fi
+fi
+
+# ============================================================
+# 13. bundler-audit（WARN）— Gemfile.lock を変更したときだけ
+#     既知の脆弱性を持つ gem を持ち込んでいないか。
+#     advisory DB の更新（--update）は行わない。ネットワークに依存させると
+#     PR作成が不安定になるため、ローカルDBが無い場合はスキップする。
+# ============================================================
+if echo "$CHANGED" | grep -qx 'Gemfile.lock'; then
+  AUDIT=""
+  if command -v bundle >/dev/null 2>&1 && bundle exec bundle-audit version >/dev/null 2>&1; then
+    AUDIT="bundle exec bundle-audit"
+  elif command -v bundle-audit >/dev/null 2>&1; then
+    AUDIT="bundle-audit"
+  fi
+  if [ -n "$AUDIT" ]; then
+    OUT=$($AUDIT check 2>/dev/null)
+    echo "$OUT" | grep -q 'No vulnerabilities found' || {
+      [ -n "$OUT" ] && warn "bundler-audit が脆弱性を報告しています:
+$(echo "$OUT" | grep -E '^(Name|Version|Advisory|Criticality|Title):' | head -16 | sed 's/^/      /')"
+    }
+  fi
+fi
+
+# ============================================================
 # 出力
 # ============================================================
 {

@@ -26,10 +26,26 @@
   amend = commit --amend --no-edit
   wip = "!git add -A && git commit -m 'wip'"
   pushf = push --force-with-lease
+  dft = difftool -t difftastic
+  dftc = difftool -t difftastic --staged
   delete-merged-branch = "!f () { git checkout $1; git branch --merged|egrep -v '\\*|develop|main|master'|xargs git branch -d; };f"
   branch-date = "!f() { git checkout -b $(git config user.name)-$(date +'%Y%m%d%H%M%S'); }; f"
 [interactive]
   diffFilter = delta --color-only --features=interactive
+
+# difftastic（構文単位の差分）。`git diff` は従来どおり delta のままにして、
+# `git dft` / `git dftc` のときだけ difft を使う。
+# delta は行単位の色付け、difft は構文の対応付けが得意なので用途が違う。
+# pager.difftool に less を明示しているのは、core.pager=delta を通すと
+# difft の出力を delta が再解析して壊すため。
+[diff]
+  tool = difftastic
+[difftool]
+  prompt = false
+[difftool "difftastic"]
+  cmd = difft "$LOCAL" "$REMOTE"
+[pager]
+  difftool = less -RFX
 [delta]
   features = decorations
 [delta "interactive"]

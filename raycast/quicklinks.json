@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Google 検索",
+    "link": "https://www.google.com/search?q={argument name=\"query\"}"
+  },
+  {
+    "name": "GitHub 検索",
+    "link": "https://github.com/search?q={argument name=\"query\"}&type=repositories"
+  },
+  {
+    "name": "MDN 検索",
+    "link": "https://developer.mozilla.org/ja/search?q={argument name=\"query\"}"
+  },
+  {
+    "name": "Rails API 検索",
+    "link": "https://www.google.com/search?q=site%3Aapi.rubyonrails.org+{argument name=\"query\"}"
+  },
+  {
+    "name": "Ruby リファレンス検索",
+    "link": "https://www.google.com/search?q=site%3Adocs.ruby-lang.org+{argument name=\"query\"}"
+  },
+  {
+    "name": "npm パッケージ検索",
+    "link": "https://www.npmjs.com/search?q={argument name=\"query\"}"
+  },
+  {
+    "name": "Docker Hub 検索",
+    "link": "https://hub.docker.com/search?q={argument name=\"query\"}"
+  },
+  {
+    "name": "Zenn 検索",
+    "link": "https://zenn.dev/search?q={argument name=\"query\"}"
+  },
+  {
+    "name": "DeepL で和訳",
+    "link": "https://www.deepl.com/translator#en/ja/{argument name=\"text\"}"
+  }
+]

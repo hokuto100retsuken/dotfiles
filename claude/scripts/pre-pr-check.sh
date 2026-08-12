@@ -317,6 +317,36 @@ $(echo "$OUT" | grep -E '^(Name|Version|Advisory|Criticality|Title):' | head -16
 fi
 
 # ============================================================
+# 14. 差分で新登場する識別子（WARN）
+#     実績: colorme-api#10219「通報という単語は聞き慣れない」
+#           #9512「konbini で統一したいです」#9440「use_money という用語は」
+#           #10171「ちょっと略しすぎな気もしている」
+#     既存コードベースに一度も現れない語は、既存の呼称とずれている可能性がある。
+#     日本語（漢字語）も対象にしたかったが、混在エンコーディングのリポジトリで
+#     バイト単位マッチが安定しなかったため識別子だけを見る。
+#     日本語の用語ずれは rules/self-review.md の「用語を発明しない」で人が見る。
+# ============================================================
+VOCAB_PATHS=""
+for p in app lib config spec; do
+  git cat-file -e "$MERGE_BASE:$p" 2>/dev/null && VOCAB_PATHS="$VOCAB_PATHS $p"
+done
+if [ -n "$VOCAB_PATHS" ]; then
+  KNOWN=$(git archive "$MERGE_BASE" $VOCAB_PATHS 2>/dev/null | tar -xO -f - 2>/dev/null |
+    LC_ALL=C grep -aoE '[a-z][a-z0-9_]{3,}' | sort -u)
+  NOVEL=$(git diff "$MERGE_BASE"...HEAD -- $VOCAB_PATHS 2>/dev/null |
+    LC_ALL=C grep -a '^+' | LC_ALL=C grep -av '^+++' |
+    LC_ALL=C grep -aoE '[a-z][a-z0-9_]{3,}' | sort -u |
+    comm -23 - <(echo "$KNOWN"))
+  COUNT=$(echo "$NOVEL" | grep -c . )
+  if [ "$COUNT" -gt 0 ]; then
+    warn "この差分で初めて登場する識別子が ${COUNT} 件あります。既存の呼称・綴りと揃っているか確認してください
+（新機能なら新語が出るのは正常です。既存語の言い換えになっていないかだけ見てください）:
+$(echo "$NOVEL" | head -15 | sed 's/^/      /')$([ "$COUNT" -gt 15 ] && echo "
+      ... 他 $((COUNT - 15)) 件")"
+  fi
+fi
+
+# ============================================================
 # 出力
 # ============================================================
 {

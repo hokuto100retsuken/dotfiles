@@ -1,0 +1,112 @@
+[
+  {
+    "name": "日付 (yyyy-MM-dd)",
+    "keyword": ";da",
+    "text": "{date format=\"yyyy-MM-dd\"}"
+  },
+  {
+    "name": "日付 (和式)",
+    "keyword": ";dj",
+    "text": "{date format=\"yyyy年M月d日\"}"
+  },
+  {
+    "name": "日時 (yyyy-MM-dd HH:mm)",
+    "keyword": ";dt",
+    "text": "{date format=\"yyyy-MM-dd HH:mm\"}"
+  },
+  {
+    "name": "日付つき見出し",
+    "keyword": ";dh",
+    "text": "## {date format=\"yyyy-MM-dd\"} {cursor}"
+  },
+  {
+    "name": "Claude Code 起動",
+    "keyword": ";cc",
+    "text": "claude"
+  },
+  {
+    "name": "Claude Code 続きから",
+    "keyword": ";ccc",
+    "text": "claude --continue"
+  },
+  {
+    "name": "Claude Code セッション選択",
+    "keyword": ";ccr",
+    "text": "claude --resume"
+  },
+  {
+    "name": "git commit -m",
+    "keyword": ";gcm",
+    "text": "git commit -m \"{cursor}\""
+  },
+  {
+    "name": "git switch -c",
+    "keyword": ";gsc",
+    "text": "git switch -c {cursor}"
+  },
+  {
+    "name": "git push (force-with-lease)",
+    "keyword": ";gpf",
+    "text": "git push --force-with-lease"
+  },
+  {
+    "name": "git log (graph)",
+    "keyword": ";glg",
+    "text": "git log --oneline --graph -20"
+  },
+  {
+    "name": "docker compose up",
+    "keyword": ";dcu",
+    "text": "docker compose up"
+  },
+  {
+    "name": "docker compose exec",
+    "keyword": ";dce",
+    "text": "docker compose exec {cursor}"
+  },
+  {
+    "name": "docker compose run --rm",
+    "keyword": ";dcr",
+    "text": "docker compose run --rm {cursor}"
+  },
+  {
+    "name": "レビュー依頼",
+    "keyword": ";rt",
+    "text": "対応が完了しました。お手数ですが、レビューをお願いします 🙇"
+  },
+  {
+    "name": "レビュー指摘の修正報告",
+    "keyword": ";rf",
+    "text": "レビューありがとうございました 🙇 ご指摘の点を修正しましたので、再度ご確認をお願いします。"
+  },
+  {
+    "name": "LGTM",
+    "keyword": ";lg",
+    "text": "確認しました、LGTM です 🙆"
+  },
+  {
+    "name": "指摘への返信",
+    "keyword": ";kn",
+    "text": "ご指摘ありがとうございます。{cursor}"
+  },
+  {
+    "name": "コードブロック",
+    "keyword": ";mc",
+    "text": "```\n{cursor}\n```"
+  },
+  {
+    "name": "折りたたみ (details)",
+    "keyword": ";md",
+    "text": "<details><summary>詳細</summary>\n\n{cursor}\n\n</details>"
+  },
+  {
+    "name": "クリップボードを引用",
+    "keyword": ";mq",
+    "text": "> {clipboard}"
+  },
+  {
+    "name": "bash shebang",
+    "keyword": ";sh",
+    "text": "#!/bin/bash\n\nset -euo pipefail\n\n{cursor}"
+  }
+]

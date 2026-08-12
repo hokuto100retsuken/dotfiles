@@ -26,12 +26,12 @@
   },
   {
     "name": "Claude Code 続きから",
-    "keyword": ";ccc",
+    "keyword": ";cn",
     "text": "claude --continue"
   },
   {
     "name": "Claude Code セッション選択",
-    "keyword": ";ccr",
+    "keyword": ";cr",
     "text": "claude --resume"
   },
   {

@@ -31,12 +31,19 @@ raycast/
 
 Raycast で `Import Snippets` を実行し、`raycast/snippets.json` を選ぶ。
 
-キーワードはすべて `;` 始まりにしてある。通常の文章入力中に誤爆させないため。
+取り込んだあと `Settings → Snippets → Enable Snippet Expansion` を ON にしないと、キーワードを打っても
+展開されない。`Expansion Mode` は `Immediately`（打ち終えた瞬間に展開）を前提にしている。
+
+キーワードの決めかたのルールは 2 つ。
+
+- すべて `;` 始まりにする。通常の文章入力中に誤爆させないため
+- **あるキーワードが別のキーワードの前方部分にならないようにする**。`Immediately` では長いほうを打ち切る前に
+  短いほうが展開されてしまうため（例: `;cc` と `;ccc` は共存できないので `;cc` / `;cn` / `;cr` にしている）
 
 | キーワード | 展開内容 |
 | --- | --- |
 | `;da` / `;dj` / `;dt` | 日付 (`2026-08-12` / `2026年8月12日` / `2026-08-12 14:30`) |
-| `;cc` / `;ccc` / `;ccr` | `claude` / `claude --continue` / `claude --resume` |
+| `;cc` / `;cn` / `;cr` | `claude` / `claude --continue` / `claude --resume` |
 | `;gcm` / `;gsc` / `;gpf` / `;glg` | git のよく使うコマンド |
 | `;dcu` / `;dce` / `;dcr` | docker compose のよく使うコマンド |
 | `;rt` / `;rf` / `;lg` / `;kn` | レビュー依頼・修正報告・LGTM・指摘への返信 |

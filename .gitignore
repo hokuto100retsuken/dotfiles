@@ -5,6 +5,7 @@
 # Fish shell: fisherが管理するプラグインの関数は無視、自作関数だけ追跡する
 config/fish/functions/*
 !config/fish/functions/fish_prompt.fish
+!config/fish/functions/wt.fish
 
 # Fish shell: シークレット類（実値）。テンプレ(secrets.fish.example)のみ追跡する
 config/fish/conf.d/secrets.fish

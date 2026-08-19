@@ -70,6 +70,9 @@ link_shell() {
     echo "  [DIR] Linking entire Neovim config directory..."
     create_symlink "$DOTPATH/config/nvim" "$HOME/.config/nvim"
 
+    # herdr
+    create_symlink "$DOTPATH/config/herdr/config.toml" "$HOME/.config/herdr/config.toml"
+
     # zellij
     echo "  [DIR] Linking Zellij configurations..."
     create_symlink "$DOTPATH/config/zellij/config.kdl" "$HOME/.config/zellij/config.kdl"

@@ -11,13 +11,14 @@ globs:
 config/
   fish/       # Fish shell設定・プラグイン(fisher)
   ghostty/    # Ghosttyターミナル設定
+  herdr/      # herdr (エージェント多重化ターミナル) 設定
   mise/       # mise (asdf後継) のツールバージョン管理
   nvim/       # Neovim設定 (lazy.nvim)
   zellij/     # Zellijターミナルマルチプレクサ設定
 claude/       # Claude Code用のルール・スキル・コマンド
 gemini/       # Gemini CLI用のスキル・規約
 git/          # gitconfig
-doc/          # 各ツールの使いこなしガイド (nvim/ claude/ gemini/)
+doc/          # 各ツールの使いこなしガイド (nvim/ claude/ gemini/ herdr/)
 setup.sh      # セットアップ入口 (--all, --dotfiles, --fish, --install)
 scripts/      # setup.shから呼ばれるサブスクリプト
   setup-dotfiles.sh  # シンボリックリンク作成

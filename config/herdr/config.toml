@@ -1,0 +1,73 @@
+onboarding = false
+# herdr — ターミナル用エージェント多重化ツール（https://herdr.dev）
+# 既定値は `herdr --default-config` で確認できる。ここには既定から変えたものだけ書く。
+# 検証は `herdr config check`、反映は `herdr server reload-config`。
+
+[theme]
+# Ghostty 側が carbonfox（config/ghostty/config）なので、既定の catppuccin（紫寄り）だと
+# ペインの色と別系統になって混ざる。"terminal" はホストターミナルの配色をそのまま使う。
+name = "terminal"
+
+[keys]
+# プレフィックス。既定の ctrl+b から ctrl+x に変更している。
+# 注意: プレフィックスキーはペイン内のアプリに一切届かない（herdr が食う）。
+# ctrl+b は fish の switch_branch（config.fish）、nvim の <C-b>、
+# Claude Code のバックグラウンド実行で使うので herdr に食わせない。
+# ctrl+g（ghq_select）/ ctrl+r（fzf_history）/ ctrl+v（fzf 変数）も fish で使用中なので避ける。
+# 副作用: nvim の挿入モード補完 i_CTRL-X 系がペイン内に届かなくなる。
+prefix = "ctrl+x"
+
+# ┃ space（= workspace / サイドバー上段）の移動 ┃
+# 既定では前後移動・番号ジャンプがどれも未割り当てなので、ここで割り当てる。
+previous_workspace = "prefix+shift+k"
+next_workspace = "prefix+shift+j"
+switch_workspace = "prefix+shift+1..9"
+
+# ┃ agent（サイドバー下段のエージェント行）の移動 ┃
+# 既定では未割り当て。a = agent で覚える。
+next_agent = "prefix+a"
+previous_agent = "prefix+shift+a"
+focus_agent = "prefix+alt+1..9"
+
+# ┃ サイドバーの表示内容 ┃
+[ui]
+# ペイン枠に検出したエージェント名を出す（手動でペイン名を付けていない場合）。
+# 分割したペインのどれがどのエージェントか、枠を見れば分かるようになる。
+show_agent_labels_on_pane_borders = true
+
+# agents パネルの並び順。"spaces" = space ごとにグループ化、
+# "priority" = 要対応（blocked / done）が上に来るキュー順。
+agent_panel_sort = "spaces"
+
+# エージェント行に出す情報。既定は [["state_icon","workspace","tab"],["agent"]] だけで
+# 「何をやっているか」が分からないので、状態の文字表記と端末タイトルを足す。
+# 使えるトークン: state_icon / state_text / workspace / tab / pane / agent /
+#                 terminal_title / terminal_title_stripped
+# （エージェントが `herdr pane report-metadata --token NAME=VALUE` で報告した値は $NAME で使える）
+# 色を使うのは状態（state_icon / state_text）だけにして、視線が blocked に向くようにする。
+# 状態トークンには fg を指定しない（指定すると状態ごとの色分けが消える。
+# 省略したスタイル項目は herdr 側の文脈依存の既定が残る）。
+[ui.sidebar.agents]
+rows = [
+    ["state_icon", "state_text", { token = "workspace", bold = true }],
+    [{ token = "tab", dim = true }, { token = "agent", dim = true }],
+    [{ token = "terminal_title_stripped", dim = true }],
+]
+
+# space 行に出す情報。既定のままだが、何が出ているかを明示するために書いておく。
+# 使えるトークン: state_icon / state_text / workspace / branch / git_status
+[ui.sidebar.spaces]
+rows = [
+    ["state_icon", { token = "workspace", bold = true }],
+    [{ token = "branch", dim = true }, { token = "git_status", dim = true }],
+]
+
+[experimental]
+# 日本語入力（IME）が ON のままだと prefix コマンドが効かないことがある。
+# true にすると prefix モード中だけ ASCII 入力ソースへ一時的に切り替える。
+switch_ascii_input_source_in_prefix = true
+
+# Claude Code など自前でカーソルを描くエージェントで、IME の変換候補ウィンドウが
+# 追従しなくなる問題への対処。副作用としてカーソルが二重に見える場面がある。
+# reveal_hidden_cursor_for_cjk_ime = true
+# cjk_ime_agents = ["claude"]

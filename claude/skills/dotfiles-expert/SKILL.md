@@ -1,10 +1,6 @@
 ---
 name: dotfiles-expert
-description: >
-  この dotfiles リポジトリの管理と拡張に特化した知識を提供します。
-  シェル設定 (fish)、ターミナル設定 (ghostty)、エディタ設定 (nvim) の変更、
-  または新しい設定のシンボリックリンク追加時に使用します。
-autoApply: true
+description: dotfiles リポジトリ（fish / nvim / ghostty / zellij / mise の設定）の構造と規約を示す。「dotfiles を直して」「fish の設定を変えて」「nvim にプラグインを追加して」「シンボリックリンクを追加して」と言われたとき、および `config/` 配下や `setup.sh` を触るときに使用する。新しい設定を足したら `scripts/setup-dotfiles.sh` への `create_symlink` 追加まで行う。
 ---
 
 # Dotfiles Expert
@@ -24,7 +20,7 @@ autoApply: true
 ## 基本規約
 
 - **シンボリックリンク**: すべての設定はリポジトリから `~/.config/` または `$HOME` へリンク。新しい設定を追加する際は `scripts/setup-dotfiles.sh` に `create_symlink` を追加すること。
-- **ルール類**: グローバル / プロジェクトのルールは `.claude/rules/` 配下に分割配置（`CLAUDE.md` は `.claude/rules/` への移行済み notice のみ）。
+- **ルール類**: グローバル / プロジェクトのルールは `claude/rules/` 配下に1トピック1ファイルで分割配置し、`~/.claude/rules/` にリンクする（`claude/CLAUDE.md` は移行済み notice のみ）。
 - **Fish Shell**: abbreviation でコマンド短縮。OS固有設定は `conf.d/Darwin.fish` / `conf.d/Linux.fish` に分離。
 - **カラー**: Carbonfox 配色を統一使用。
 - **Neovim**: `config/nvim/lua/my/plugins/` 配下にカテゴリ別（ui, editor, git, lsp, utility）で管理。lazy.nvim でプラグイン管理。

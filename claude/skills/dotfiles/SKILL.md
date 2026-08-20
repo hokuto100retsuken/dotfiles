@@ -3,7 +3,7 @@ name: dotfiles
 description: dotfiles リポジトリ（fish / nvim / ghostty / zellij / mise の設定）の構造と規約を示す。「dotfiles を直して」「fish の設定を変えて」「nvim にプラグインを追加して」「シンボリックリンクを追加して」と言われたとき、および `config/` 配下や `setup.sh` を触るときに使用する。新しい設定を足したら `scripts/setup-dotfiles.sh` への `create_symlink` 追加まで行う。
 ---
 
-# Dotfiles Expert
+# dotfiles リポジトリ
 
 このスキルは、この特定のリポジトリの構造と規約を理解するのに役立ちます。
 

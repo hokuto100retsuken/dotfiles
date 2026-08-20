@@ -1,5 +1,5 @@
 ---
-name: explain
+name: explain-code
 description: コードの処理フローや設計意図を解説する。「説明して」「解説して」「どういう仕組み」「何をしている」等の質問時に使用。
 ---
 

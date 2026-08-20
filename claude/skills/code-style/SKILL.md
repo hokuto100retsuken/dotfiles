@@ -1,5 +1,5 @@
 ---
-name: code-style-quality
+name: code-style
 description: コード・テスト・コミット・コメントのスタイルルールを適用する。コードを書く時、レビュー時、規約の質問時に使用。How/What/Why/Why notと説明的な変数名を案内する。
 ---
 

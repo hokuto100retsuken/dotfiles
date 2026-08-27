@@ -28,7 +28,7 @@
   pushf = push --force-with-lease
   dft = difftool -t difftastic
   dftc = difftool -t difftastic --staged
-  delete-merged-branch = "!f () { git checkout $1; git branch --merged|egrep -v '\\*|develop|main|master'|xargs git branch -d; };f"
+  delete-merged-branch = "!f () { git checkout $1; git branch --format='%(refname:short) %(worktreepath)' --merged | awk 'NF == 1' | grep -Ev '^(develop|main|master)$' | xargs -r git branch -d; };f"
   branch-date = "!f() { git checkout -b $(git config user.name)-$(date +'%Y%m%d%H%M%S'); }; f"
 [interactive]
   diffFilter = delta --color-only --features=interactive

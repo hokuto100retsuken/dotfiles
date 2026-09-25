@@ -25,11 +25,20 @@ setup_homebrew_path() {
 
 # Detect OS and set package lists
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    # Linux (Assuming Arch/yay for this script's scope)
-    PACKAGE_MANAGER="yay"
-    INSTALL_CMD="yay -S --needed"
+    # Linux (Arch 系。CachyOS は paru が標準で入っているので paru を優先する)
+    if command -v paru &> /dev/null; then
+        PACKAGE_MANAGER="paru"
+    elif command -v yay &> /dev/null; then
+        PACKAGE_MANAGER="yay"
+    else
+        echo "Error: AUR helper (paru or yay) not found. Install one first." >&2
+        exit 1
+    fi
+    is_installed() { pacman -Qq "$1" &> /dev/null; }
+    install_package() { "$PACKAGE_MANAGER" -S --needed --noconfirm "$1"; }
     packages=(
-        "gh"
+        "fish"
+        "github-cli"
         "ghq"
         "fzf"
         "ripgrep"
@@ -42,12 +51,35 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
         "grc"
         "zoxide"
         "zellij"
+        "herdr"
+        "lazygit"
+        "git-delta"
+        "difftastic"
+        "nkf"
+        "gcc"
+        "wl-clipboard"
         "ghostty"
-        "nerd-fonts-hack-gen"
-        "nerd-fonts-jetbrains-mono"
-        "direnv"
+        "ttf-udev-gothic"
+        "ttf-hackgen"
+        "ttf-jetbrains-mono-nerd"
+        "ast-grep"
+        "glow"
+        "hyperfine"
+        "watchexec"
+        "tree"
+        "wget"
+        "git-filter-repo"
+        "ctop"
+        "act"
+        "lazydocker"
+        "tealdeer"
+        "poppler"
+        "vim"
+        "mkcert"
+        "ollama"
         "docker"
         "docker-compose"
+        "docker-buildx"
     )
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     # macOS
@@ -62,8 +94,22 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
         echo "Homebrew setup complete. Please restart your shell for changes to take effect."
     fi
     PACKAGE_MANAGER="brew"
-    INSTALL_CMD="brew install"
+    # "cask:" 付きは GUI アプリ・フォント
+    is_installed() {
+        case "$1" in
+            cask:*) brew list --cask "${1#cask:}" &> /dev/null ;;
+            *) brew list --formula "$1" &> /dev/null ;;
+        esac
+    }
+    install_package() {
+        case "$1" in
+            cask:*) brew install --cask "${1#cask:}" ;;
+            *) brew install "$1" ;;
+        esac
+    }
     packages=(
+        "bash"
+        "fish"
         "gh"
         "ghq"
         "fzf"
@@ -75,7 +121,35 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
         "yq"
         "mise"
         "grc"
-        "direnv"
+        "zoxide"
+        "zellij"
+        "herdr"
+        "lazygit"
+        "git-delta"
+        "difftastic"
+        "nkf"
+        "gcc"
+        "cask:ghostty"
+        "cask:font-udev-gothic-nf"
+        "ast-grep"
+        "glow"
+        "hyperfine"
+        "watchexec"
+        "tree"
+        "wget"
+        "git-filter-repo"
+        "ctop"
+        "act"
+        "lazydocker"
+        "tealdeer"
+        "poppler"
+        "vim"
+        "mkcert"
+        "ollama"
+        "docker"
+        "docker-compose"
+        "docker-buildx"
+        "colima"
     )
 else
     echo "Error: Unsupported operating system: $OSTYPE" >&2
@@ -92,22 +166,32 @@ success_count=0
 total_count=${#packages[@]}
 
 for package in "${packages[@]}"; do
-    if command -v "$package" &>/dev/null; then
+    if is_installed "$package"; then
         echo "✅ Already installed: $package"
         ((success_count++))
         continue
     fi
-    
-    echo -n "📦 Installing $package... "
-    # Use eval to correctly execute the install command with package names
-    if eval "$INSTALL_CMD \"$package\"" &>/dev/null; then
-        echo "✅ Success"
+
+    echo "📦 Installing $package..."
+    if install_package "$package"; then
+        echo "✅ Success: $package"
         ((success_count++))
     else
-        echo "❌ Failed" >&2
+        echo "❌ Failed: $package" >&2
         failed_packages+=("$package")
     fi
 done
+
+# Linux の docker はデーモンの起動と、sudo なしで使うための docker グループ参加が要る
+if [[ "$OSTYPE" == "linux-gnu"* ]] && is_installed docker; then
+    echo ""
+    echo "🐳 Enabling docker service..."
+    sudo systemctl enable --now docker.service
+    if ! id -nG "$USER" | grep -qw docker; then
+        sudo usermod -aG docker "$USER"
+        echo "⚠️ Added $USER to docker group. Log out and back in to use docker without sudo."
+    fi
+fi
 
 echo ""
 echo "=========================================="

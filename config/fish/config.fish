@@ -12,12 +12,7 @@ if test -f $env_file
 end
 
 # --- Tools Setup ---
-# direnv (プロジェクトごとの環境変数を .envrc で自動切替)
-if command -v direnv >/dev/null
-    direnv hook fish | source
-end
-
-# mise (Tool version manager)
+# mise (Tool version manager。mise.toml の [env] でプロジェクトごとの環境変数も切り替える)
 if command -v mise >/dev/null
     mise activate fish | source
 end

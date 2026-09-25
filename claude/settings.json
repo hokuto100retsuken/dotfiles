@@ -1,0 +1,135 @@
+{
+  "permissions": {
+    "allow": [
+      "Read",
+      "Bash(cd *)",
+      "Bash(pwd)",
+      "Bash(echo *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(date *)",
+      "Bash(basename *)",
+      "Bash(dirname *)",
+      "Bash(stat *)",
+      "Bash(find *)",
+      "Bash(ls *)",
+      "Bash(grep *)",
+      "Bash(rg *)",
+      "Bash(git *)",
+      "Bash(docker compose *)",
+      "Bash(wc *)",
+      "Bash(tree *)",
+      "Bash(cat *)",
+      "WebFetch",
+      "WebSearch",
+      "Edit(~/src/**)",
+      "Write(~/src/**)",
+      "Bash(gh project item-list *)",
+      "Bash(nkf:*)",
+      "Bash(iconv:*)"
+    ],
+    "deny": [
+      "Read(**/.env)",
+      "Read(**/.env.*)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)",
+      "Read(**/*.p12)",
+      "Read(**/credentials.json)",
+      "Read(**/credentials)",
+      "Read(**/secrets/**)",
+      "Read(**/id_rsa)",
+      "Read(**/id_ed25519)",
+      "Read(~/.ssh/**)",
+      "Read(~/.aws/**)",
+      "Read(~/.netrc)",
+      "Read(~/.npmrc)",
+      "Read(~/.config/gh/hosts.yml)",
+      "Edit(**/.env)",
+      "Edit(**/.env.*)",
+      "Edit(**/secrets/**)",
+      "Write(**/.env)",
+      "Write(**/.env.*)",
+      "Write(**/secrets/**)"
+    ],
+    "ask": [
+      "Bash(pbcopy)"
+    ]
+  },
+  "model": "opus[1m]",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'CMD=$(cat | jq -r \".tool_input.command // empty\"); if echo \"$CMD\" | grep -qiE \"(imgur|imgbb|0x0\\.st|transfer\\.sh|file\\.io|pasteboard|ibb\\.co|catbox\\.moe|uguu\\.se|gyazo\\.com|firestorage\\.jp|gigafile\\.nu|data-bin\\.com|tenpu\\.me|uploader\\.jp|axfc\\.net|dotup\\.org|filesend\\.to|sendanywhere\\.com|data-deliver\\.net|wetransfer\\.com|send-anywhere\\.com)\"; then echo \"BLOCKED: 外部アップロードサービスへの送信はセキュリティポリシーにより禁止されています\" >&2; exit 2; fi'",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "bash ~/src/github.com/hokuto100retsuken/dotfiles/claude/scripts/hook-pr-draft-guard.sh",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "bash -c 'CMD=$(cat | jq -r \".tool_input.command // empty\"); if echo \"$CMD\" | grep -qE \"rm[[:space:]]+(-[a-zA-Z]*f[a-zA-Z]*[[:space:]]+|.*--force[[:space:]]+)*(/|~|\\$HOME)[[:space:]]*$\"; then echo \"BLOCKED: 危険な削除コマンド（/ ~ \\$HOME 等の削除）をブロックしました\" >&2; exit 2; fi'",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "bash ~/src/github.com/hokuto100retsuken/dotfiles/claude/scripts/hook-pre-pr-check.sh",
+            "timeout": 180
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'F=$(cat | jq -r \".tool_input.file_path // empty\"); if [ -n \"$F\" ] && [ -f \"$F\" ] && command -v nkf >/dev/null 2>&1; then ENC=$(nkf --guess \"$F\" 2>/dev/null); case \"$ENC\" in EUC-JP*|Shift_JIS*|ISO-2022-JP*|CP932*) echo \"BLOCKED: $F は $ENC です。Edit/Writeは文字化けするため、nkf変換ワークフロー（euc-jp スキル）を使ってください\" >&2; exit 2;; esac; fi'",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'F=$(cat | jq -r \".tool_input.file_path // empty\"); case \"$F\" in */handoff.md) exit 0;; esac; if [ -n \"$F\" ] && [ -f \"$F\" ]; then echo \"BLOCKED: $F は既存ファイルです。新規作成以外でWriteは使わず、Editで差分変更してください（edit-over-write.md）\" >&2; exit 2; fi'",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/src/github.com/hokuto100retsuken/dotfiles/claude/scripts/hook-session-handoff.sh",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "bash ~/src/github.com/hokuto100retsuken/dotfiles/claude/scripts/hook-session-nested-claudemd.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
+  },
+  "spinnerTipsEnabled": true,
+  "tui": "default",
+  "showThinkingSummaries": true,
+  "skipWorkflowUsageWarning": true,
+  "theme": "dark",
+  "showTurnDuration": true,
+  "terminalProgressBarEnabled": true
+}

@@ -89,6 +89,19 @@ link_claude() {
     create_symlink "$DOTPATH/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
     create_symlink "$DOTPATH/claude/statusline-command.sh" "$HOME/.claude/statusline-command.sh"
 
+    # settings.json は Claude Code 自身が書き換えるので、リンクせず初回だけコピーする
+    if [[ ! -e "$HOME/.claude/settings.json" ]]; then
+        cp "$DOTPATH/claude/settings.json" "$HOME/.claude/settings.json"
+        echo "  [COPY] Copied settings.json template -> $HOME/.claude/settings.json"
+    else
+        echo "  [SKIP] $HOME/.claude/settings.json already exists"
+    fi
+
+    # herdr の hook は herdr が管理・更新するので、herdr 経由で入れる
+    if command -v herdr &> /dev/null; then
+        herdr integration install claude
+    fi
+
     # Ensure base directories exist
     mkdir -p "$HOME/.claude/rules" "$HOME/.claude/skills" "$HOME/.claude/commands" \
              "$HOME/.claude/agents" "$HOME/.claude/workflows"

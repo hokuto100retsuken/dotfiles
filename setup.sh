@@ -41,6 +41,17 @@ run_dotfiles() {
     fi
 }
 
+run_mise() {
+    info "Installing tools managed by mise (neovim, node, go, claude, ...)..."
+    if mise install; then
+        success "mise install completed successfully."
+        return 0
+    else
+        error "mise install failed."
+        return 1
+    fi
+}
+
 run_fish() {
     info "Setting up Fish Shell plugins..."
     if bash "$SCRIPT_DIR/scripts/setup-fish.sh"; then
@@ -65,9 +76,10 @@ Usage:
     ./setup.sh [OPTIONS]
 
 Options:
-    -a, --all       Run all setup steps (Install -> Dotfiles -> Fish).
+    -a, --all       Run all setup steps (Install -> Dotfiles -> Mise -> Fish).
     -i, --install   Run package installation only.
     -d, --dotfiles  Create dotfile symlinks only.
+    -m, --mise      Install tools managed by mise only.
     -f, --fish      Setup fish shell plugins only.
     --interactive   Interactive mode: Prompts user for desired setup steps.
     -h, --help      Show this help message.
@@ -127,7 +139,17 @@ run_all() {
     fi
     echo ""
 
-    # 3. Setup Fish Shell (Only if fish is available)
+    # 3. Install mise tools (config.toml is linked in step 2)
+    if command -v mise &> /dev/null; then
+        if ! run_mise; then
+            has_error=true
+        fi
+        echo ""
+    else
+        warn "mise not found. Skipping mise install."
+    fi
+
+    # 4. Setup Fish Shell (Only if fish is available)
     if command -v fish &> /dev/null; then
         if ! run_fish; then
             has_error=true
@@ -156,6 +178,7 @@ run_interactive() {
 
     local run_install_flag=false
     local run_dotfiles_flag=false
+    local run_mise_flag=false
     local run_fish_flag=false
 
     if confirm "1. Install system packages (Recommended)" "Y"; then
@@ -166,12 +189,16 @@ run_interactive() {
         run_dotfiles_flag=true
     fi
 
+    if confirm "3. Install tools managed by mise" "Y"; then
+        run_mise_flag=true
+    fi
+
     if command -v fish &> /dev/null; then
-        if confirm "3. Setup Fish Shell plugins (Requires 'fish' installed)" "N"; then
+        if confirm "4. Setup Fish Shell plugins (Requires 'fish' installed)" "N"; then
             run_fish_flag=true
         fi
     else
-        warn "Fish shell not found. Skipping option 3."
+        warn "Fish shell not found. Skipping option 4."
     fi
 
     echo ""
@@ -185,6 +212,11 @@ run_interactive() {
 
     if [[ "$run_dotfiles_flag" == true ]]; then
         run_dotfiles || has_error=true
+        echo ""
+    fi
+
+    if [[ "$run_mise_flag" == true ]]; then
+        run_mise || has_error=true
         echo ""
     fi
 
@@ -207,6 +239,7 @@ run_interactive() {
 main() {
     local do_install=false
     local do_dotfiles=false
+    local do_mise=false
     local do_fish=false
     local do_all=false
     local do_interactive=false
@@ -227,6 +260,10 @@ main() {
                 ;;
             -d|--dotfiles)
                 do_dotfiles=true
+                shift
+                ;;
+            -m|--mise)
+                do_mise=true
                 shift
                 ;;
             -f|--fish)
@@ -267,6 +304,12 @@ main() {
 
     if [[ "$do_dotfiles" == true ]]; then
         run_dotfiles || has_error=true
+        ran_something=true
+        echo ""
+    fi
+
+    if [[ "$do_mise" == true ]]; then
+        run_mise || has_error=true
         ran_something=true
         echo ""
     fi

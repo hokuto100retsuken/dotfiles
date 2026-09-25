@@ -6,8 +6,7 @@ set -euo pipefail
 check_fisher() {
     if ! fish -c "type -q fisher" 2>/dev/null; then
         echo "⚠️ Fisher not found. Attempting installation..."
-        # Use a more robust curl method for sourcing the installer
-        fish -c "curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher"
+        fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
     fi
 }
 

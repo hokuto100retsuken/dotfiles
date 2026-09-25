@@ -22,11 +22,14 @@ Carbonfox テーマを基調とした、一貫性のあるモダンな開発環�
 
 ## 🚀 インストール
 
-\`\`\`bash
-git clone https://github.com/hokuto100retsuken/dotfiles.git
-cd dotfiles
+`~/src/github.com/hokuto100retsuken/dotfiles` に clone する（ghq の配置と揃えるため）。
+
+```bash
+mkdir -p ~/src/github.com/hokuto100retsuken
+git clone https://github.com/hokuto100retsuken/dotfiles.git ~/src/github.com/hokuto100retsuken/dotfiles
+cd ~/src/github.com/hokuto100retsuken/dotfiles
 bash setup.sh --all
-\`\`\`
+```
 
 ## 📂 ディレクトリ構成
 

@@ -209,3 +209,6 @@ else
     echo "✅ All required packages were successfully installed or found."
 fi
 echo "=========================================="
+
+# 1件でも失敗したら setup.sh 側で失敗として扱わせる
+[[ ${#failed_packages[@]} -eq 0 ]]

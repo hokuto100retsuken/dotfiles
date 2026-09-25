@@ -26,7 +26,9 @@ set_default_shell() {
     fi
 
     echo "🐟 Changing default shell to $fish_path..."
-    chsh -s "$fish_path"
+    if ! chsh -s "$fish_path"; then
+        echo "⚠️ Failed to change default shell. Run 'chsh -s $fish_path' manually."
+    fi
 }
 
 # Main execution function

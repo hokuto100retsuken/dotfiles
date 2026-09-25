@@ -166,6 +166,7 @@ run_all() {
         success "🎉 Setup completed successfully! Remember to restart your terminal session."
     fi
     echo "=========================================="
+    [[ "$has_error" == false ]]
 }
 
 run_interactive() {
@@ -232,6 +233,7 @@ run_interactive() {
         success "🎉 Setup completed successfully! Remember to restart your terminal session."
     fi
     echo "=========================================="
+    [[ "$has_error" == false ]]
 }
 
 # --- Argument Parsing and Main Entry Point ---

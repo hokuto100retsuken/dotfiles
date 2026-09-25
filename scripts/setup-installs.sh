@@ -51,7 +51,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
         "grc"
         "zoxide"
         "zellij"
-        "herdr"
+        "herdr-bin"
         "lazygit"
         "git-delta"
         "difftastic"

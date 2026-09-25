@@ -1,7 +1,9 @@
 local nvim_treesitter = {
     {
         "nvim-treesitter/nvim-treesitter",
-        event = { "BufReadPre", "BufNewFile" },
+        branch = "main",
+        -- main ブランチは遅延読み込みに対応していない
+        lazy = false,
         build = ":TSUpdate",
         dependencies = {
             "nvim-treesitter/nvim-treesitter-textobjects",
@@ -9,73 +11,62 @@ local nvim_treesitter = {
             "JoosepAlviste/nvim-ts-context-commentstring",
         },
         config = function()
-            -- import nvim-treesitter plugin
-            local treesitter = require("nvim-treesitter.configs")
-
-            -- configure treesitter
-            treesitter.setup({ -- enable syntax highlighting
-                highlight = {
-                    enable = true,
-                    -- Enable language injection for better highlighting in embedded code blocks
-                    -- 埋め込みコードブロックでのより良いハイライトのために言語インジェクションを有効化
-                    additional_vim_regex_highlighting = false,
-                },
-                -- enable indentation
-                indent = { enable = true },
-                -- enable autotagging (w/ nvim-ts-autotag plugin)
-                autotag = {
-                    enable = true,
-                },
-                -- enable vim-matchup integration for accurate keyword matching (def/end, etc.)
-                -- def/end などのキーワード対応を正確にするため vim-matchup 連携を有効化
-                matchup = {
-                    enable = true,
-                },
-                -- ensure these language parsers are installed
-                ensure_installed = {
-                    "json",
-                    "javascript",
-                    "typescript",
-                    "tsx",
-                    "vue",
-                    "yaml",
-                    "toml",
-                    "html",
-                    "css",
-                    "prisma",
-                    "markdown",
-                    "markdown_inline",
-                    "svelte",
-                    "graphql",
-                    "sql",
-                    "bash",
-                    "fish",
-                    "lua",
-                    "vim",
-                    "python",
-                    "ruby",
-                    "go",
-                    "rust",
-                    "php",
-                    "java",
-                    "c",
-                    "cpp",
-                    "dockerfile",
-                    "gitignore",
-                    "diff",
-                    "regex",
-                    "query",
-                },
-                incremental_selection = {
-                    enable = true,
-                    keymaps = {
-                        init_selection = "<C-space>",
-                        node_incremental = "<C-space>",
-                        scope_incremental = false,
-                        node_decremental = "<bs>",
-                    },
-                },
+            -- ensure these language parsers are installed (no-op if already installed)
+            require("nvim-treesitter").install({
+                "json",
+                "javascript",
+                "typescript",
+                "tsx",
+                "vue",
+                "yaml",
+                "toml",
+                "html",
+                "css",
+                "prisma",
+                "markdown",
+                "markdown_inline",
+                "svelte",
+                "graphql",
+                "sql",
+                "bash",
+                "fish",
+                "lua",
+                "vim",
+                "python",
+                "ruby",
+                "go",
+                "rust",
+                "php",
+                "java",
+                "c",
+                "cpp",
+                "dockerfile",
+                "gitignore",
+                "diff",
+                "regex",
+                "query",
             })
+
+            -- enable syntax highlighting and indentation for filetypes that have a parser
+            -- パーサーがあるファイルタイプでハイライトとインデントを有効化
+            vim.api.nvim_create_autocmd("FileType", {
+                group = vim.api.nvim_create_augroup("my_treesitter", { clear = true }),
+                callback = function(args)
+                    if not pcall(vim.treesitter.start, args.buf) then
+                        return
+                    end
+                    vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                end,
+            })
+
+            -- expand / shrink selection by syntax node (Nvim built-in v_an / v_in)
+            -- 構文ノード単位で選択範囲を広げる・狭める（Nvim 組み込みの v_an / v_in）
+            vim.keymap.set("n", "<C-space>", "van", { remap = true, desc = "Start node selection" })
+            vim.keymap.set("x", "<C-space>", "an", { remap = true, desc = "Expand node selection" })
+            vim.keymap.set("x", "<bs>", "in", { remap = true, desc = "Shrink node selection" })
+
+            -- enable autotagging (w/ nvim-ts-autotag plugin)
+            require("nvim-ts-autotag").setup()
 
             -- enable nvim-ts-context-commentstring plugin for commenting tsx and jsx
             require('ts_context_commentstring').setup {

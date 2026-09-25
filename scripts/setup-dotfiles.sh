@@ -62,6 +62,7 @@ link_shell() {
     create_symlink "$DOTPATH/config/fish/config.fish" "$HOME/.config/fish/config.fish"
     create_symlink "$DOTPATH/config/fish/conf.d" "$HOME/.config/fish/conf.d"
     create_symlink "$DOTPATH/config/fish/functions" "$HOME/.config/fish/functions"
+    create_symlink "$DOTPATH/config/fish/fish_plugins" "$HOME/.config/fish/fish_plugins"
 
     # ghostty
     create_symlink "$DOTPATH/config/ghostty/config" "$HOME/.config/ghostty/config"

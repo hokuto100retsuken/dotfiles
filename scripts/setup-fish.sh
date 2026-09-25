@@ -11,12 +11,32 @@ check_fisher() {
     fi
 }
 
+# Make fish the login shell
+set_default_shell() {
+    local fish_path
+    fish_path=$(command -v fish)
+
+    if [[ "${SHELL:-}" == "$fish_path" ]]; then
+        echo "✅ Default shell is already fish: $fish_path"
+        return 0
+    fi
+
+    # chsh は /etc/shells に載っているシェルしか受け付けない
+    if ! grep -qx "$fish_path" /etc/shells; then
+        echo "$fish_path" | sudo tee -a /etc/shells > /dev/null
+    fi
+
+    echo "🐟 Changing default shell to $fish_path..."
+    chsh -s "$fish_path"
+}
+
 # Main execution function
 main() {
     echo "=========================================="
     echo "Starting Fish Shell Plugin Setup..."
     echo "=========================================="
 
+    set_default_shell
     check_fisher
 
     echo "🚀 Updating all installed fish plugins via Fisher..."

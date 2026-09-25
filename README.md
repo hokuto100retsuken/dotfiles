@@ -31,6 +31,19 @@ cd ~/src/github.com/hokuto100retsuken/dotfiles
 bash setup.sh --all
 ```
 
+- Mac は初回の `git` 実行時に Xcode Command Line Tools のインストールを求められるので、先に入れておく
+- Linux は Arch 系（CachyOS 等）が対象。AUR ヘルパー（paru または yay）が必要
+- 途中で sudo のパスワードを聞かれる（既定シェルの変更、Linux の docker 設定）
+
+### セットアップ後に手作業で行うこと
+
+- ログインし直す（既定シェルの fish と、Linux の docker グループを反映するため）
+- `gh auth login` で GitHub に認証する
+- SSH 鍵を作成または配置し、GitHub に登録する
+- `config/fish/conf.d/secrets.fish.example` をコピーして `secrets.fish` を作り、値を埋める
+- 環境ごとの環境変数があれば `~/.config/fish/envvars.txt` に `KEY value` 形式で書く
+- `mise install` が失敗していたら、もう一度実行する
+
 ## 📂 ディレクトリ構成
 
 - \`config/\`: 各ツールの設定ファイル（fish, nvim, ghostty 等）

@@ -3,7 +3,7 @@ go = "1.25.7"
 node = "24"
 claude = "latest"
 gemini-cli = { version = "latest", allow_builds = ["@github/keytar", "node-pty"] }
-neovim = "0.11.7"
+neovim = "0.12.5"
 
 [tasks.ccupdate]
 description = 'Claude Codeを最新版に更新'

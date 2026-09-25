@@ -158,20 +158,17 @@ local lspconfig = {
 
     -- Diagnostic icon configuration.
     -- 診断アイコンの設定。
-    local signs = {
-      { name = "DiagnosticSignError", text = "✗" },
-      { name = "DiagnosticSignWarn", text = "⚠" },
-      { name = "DiagnosticSignHint", text = "➤" },
-      { name = "DiagnosticSignInfo", text = "ℹ" },
-    }
-
-    for _, sign in ipairs(signs) do
-      vim.fn.sign_define(sign.name, {
-        texthl = sign.name,
-        text = sign.text,
-        numhl = "",
-      })
-    end
+    -- Nvim 0.12 から sign_define では設定できないため vim.diagnostic.config で渡す
+    vim.diagnostic.config({
+      signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = "✗",
+          [vim.diagnostic.severity.WARN] = "⚠",
+          [vim.diagnostic.severity.HINT] = "➤",
+          [vim.diagnostic.severity.INFO] = "ℹ",
+        },
+      },
+    })
   end,
 }
 

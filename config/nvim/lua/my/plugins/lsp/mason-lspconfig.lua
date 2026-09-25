@@ -16,7 +16,7 @@ local mason_lspconfig = {
         "lua_ls",       -- Lua
         "gopls",        -- Go
         "intelephense", -- PHP
-        "ruby_lsp",     -- Ruby
+        -- ruby_lsp は Ruby 本体が要るため自動インストールしない（必要な環境で :MasonInstall ruby-lsp）
       },
       -- Automatically install missing servers.
       -- 不足しているサーバーを自動的にインストールします。

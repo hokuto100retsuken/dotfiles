@@ -111,6 +111,7 @@ link_claude() {
     echo -e "\n--- Linking Claude Configurations ---"
     create_symlink "$DOTPATH/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
     create_symlink "$DOTPATH/claude/statusline-command.sh" "$HOME/.claude/statusline-command.sh"
+    create_symlink "$DOTPATH/claude/themes" "$HOME/.claude/themes"
 
     # settings.json は Claude Code 自身が書き換えるので、リンクせず初回だけコピーする
     if [[ ! -e "$HOME/.claude/settings.json" ]]; then

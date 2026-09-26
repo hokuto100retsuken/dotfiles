@@ -1,0 +1,8 @@
+{
+  "name": "Glass (dark-ansi)",
+  "base": "dark-ansi",
+  "overrides": {
+    "userMessageBackground": "#1e2a3a",
+    "userMessageBackgroundHover": "#2a3a50"
+  }
+}

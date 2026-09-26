@@ -132,6 +132,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
         "gcc"
         "tree-sitter-cli"
         "cask:ghostty"
+        "felixkratz/formulae/borders"
         "cask:font-udev-gothic-nf"
         "ast-grep"
         "glow"
@@ -211,6 +212,11 @@ else
     echo "✅ All required packages were successfully installed or found."
 fi
 echo "=========================================="
+
+# JankyBorders はログイン時に常駐させる（設定は ~/.config/borders/bordersrc を読む）
+if [[ "$OSTYPE" == "darwin"* ]] && is_installed felixkratz/formulae/borders; then
+    brew services start borders
+fi
 
 # 1件でも失敗したら setup.sh 側で失敗として扱わせる
 [[ ${#failed_packages[@]} -eq 0 ]]

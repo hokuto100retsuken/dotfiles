@@ -81,6 +81,11 @@ link_shell() {
 
     # mise
     create_symlink "$DOTPATH/config/mise/config.toml" "$HOME/.config/mise/config.toml"
+
+    # JankyBorders (macOS only)
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        create_symlink "$DOTPATH/config/borders/bordersrc" "$HOME/.config/borders/bordersrc"
+    fi
 }
 
 # 会社の業務用で、個人環境にはリンクしないもの（claude/ からの相対パス）

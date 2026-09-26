@@ -29,6 +29,13 @@ local config = function()
         variables = "NONE",
       },
     },
+    -- 透過した黒い背景では carbonfox の既定色が沈んで見えないため上書きする
+    groups = {
+      all = {
+        WinSeparator = { fg = "#606060" }, -- Ghostty の split-divider-color と揃える
+        Visual = { bg = "#2a3a50" },       -- Claude Code の入力欄と同系の青みグレー
+      },
+    },
   })
   
   -- Apply carbonfox colorscheme.

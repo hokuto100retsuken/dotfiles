@@ -1,6 +1,6 @@
 theme = "12-bit Rainbow"
 
-# 背景とのコントラスト比が 4.5 未満の色を、色相を保ったまま明るくする（nvim の nightfox.lua と同じ値）
+# 背景とのコントラスト比が 4.5 未満の色を、色相を保ったまま明るくする
 palette = 1=#d33f6a
 palette = 4=#3a75d6
 palette = 5=#9c4ee9

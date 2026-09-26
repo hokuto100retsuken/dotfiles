@@ -35,6 +35,11 @@ local config = function()
         WinSeparator = { fg = "#606060" }, -- Ghostty の split-divider-color と揃える
         Visual = { bg = "#2a3a50" },       -- Claude Code の入力欄と同系の青みグレー
         Comment = { fg = "#848587" },      -- 背景とのコントラスト比を 4.1 から 5.5 に上げる
+        -- ポップアップも透過させる。背景で区別できなくなるので枠線を FloatBorder と同じ明るさにする
+        NormalFloat = { bg = "NONE" },
+        Pmenu = { bg = "NONE" },
+        BlinkCmpDoc = { bg = "NONE" },
+        BlinkCmpDocBorder = { fg = "#7b7c7e", bg = "NONE" },
       },
     },
   })

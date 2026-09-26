@@ -8,7 +8,7 @@ palette = 8=#887171
 palette = 13=#d41bba
 
 # 黒いすりガラス風: 背景を少し透かしてぼかす（macOS と KDE Plasma で効く）
-background-opacity = 0.9
+background-opacity = 0.8
 background-blur = 20
 
 window-height = 40

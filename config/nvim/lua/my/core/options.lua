@@ -114,3 +114,4 @@ opt.completeopt = 'menuone,noselect' -- Set completion options / 補完オプシ
 opt.helplang = 'ja,en'                  -- Set preferred help languages / ヘルプの優先言語を設定
 opt.grepprg = 'rg --vimgrep'            -- Use ripgrep for :grep / :grepにripgrepを使用
 opt.grepformat = '%f:%l:%c:%m'          -- Set grep format / grepのフォーマットを設定
+opt.winborder = 'rounded'               -- Rounded borders for floating windows / 浮き窓の枠を角丸にする

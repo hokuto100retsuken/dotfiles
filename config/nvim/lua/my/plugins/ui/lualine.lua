@@ -22,6 +22,10 @@ local lualine = {
       options = {
         theme = "auto", -- Use auto theme detection from vim.g.colors_name.
         -- vim.g.colors_nameから自動テーマ検出を使用します。
+        -- Rounded section separators (Nerd Font).
+        -- セクションの区切りを丸い形にします（Nerd Font）。
+        section_separators = { left = "\u{e0b4}", right = "\u{e0b6}" },
+        component_separators = { left = "\u{e0b5}", right = "\u{e0b7}" },
       },
       sections = {
         lualine_a = { "mode" },

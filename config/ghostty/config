@@ -13,6 +13,8 @@ cursor-style-blink = true
 split-divider-color = #606060
 
 macos-titlebar-style = tabs
+# タブ間の境界線の色は設定できないため、タイトルバーを背景(#040404)より少し明るくして境界を見やすくする
+window-titlebar-background = #1a1a1a
 macos-titlebar-proxy-icon= hidden
 macos-window-shadow = true
 

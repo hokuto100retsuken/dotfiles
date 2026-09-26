@@ -70,18 +70,21 @@ if [ -n "$transcript" ] && [ -f "$transcript" ]; then
     ' 2>/dev/null)
 fi
 
-# ANSI colors
+# 色は fish のプロンプトと同じ Carbonfox 風（アイコンは Nerd Font）
 RESET='\033[0m'
 BOLD='\033[1m'
-CYAN='\033[36m'
-YELLOW='\033[33m'
-MAGENTA='\033[35m'
-DIM='\033[2m'
+BLUE='\033[38;2;120;169;255m'     # #78a9ff ディレクトリ
+TEAL='\033[38;2;8;189;186m'       # #08bdba ブランチ
+MAUVE='\033[38;2;190;149;255m'    # #be95ff タイトル
+LAVENDER='\033[38;2;200;165;255m' # #c8a5ff モデル
+PEACH='\033[38;2;255;192;185m'    # #ffc0b9 実行中の件数
+SKY='\033[38;2;51;177;255m'       # #33b1ff 実行中の種類
+GRAY='\033[38;2;141;142;143m'     # #8d8e8f 区切り・補足
 
 parts=()
-[ -n "$repo" ] && parts+=("$(printf "${CYAN}%s${RESET}" "$repo")")
-[ -n "$branch" ] && parts+=("$(printf "${BOLD}${YELLOW}%s${RESET}" "$branch")")
-[ -n "$model" ] && parts+=("$(printf "${DIM}%s${RESET}" "$model")")
+[ -n "$repo" ] && parts+=("$(printf "${BLUE}\uf07b %s${RESET}" "$repo")")
+[ -n "$branch" ] && parts+=("$(printf "${BOLD}${TEAL}\ue0a0 %s${RESET}" "$branch")")
+[ -n "$model" ] && parts+=("$(printf "${LAVENDER}\uf2db %s${RESET}" "$model")")
 
 if [ ${#parts[@]} -eq 0 ] && [ -z "$title" ] && [ -z "$bg" ]; then
   exit 0
@@ -93,20 +96,20 @@ for i in "${!parts[@]}"; do
   if [ $i -eq 0 ]; then
     result="${parts[$i]}"
   else
-    result="$result $(printf "${DIM}|${RESET}") ${parts[$i]}"
+    result="$result $(printf "${GRAY}·${RESET}") ${parts[$i]}"
   fi
 done
 
 [ -n "$result" ] && printf "%b\n" "$result"
 
 # 2行目: セッションのタイトル
-[ -n "$title" ] && printf "%b\n" "$(printf "${DIM}▸${RESET} ${MAGENTA}%s${RESET}" "$title")"
+[ -n "$title" ] && printf "%b\n" "$(printf "${GRAY}╰─${RESET} ${MAUVE}%s${RESET}" "$title")"
 
 # 3行目以降: バックグラウンドで実行中のもの（件数 + 1件1行）
 if [ -n "$bg" ]; then
-  printf "${YELLOW}⏳ %s running${RESET}\n" "$(printf '%s\n' "$bg" | head -n 1)"
+  printf "${PEACH}⏳ %s running${RESET}\n" "$(printf '%s\n' "$bg" | head -n 1)"
   printf '%s\n' "$bg" | tail -n +2 | while IFS=$'\t' read -r tree kind desc age; do
-    printf "  ${DIM}%s${RESET} ${CYAN}%s${RESET} %s ${DIM}%s${RESET}\n" "$tree" "$kind" "$desc" "$age"
+    printf "  ${GRAY}%s${RESET} ${SKY}%s${RESET} %s ${GRAY}%s${RESET}\n" "$tree" "$kind" "$desc" "$age"
   done
 fi
 

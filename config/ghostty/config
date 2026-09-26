@@ -19,6 +19,9 @@ window-padding-y = 14
 window-padding-balance = true
 
 cursor-style-blink = true
+# テーマの黄色いカーソルをやめ、アイコンの画面色と同じシアンにする
+cursor-color = #00b0c0
+cursor-text = #000000
 
 # 分割境界の色を設定（縦分割時の境界をわかりやすくする）
 split-divider-color = #606060

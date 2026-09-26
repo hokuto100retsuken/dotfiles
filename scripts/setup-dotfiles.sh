@@ -168,11 +168,12 @@ link_claude() {
     done
 }
 
-# Handles the gemini linking
+# Handles the gemini linking (~/.gemini is shared by Gemini CLI and Antigravity CLI)
 link_gemini() {
     echo -e "\n--- Linking Gemini Configurations ---"
     create_symlink "$DOTPATH/gemini/GEMINI.md" "$HOME/.gemini/GEMINI.md"
-    create_symlink "$DOTPATH/gemini/skills" "$HOME/.gemini/skills"
+    # Antigravity CLI はグローバルスキルを ~/.gemini/skills ではなくここから読む
+    create_symlink "$DOTPATH/gemini/skills" "$HOME/.gemini/antigravity-cli/skills"
 }
 
 # Main execution function

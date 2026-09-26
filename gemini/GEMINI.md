@@ -1,6 +1,6 @@
-# Gemini CLI 憲法 (Project Rules)
+# Gemini CLI / Antigravity CLI 憲法 (Project Rules)
 
-このプロジェクトで作業する際、Gemini CLI は以下の原則を厳守してください。
+このプロジェクトで作業する際、Gemini CLI / Antigravity CLI は以下の原則を厳守してください。
 
 ## 1. 日本語によるコミュニケーションとドキュメント
 - **日本語優先**: ユーザーへの応答、コード内のコメント、作成するドキュメント、スキルの説明などはすべて日本語で行うこと。

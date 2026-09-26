@@ -48,7 +48,7 @@ bash setup.sh --all
 
 - \`config/\`: 各ツールの設定ファイル（fish, nvim, ghostty 等）
 - \`git/\`: Git のグローバル設定
-- \`gemini/\`: Gemini CLI 用のスキル・規約
+- \`gemini/\`: Gemini CLI / Antigravity CLI 用のスキル・規約
 - \`claude/\`: Claude Code 用のルール・スキル
 - \`raycast/\`: Raycast の Snippets / Quicklinks / Script Commands（取り込み手順は \`raycast/README.md\`）
 - \`doc/\`: 各ツールの使いこなしガイド（nvim, claude, gemini）

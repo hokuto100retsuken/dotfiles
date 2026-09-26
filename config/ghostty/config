@@ -1,10 +1,21 @@
 theme = "12-bit Rainbow"
 
+# 背景とのコントラスト比が 4.5 未満の色を、色相を保ったまま明るくする（nvim の nightfox.lua と同じ値）
+palette = 1=#d33f6a
+palette = 4=#3a75d6
+palette = 5=#9c4ee9
+palette = 8=#887171
+palette = 13=#d41bba
+
+# 黒いすりガラス風: 背景を少し透かしてぼかす（macOS と KDE Plasma で効く）
+background-opacity = 0.9
+background-blur = 20
+
 window-height = 40
 window-width = 180
 
 window-padding-x = 20
-window-padding-y = 5
+window-padding-y = 14
 window-padding-balance = true
 
 cursor-style-blink = true
@@ -25,13 +36,13 @@ keybind = "global:cmd+shift+t=toggle_quick_terminal"
 
 macos-icon = custom-style
 macos-icon-ghost-color = 010101
-macos-icon-screen-color = 78A9FF
+macos-icon-screen-color = 00B0C0
 macos-icon-frame = plastic
 
 font-family = UDEV Gothic NF
 font-feature = -dlig
 font-size = 12
-adjust-cell-height = 0%
+adjust-cell-height = 10%
 
 # ┃ Pane/Split Management ┃
 # Neovimのウィンドウ分割の代わりにGhosttyの画面分割を使用

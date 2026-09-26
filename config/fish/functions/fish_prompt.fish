@@ -6,27 +6,32 @@ function fish_prompt
     set -l git_branch (git branch --show-current 2>/dev/null)
     set -l project_name (basename (pwd))
     
+    # 色は Carbonfox 風（枠線のグレーは黒背景で読めるよう明るくした値）
+    set -l frame_color 8d8e8f
+
     # --- Line 1: Rich Info ---
-    
+    set_color $frame_color
+    echo -n "╭─ "
+
     # Project Name (blue)
-    set_color 78a9ff # blue from carbonfox
-    echo -n "$project_name"
+    set_color 78a9ff
+    echo -n \uf07b" $project_name"
     
     # Git Info (yellow)
     if test -n "$git_branch"
         set -l git_user (git config user.name 2>/dev/null)
         if test -n "$git_user"
-            set_color ffc0b9 # coral/peach from carbonfox
+            set_color ffc0b9 # peach
             echo -n " as $git_user"
         end
         
-        set_color 08bdba # yellow/teal from carbonfox
+        set_color 08bdba # teal
         echo -n " on  $git_branch"
         
         # Git Status indicators
         set -l git_status (git status --porcelain 2>/dev/null)
         if test -n "$git_status"
-            set_color 08bdba
+            set_color 08bdba # teal
             echo -n " [\$]"
         end
     end
@@ -34,7 +39,7 @@ function fish_prompt
     # Docker / Colima (via 🐳 colima)
     # `colima status` はdaemon問い合わせで遅いので、socketの存在で稼働判定する
     if test -S "$HOME/.colima/default/docker.sock"
-        set_color 6e6f70 # subtext/brblack
+        set_color $frame_color
         echo -n " via 🐳 colima"
     end
 
@@ -52,7 +57,7 @@ function fish_prompt
     set -l is_dockerized 0
     if test -f docker-compose.yml; or test -f docker-compose.yaml; or test -f compose.yaml; or test -f compose.yml; or test -f Dockerfile
         set is_dockerized 1
-        set_color 33b1ff # blue (carbonfox)
+        set_color 33b1ff # blue
         echo -n " 🐳 dockerized"
     end
 
@@ -82,7 +87,7 @@ function fish_prompt
             set ruby_v (awk '/^ruby / {print $2}' .tool-versions)
         end
         test -z "$ruby_v"; and set ruby_v "?"
-        set_color ee5396 # pink/red
+        set_color ee5396 # pink
         echo -n " via 💎 v$ruby_v"
     end
 
@@ -98,7 +103,9 @@ function fish_prompt
 
     # --- Line 2: Prompt Character ---
     echo ""
-    
+    set_color $frame_color
+    echo -n "╰─"
+
     if test $last_status -eq 0
         set_color 25be6a # success green
     else

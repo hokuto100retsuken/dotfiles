@@ -129,7 +129,7 @@
   "tui": "default",
   "showThinkingSummaries": true,
   "skipWorkflowUsageWarning": true,
-  "theme": "dark-ansi",
+  "theme": "custom:glass",
   "showTurnDuration": true,
   "terminalProgressBarEnabled": true
 }

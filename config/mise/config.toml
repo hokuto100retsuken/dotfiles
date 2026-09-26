@@ -2,7 +2,7 @@
 go = "1.25.7"
 node = "24"
 claude = "latest"
-gemini-cli = { version = "latest", allow_builds = ["@github/keytar", "node-pty"] }
+antigravity-cli = "latest"
 neovim = "0.12.5"
 
 [tasks.ccupdate]
@@ -14,11 +14,11 @@ mise use --global claude@latest
 mise prune claude
 """
 
-[tasks.gcupdate]
-description = 'Gemini CLIを最新版に更新'
+[tasks.agyupdate]
+description = 'Antigravity CLIを最新版に更新'
 run = """
 #!/usr/bin/env fish
 
-mise use --global gemini-cli@latest
-mise prune gemini-cli
+mise use --global antigravity-cli@latest
+mise prune antigravity-cli
 """

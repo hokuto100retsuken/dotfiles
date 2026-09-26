@@ -16,7 +16,7 @@ config/
   nvim/       # Neovim設定 (lazy.nvim)
   zellij/     # Zellijターミナルマルチプレクサ設定
 claude/       # Claude Code用のルール・スキル・コマンド
-gemini/       # Gemini CLI用のスキル・規約
+gemini/       # Gemini CLI / Antigravity CLI 用のスキル・規約（~/.gemini 配下に置く）
 git/          # gitconfig
 doc/          # 各ツールの使いこなしガイド (nvim/ claude/ gemini/ herdr/)
 setup.sh      # セットアップ入口 (--all, --dotfiles, --fish, --install)

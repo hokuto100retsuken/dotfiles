@@ -2,6 +2,7 @@
 name: researcher
 description: 複数リポジトリ・複数ディレクトリにまたがる横断調査を行う。「どこで使われているか」「他リポジトリにも同じパターンがあるか」「この仕組みは全体でどう繋がっているか」を調べるときに使用。単発の検索1件・軽い確認では起動せず、メインセッションで処理する。
 model: sonnet
+effort: medium
 tools: Read, Grep, Glob, Bash, WebFetch
 ---
 

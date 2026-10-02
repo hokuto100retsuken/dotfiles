@@ -2,6 +2,7 @@
 name: spec-checker
 description: 実装やPR差分を、colorme/trunk の仕様書と issue の合意事項に照らして1対1で突き合わせる。実装前の判定条件の確認、PR作成前の仕様漏れチェックに使用。「仕様と合っているか」を人間レビュアーより先に指摘するのが役目。
 model: opus
+effort: high
 tools: Read, Grep, Glob, Bash, WebFetch
 ---
 

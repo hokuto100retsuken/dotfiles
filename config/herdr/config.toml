@@ -24,9 +24,10 @@ next_workspace = "prefix+shift+j"
 switch_workspace = "prefix+shift+1..9"
 
 # ┃ agent（サイドバー下段のエージェント行）の移動 ┃
-# 既定では未割り当て。a = agent で覚える。
-next_agent = "prefix+a"
-previous_agent = "prefix+shift+a"
+# 既定では未割り当て。前後移動は prefix なしで ctrl+alt+j / k（vim の上下と同じ向き）。
+# Ghostty の macos-option-as-alt = true が前提（option が alt として届く）。
+next_agent = "ctrl+alt+j"
+previous_agent = "ctrl+alt+k"
 focus_agent = "prefix+alt+1..9"
 
 # ┃ サイドバーの表示内容 ┃

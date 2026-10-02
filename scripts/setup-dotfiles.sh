@@ -175,11 +175,34 @@ link_claude() {
 }
 
 # Handles the gemini linking (~/.gemini is shared by Gemini CLI and Antigravity CLI)
+#
+# Antigravity CLI の customization root は ~/.gemini/config/。
+# グローバルのルールは その配下の rules/、スキルは skills/ から読まれる（CLI バイナリで確認）。
+# ~/.gemini/GEMINI.md は Gemini CLI 側の置き場なので、両方に張る。
 link_gemini() {
     echo -e "\n--- Linking Gemini Configurations ---"
     create_symlink "$DOTPATH/gemini/GEMINI.md" "$HOME/.gemini/GEMINI.md"
-    # Antigravity CLI はグローバルスキルを ~/.gemini/skills ではなくここから読む
-    create_symlink "$DOTPATH/gemini/skills" "$HOME/.gemini/antigravity-cli/skills"
+    create_symlink "$DOTPATH/gemini/GEMINI.md" "$HOME/.gemini/config/rules/AGENTS.md"
+
+    # skills は実ディレクトリにして中身を1件ずつ張る。
+    # Claude Code のスキルもここへ張るため、ディレクトリごとリンクにすると
+    # dotfiles リポジトリの中に別リポジトリ（dotfiles-pepabo）への絶対パスが入ってしまう。
+    mkdir -p "$HOME/.gemini/config/skills"
+    for skill_dir in "$DOTPATH"/gemini/skills/*/; do
+        [[ -d "$skill_dir" ]] || continue
+        create_symlink "${skill_dir%/}" "$HOME/.gemini/config/skills/$(basename "$skill_dir")"
+    done
+
+    # Claude Code と共有するスキル。pr-review-sweep は claude -p と launchd に
+    # 直結していて動かないので外す。dotfiles は gemini 側の dotfiles-expert と重複。
+    for skill_link in "$HOME"/.claude/skills/*/; do
+        local name
+        name=$(basename "$skill_link")
+        case "$name" in pr-review-sweep|synced|dotfiles) continue ;; esac
+        [[ -e "$HOME/.gemini/config/skills/$name" ]] && continue
+        create_symlink "$(readlink "$HOME/.claude/skills/$name" || echo "${skill_link%/}")" \
+            "$HOME/.gemini/config/skills/$name"
+    done
 }
 
 # Main execution function

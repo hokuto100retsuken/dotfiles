@@ -112,6 +112,43 @@ issue / PR の本文・コメント、コードコメント、仕様ドキュメ
 
 ## 9. スキル
 
-`~/.gemini/config/skills/` に `dotfiles-expert` / `refactor-expert` / `secret-guard` がある。
-**dotfiles（fish / nvim / ghostty / Carbonfox 配色 / `scripts/setup-dotfiles.sh`）の規約は
-`dotfiles-expert` が持っている。** dotfiles を触るときはそちらを読む。
+`~/.gemini/config/skills/` にある。**Claude Code と共有しているものが多い**（同じ実体への
+シンボリックリンク）。片方で直せば両方に効く。
+
+- **dotfiles（fish / nvim / ghostty / Carbonfox 配色 / `setup-dotfiles.sh`）の規約は
+  `dotfiles-expert` が持っている。** dotfiles を触るときはそちらを読む
+- スキル内の `[[名前]]` は Claude Code のリンク記法。Antigravity では解決されないので、
+  **その名前のスキルを自分で開く**
+- スキルが `scripts/*.sh` を持つ場合、**絶対パスで叩く**
+  （`~/.gemini/config/skills/<名前>/scripts/<ファイル>`）
+
+## 10. Claude Code と共有しているルール
+
+詳細なルールは `~/.claude/rules/*.md` にある。**二重管理しないため、ここには写さない。**
+必要になったら読む。ただし**全部ではない。**
+
+### 読む（このツールでもそのまま通用する）
+
+| ファイル | 内容 |
+|---|---|
+| `self-review.md` | セルフレビュー観点の一次情報。§4 はここの要約 |
+| `no-meta-commentary.md` | 成果物に経緯を書かない。§6 の一次情報 |
+| `pr-style.md` / `commit.md` / `small-commits.md` | PR とコミットの作法 |
+| `encoding.md` | 文字コード。§5 の一次情報 |
+| `git-hosting.md` | `git.pepabo.com` が仕事のリモート。GitLab は使わない |
+| `no-external-upload.md` / `clipboard.md` | 禁止事項 |
+| `coding-style.md` / `use-templates.md` / `response-style.md` | 書き方 |
+| `environment.md` | macOS / fish / Docker Compose |
+| `bigquery-cost.md` | BigQuery は走査量で課金。まず MySQL で解けないか考える |
+| `failure-learning.md` | 失敗の記録の作法。**保存先の `~/.claude/projects/.../memory/` は Claude 固有**なので、記録するなら置き場所は別途決める |
+
+### 読まない（このツールと矛盾する）
+
+| ファイル | 理由 |
+|---|---|
+| `model-roles.md` | **Opus / Sonnet / Fable / advisor 前提。** Antigravity 版は本ファイルの §2。混ぜない |
+| `edit-over-write.md` | `Edit` / `Write` は Claude Code のツール名 |
+| `basics.md` | 会話方針は §1 に移してある。`/dev-pipeline`・handoff フック・Agent ツールの記述は Claude 固有 |
+
+**`~/.claude/CLAUDE.md` 自体は読まなくてよい。** 中身は「ルールは `~/.claude/rules/` に
+移行済み」の一行だけで、実体は上記のファイル群にある。

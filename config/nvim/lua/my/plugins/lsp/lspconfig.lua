@@ -25,16 +25,22 @@ local lspconfig = {
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts("Go to definition"))
       vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Hover documentation"))
       vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts("Go to implementation"))
-      vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts("Signature help"))
+      -- <C-k> はウィンドウ移動（keymaps.lua）で使うため gK に置く。
+      vim.keymap.set("n", "gK", vim.lsp.buf.signature_help, opts("Signature help"))
       vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts("Rename symbol"))
       vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts("Code action"))
       vim.keymap.set("n", "gr", vim.lsp.buf.references, opts("Show references"))
-      vim.keymap.set("n", "<leader>f", function()
-        vim.lsp.buf.format({ async = true })
-      end, opts("Format file"))
+      -- フォーマットは conform に一本化する（keymaps.lua の <leader>cf）。
+      -- ここで buffer-local に <leader>cf を張るとグローバル側より優先され、
+      -- formatting.lua で設定した php_cs_fixer 等が使われなくなる。
 
-      vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts("Previous diagnostic"))
-      vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts("Next diagnostic"))
+      -- nvim 0.11 で goto_prev/goto_next は deprecated（0.12 で削除予定）。
+      vim.keymap.set("n", "[d", function()
+        vim.diagnostic.jump({ count = -1, float = true })
+      end, opts("Previous diagnostic"))
+      vim.keymap.set("n", "]d", function()
+        vim.diagnostic.jump({ count = 1, float = true })
+      end, opts("Next diagnostic"))
       vim.keymap.set("n", "<leader>xl", vim.diagnostic.setloclist, opts("Diagnostics to loclist"))
 
       -- Attach navic to LSP client for code context display.

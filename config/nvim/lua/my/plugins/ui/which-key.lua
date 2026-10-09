@@ -13,13 +13,14 @@ local wk = {
     which_key.setup({})
     which_key.add({
       { "<leader>f", group = "Find" },
+      { "<leader>c", group = "Code" },
       { "<leader>e", group = "Explorer" },
       { "<leader>g", group = "Git" },
       { "<leader>x", group = "Diagnostics" },
       { "<leader>h", group = "Harpoon" },
       { "<leader>b", group = "Buffer" },
       { "<leader>n", group = "Notification" },
-      { "<leader>w", group = "Window / Save" },
+      { "<leader>w", group = "Window" },
       { "<leader>t", group = "Tab" },
       { "<leader>q", desc = "Quit" },
     })

@@ -28,12 +28,9 @@ keymap.set("n", "<leader>tl", "<cmd>tabnext<CR>", { silent = true, desc = "Next 
 keymap.set("n", "<leader>th", "<cmd>tabprevious<CR>", { silent = true, desc = "Previous tab" })
 
 -- ┃ Buffer Management / バッファ管理 ┃
--- bufferline の番号で直接ジャンプ
-keymap.set("n", "<leader>1", "<cmd>BufferLineGoToBuffer 1<CR>", { silent = true, desc = "Go to buffer 1" })
-keymap.set("n", "<leader>2", "<cmd>BufferLineGoToBuffer 2<CR>", { silent = true, desc = "Go to buffer 2" })
-keymap.set("n", "<leader>3", "<cmd>BufferLineGoToBuffer 3<CR>", { silent = true, desc = "Go to buffer 3" })
-keymap.set("n", "<leader>4", "<cmd>BufferLineGoToBuffer 4<CR>", { silent = true, desc = "Go to buffer 4" })
-keymap.set("n", "<leader>5", "<cmd>BufferLineGoToBuffer 5<CR>", { silent = true, desc = "Go to buffer 5" })
+-- 番号ジャンプ（<leader>1〜4）は harpoon の固定スロットに渡した（harpoon.lua）。
+-- bufferline は開いた順で並びが動くため、番号を覚える用途には向かない。
+-- ここでは H/L のサイクル移動だけ担当する。
 keymap.set("n", "H", "<cmd>BufferLineCyclePrev<CR>", { silent = true, desc = "Previous buffer" })
 keymap.set("n", "L", "<cmd>BufferLineCycleNext<CR>", { silent = true, desc = "Next buffer" })
 keymap.set("n", "<leader>bd", "<cmd>bdelete<CR>", { silent = true, desc = "Close buffer" })
@@ -46,10 +43,13 @@ keymap.set("n", "<F1>", ":edit $MYVIMRC<CR>", { silent = true, desc = "Edit init
 keymap.set("n", "<Esc>", ":nohlsearch<CR>", { silent = true, desc = "Clear search highlights" })
 
 -- Format / 整形
-keymap.set("n", "<leader>f", function() require("conform").format({ lsp_fallback = true, async = true, timeout_ms = 500 }) end, { silent = true, desc = "Format buffer" })
+-- <leader>f は snacks picker の Find グループなので、Format は <leader>cf に置く。
+-- 同じキーに単独マッピングとグループを同居させると timeoutlen ぶん待たされる。
+keymap.set("n", "<leader>cf", function() require("conform").format({ lsp_fallback = true, async = true, timeout_ms = 500 }) end, { silent = true, desc = "Format buffer" })
 
 -- Save / Quit
-keymap.set("n", "<leader>w", ":write<CR>", { silent = true, desc = "Save file" })
+-- <leader>w は Window グループなので、Save は <C-s> に置く。
+keymap.set({ "n", "i", "v" }, "<C-s>", "<Esc><cmd>write<CR>", { silent = true, desc = "Save file" })
 keymap.set("n", "<leader>q", ":quit<CR>", { silent = true, desc = "Quit" })
 keymap.set("n", "<leader>Q", ":qa<CR>", { silent = true, desc = "Quit all" })
 

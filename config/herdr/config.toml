@@ -8,6 +8,7 @@ onboarding = false
 # ペインの色と別系統になって混ざる。"terminal" はホストターミナルの配色をそのまま使う。
 name = "terminal"
 
+auto_switch = false
 [keys]
 # プレフィックス。既定の ctrl+b から ctrl+x に変更している。
 # 注意: プレフィックスキーはペイン内のアプリに一切届かない（herdr が食う）。

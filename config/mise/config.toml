@@ -4,6 +4,7 @@ node = "26"
 claude = "latest"
 antigravity-cli = "latest"
 neovim = "0.12.5"
+"github:babarot/claude-recall" = { version = "latest", bin = "recall" }
 
 [tasks.ccupdate]
 description = 'Claude Codeを最新版に更新'

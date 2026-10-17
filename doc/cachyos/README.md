@@ -8,7 +8,8 @@ CachyOS 機（Core i7-4770 / メモリ 24GB）で起きた、次の2つの症状
 ## まず切り分けスクリプトを回す
 
 ```bash
-bash scripts/cachyos-docker-check.sh /mnt/hdd   # 引数は HDD のマウント先
+bash scripts/cachyos-docker-check.sh            # HDD のマウント先を自動で探す
+bash scripts/cachyos-docker-check.sh /mnt/hdd   # マウント先を指定する
 ```
 
 設定は変更せず、どこで止まっているかを ✅ / ❌ で表示するだけ。❌ が出た項目を下の対処で直す。
@@ -60,8 +61,10 @@ sudo systemctl restart docker
 KDE のファイルマネージャーで開いたときの `/run/media/ユーザー名/...` へのマウントはクリックしたときだけ行われる。
 起動直後のコンテナからは空に見えるので、`/etc/fstab` に書いて起動時に自動でマウントする。
 
+HDD がどこにマウントされているかは `lsblk` で分かる。SIZE と LABEL で HDD を探し、MOUNTPOINTS が空ならまだマウントされていない。
+
 ```bash
-lsblk -f                # UUID とファイルシステムを確認
+lsblk -o NAME,SIZE,FSTYPE,LABEL,UUID,MOUNTPOINTS
 sudo mkdir -p /mnt/hdd
 ```
 

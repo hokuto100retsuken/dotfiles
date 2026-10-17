@@ -5,10 +5,11 @@
 #
 # 使い方: bash scripts/cachyos-docker-check.sh [HDDのマウント先]
 #   例:   bash scripts/cachyos-docker-check.sh /mnt/hdd
+#   省略するとシステム以外のディスクのマウント先を自動で探す
 
 set -uo pipefail
 
-HDD_MOUNT="${1:-/mnt/hdd}"
+HDD_MOUNT="${1:-}"
 IMAGE="busybox"
 
 section() {
@@ -89,20 +90,54 @@ else
     ng "コンテナから IP で外に届きません（ファイアウォール / IP 転送 / カーネルを確認）"
 fi
 
-section "ディスク"
-lsblk -f | sed 's/^/   /'
+section "ディスク（SIZE と LABEL で HDD を探す。MOUNTPOINTS が空ならマウントされていない）"
+lsblk -o NAME,SIZE,FSTYPE,LABEL,UUID,MOUNTPOINTS | sed 's/^/   /'
 info ""
 info "/etc/fstab（コメント除く）:"
 grep -v '^\s*#' /etc/fstab | grep -v '^\s*$' | sed 's/^/     /'
 
-section "HDD のマウント先: $HDD_MOUNT"
-if mountpoint -q "$HDD_MOUNT"; then
-    ok "$HDD_MOUNT はマウントされています"
-    if docker run --rm -v "$HDD_MOUNT:/data" "$IMAGE" ls /data >/dev/null 2>&1; then
-        ok "コンテナから $HDD_MOUNT が見えます"
-    else
-        ng "コンテナから $HDD_MOUNT を読めません（権限を確認）"
+check_mount() {
+    local target="$1"
+    if ! mountpoint -q "$target"; then
+        ng "$target はマウントされていません（/etc/fstab に書いて sudo mount -a）"
+        return
     fi
+    ok "$target はマウントされています"
+    if [[ "$target" == /run/media/* ]]; then
+        info "/run/media はファイルマネージャーで開いたときだけのマウント。再起動で外れるので /etc/fstab で固定する"
+    fi
+    if docker run --rm -v "$target:/data" "$IMAGE" ls /data >/dev/null 2>&1; then
+        ok "コンテナから $target が見えます"
+    else
+        ng "コンテナから $target を読めません（権限を確認）"
+    fi
+}
+
+# システムが入っているディスク以外にマウントされているものを HDD とみなす
+find_hdd_mounts() {
+    local root_source root_disk target source disk
+    root_source=$(findmnt -no SOURCE / | sed 's/\[.*//')
+    root_disk=$(lsblk -no PKNAME "$root_source" | head -n1)
+    findmnt -rno TARGET,SOURCE | while read -r target source; do
+        [[ "$source" == /dev/* ]] || continue
+        [[ "$target" == /boot* || "$target" == /efi ]] && continue
+        disk=$(lsblk -no PKNAME "${source%%\[*}" 2>/dev/null | head -n1)
+        [[ -n "$disk" && "$disk" != "$root_disk" ]] || continue
+        # findmnt -r は空白などを \x20 にエスケープする
+        printf '%b\n' "$target"
+    done
+}
+
+if [[ -n "$HDD_MOUNT" ]]; then
+    section "HDD のマウント先: $HDD_MOUNT"
+    check_mount "$HDD_MOUNT"
 else
-    ng "$HDD_MOUNT はマウントされていません（/etc/fstab に書いて sudo mount -a）"
+    section "HDD のマウント先（自動検出）"
+    mapfile -t mounts < <(find_hdd_mounts)
+    if [[ ${#mounts[@]} -eq 0 ]]; then
+        ng "システム以外のディスクはマウントされていません。上の一覧で HDD を探し、doc/cachyos/README.md の手順でマウントしてください"
+    fi
+    for target in "${mounts[@]}"; do
+        check_mount "$target"
+    done
 fi

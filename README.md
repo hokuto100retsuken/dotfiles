@@ -51,7 +51,7 @@ bash setup.sh --all
 - \`gemini/\`: Gemini CLI / Antigravity CLI 用のスキル・規約
 - \`claude/\`: Claude Code 用のルール・スキル
 - \`raycast/\`: Raycast の Snippets / Quicklinks / Script Commands（取り込み手順は \`raycast/README.md\`）
-- \`doc/\`: 各ツールの使いこなしガイド（nvim, claude, gemini）
+- \`doc/\`: 各ツールの使いこなしガイド（nvim, claude, gemini, cachyos）
 - \`scripts/\`: セットアップ用サブスクリプト（`setup.sh` から呼ばれる）
 - `.github/`: 自動検証（Lint）用ワークフロー
 

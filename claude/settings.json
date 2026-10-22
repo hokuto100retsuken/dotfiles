@@ -75,11 +75,6 @@
             "type": "command",
             "command": "bash -c 'CMD=$(cat | jq -r \".tool_input.command // empty\"); if echo \"$CMD\" | grep -qE \"rm[[:space:]]+(-[a-zA-Z]*f[a-zA-Z]*[[:space:]]+|.*--force[[:space:]]+)*(/|~|\\$HOME)[[:space:]]*$\"; then echo \"BLOCKED: 危険な削除コマンド（/ ~ \\$HOME 等の削除）をブロックしました\" >&2; exit 2; fi'",
             "timeout": 5
-          },
-          {
-            "type": "command",
-            "command": "bash ~/src/github.com/hokuto100retsuken/dotfiles/claude/scripts/hook-pre-pr-check.sh",
-            "timeout": 180
           }
         ]
       },

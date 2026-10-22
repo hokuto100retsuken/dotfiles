@@ -88,24 +88,6 @@ link_shell() {
     fi
 }
 
-# 会社の業務用で、個人環境にはリンクしないもの（claude/ からの相対パス）
-CLAUDE_EXCLUDES=(
-    "agents/researcher.md"
-    "agents/spec-checker.md"
-    "commands/pr.md"
-    "commands/fix-review.md"
-    "workflows/investigate-repos.js"
-)
-
-is_claude_excluded() {
-    local rel="${1#"$DOTPATH"/claude/}"
-    local excluded
-    for excluded in "${CLAUDE_EXCLUDES[@]}"; do
-        [[ "$rel" == "$excluded" ]] && return 0
-    done
-    return 1
-}
-
 # Handles the complex, nested linking for claude's rules/skills/commands/agents/workflows
 link_claude() {
     echo -e "\n--- Linking Claude Configurations ---"
@@ -150,7 +132,6 @@ link_claude() {
     echo "  [FILES] Linking Claude commands..."
     for cmd in "$DOTPATH"/claude/commands/*.md; do
         [[ -f "$cmd" ]] || continue
-        is_claude_excluded "$cmd" && continue
         basename_file=$(basename "$cmd")
         create_symlink "$cmd" "$HOME/.claude/commands/$basename_file"
     done
@@ -159,7 +140,6 @@ link_claude() {
     echo "  [FILES] Linking Claude agents..."
     for agent in "$DOTPATH"/claude/agents/*.md; do
         [[ -f "$agent" ]] || continue
-        is_claude_excluded "$agent" && continue
         basename_file=$(basename "$agent")
         create_symlink "$agent" "$HOME/.claude/agents/$basename_file"
     done
@@ -168,7 +148,6 @@ link_claude() {
     echo "  [FILES] Linking Claude workflows..."
     for workflow in "$DOTPATH"/claude/workflows/*.js; do
         [[ -f "$workflow" ]] || continue
-        is_claude_excluded "$workflow" && continue
         basename_file=$(basename "$workflow")
         create_symlink "$workflow" "$HOME/.claude/workflows/$basename_file"
     done

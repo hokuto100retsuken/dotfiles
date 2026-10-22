@@ -17,7 +17,7 @@ claude/
 
 方針は [Zenn: Claude Code の rules / skills を分割してコンテキストを83%削減した話](https://zenn.dev/pepabo/articles/claude-code-rules-skills-split) を参考。
 
-職場固有の skills / commands は別リポジトリ（dotfiles-pepabo 等）に分離し、scripts/setup-dotfiles.sh は per-item symlink で両方の内容を `~/.claude/skills` / `~/.claude/commands` に合流させる構成。
+職場固有の skills / commands / agents / workflows / hook は別リポジトリ（dotfiles-pepabo 等）に分離し、per-item symlink で両方の内容を `~/.claude/` 配下に合流させる構成。
 
 ## Rules（常時適用）
 
@@ -59,21 +59,14 @@ claude/
 |----------|------|
 | /copy | 調査・ドキュメント作成してクリップボードにコピー |
 | /diff | ブランチの変更内容を日本語で要約 |
-| /fix-review | PRのレビューコメント修正 |
 | /handoff | セッションの引き継ぎメモ保存 |
 | /kickoff | タスク開始時のゴール明文化（dotfiles-pepabo 由来） |
-| /pr | 現在のブランチからPR作成 |
 | /review | ブランチの変更内容をレビュー |
 | /review-ai-worker | @ai-worker にPRレビューを依頼（dotfiles-pepabo 由来） |
 
 ## Agents（サブエージェント）
 
-`model-roles.md` は「調査は Sonnet、思考は Opus」と定めているが、文章のままではモデル選択が毎回の判断に委ねられる。ここで**モデルとツール権限を定義として固定**する。
-
-| エージェント | モデル | 用途 |
-|--------------|--------|------|
-| researcher | sonnet | 複数リポジトリ・複数ディレクトリの横断調査。読み取り専用 |
-| spec-checker | opus | 実装を trunk の仕様書と issue の合意事項に照らして突き合わせる |
+`model-roles.md` は「調査は Sonnet、思考は Opus」と定めているが、文章のままではモデル選択が毎回の判断に委ねられる。**モデルとツール権限を定義として固定**するためのもの。現在の定義（researcher / spec-checker）は職場固有のため dotfiles-pepabo 側にある。
 
 ## Workflows（並列オーケストレーション）
 
@@ -81,7 +74,6 @@ claude/
 
 | ワークフロー | 用途 |
 |--------------|------|
-| investigate-repos | リポジトリごとに researcher を並列起動して横断調査 → 統合 |
 | review-branch | 差分を観点別に並列レビュー → 各指摘を別エージェントが反証 → 生存分のみ返す |
 
 ## 並列実行の使い分け
@@ -92,7 +84,6 @@ claude/
 |--------------|------|------|
 | 長いコマンドを待たない | Bash のバックグラウンド実行。終了時に通知が来る | 不要 |
 | 独立した調査を同時に | サブエージェントを同一メッセージ内で複数起動 | agents/ |
-| 範囲が読めない横断調査 | `investigate-repos` ワークフロー | workflows/ |
 | 複数の実装を同時に | git worktree で隔離してから並列実装。同じファイルを触っても衝突しない | 不要 |
 | 毎回同じ手順を回す | ワークフロースクリプト。手順を飛ばせなくなる | workflows/ |
 

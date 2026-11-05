@@ -81,11 +81,6 @@ link_shell() {
 
     # mise
     create_symlink "$DOTPATH/config/mise/config.toml" "$HOME/.config/mise/config.toml"
-
-    # JankyBorders (macOS only)
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-        create_symlink "$DOTPATH/config/borders/bordersrc" "$HOME/.config/borders/bordersrc"
-    fi
 }
 
 # Handles the complex, nested linking for claude's rules/skills/commands/agents/workflows

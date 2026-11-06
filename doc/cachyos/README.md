@@ -16,6 +16,12 @@ bash scripts/cachyos-docker-check.sh /mnt/hdd   # マウント先を指定する
 
 ## 外に通信できない
 
+2（ufw）と 3（IP 転送）は、次のスクリプトでまとめて直せる。既に直っている項目は触らず、何か変えたときだけ docker を再起動する。最後にコンテナから外に出られるかを確認する。
+
+```bash
+bash scripts/cachyos-docker-fix.sh
+```
+
 ### 1. 再起動していない
 
 CachyOS はカーネルの更新が頻繁にある。更新後に再起動していないと、Docker が使うネットワークのカーネルモジュールを読み込めない。

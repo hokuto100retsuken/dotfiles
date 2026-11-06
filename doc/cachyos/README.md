@@ -67,6 +67,15 @@ sudo systemctl restart docker
 KDE のファイルマネージャーで開いたときの `/run/media/ユーザー名/...` へのマウントはクリックしたときだけ行われる。
 起動直後のコンテナからは空に見えるので、`/etc/fstab` に書いて起動時に自動でマウントする。
 
+次のスクリプトで、マウントされていないディスクを探して `/etc/fstab` への追記からマウントまで行える。追記する行を表示して確認を取り、`mount -a` が失敗したら `/etc/fstab` を元に戻す。
+
+```bash
+bash scripts/cachyos-hdd-mount.sh            # /mnt/hdd にマウントする
+bash scripts/cachyos-hdd-mount.sh /mnt/data  # マウント先を指定する
+```
+
+以下は手でやる場合の手順。
+
 HDD がどこにマウントされているかは `lsblk` で分かる。SIZE と LABEL で HDD を探し、MOUNTPOINTS が空ならまだマウントされていない。
 
 ```bash

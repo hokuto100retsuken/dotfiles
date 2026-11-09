@@ -115,33 +115,33 @@
         ]
       },
       {
-        "hooks": [{ "type": "command", "command": "~/src/github.com/hokuto100retsuken/flock/hooks/flock-state idle", "timeout": 5 }]
+        "hooks": [{ "type": "command", "command": "flock hook idle", "timeout": 5 }]
       }
     ],
     "UserPromptSubmit": [
       {
-        "hooks": [{ "type": "command", "command": "~/src/github.com/hokuto100retsuken/flock/hooks/flock-state working", "timeout": 5 }]
+        "hooks": [{ "type": "command", "command": "flock hook working", "timeout": 5 }]
       }
     ],
     "PostToolUse": [
       {
-        "hooks": [{ "type": "command", "command": "~/src/github.com/hokuto100retsuken/flock/hooks/flock-state working", "timeout": 5 }]
+        "hooks": [{ "type": "command", "command": "flock hook working", "timeout": 5 }]
       }
     ],
     "Notification": [
       {
         "matcher": "permission_prompt",
-        "hooks": [{ "type": "command", "command": "~/src/github.com/hokuto100retsuken/flock/hooks/flock-state blocked", "timeout": 5 }]
+        "hooks": [{ "type": "command", "command": "flock hook blocked", "timeout": 5 }]
       }
     ],
     "Stop": [
       {
-        "hooks": [{ "type": "command", "command": "~/src/github.com/hokuto100retsuken/flock/hooks/flock-state stop", "timeout": 5 }]
+        "hooks": [{ "type": "command", "command": "flock hook stop", "timeout": 5 }]
       }
     ],
     "SessionEnd": [
       {
-        "hooks": [{ "type": "command", "command": "~/src/github.com/hokuto100retsuken/flock/hooks/flock-state end", "timeout": 5 }]
+        "hooks": [{ "type": "command", "command": "flock hook end", "timeout": 5 }]
       }
     ]
   },

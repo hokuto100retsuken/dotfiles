@@ -1,0 +1,39 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(**/.env)",
+      "Read(**/.env.*)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)",
+      "Read(**/*.p12)",
+      "Read(**/credentials.json)",
+      "Read(**/credentials)",
+      "Read(**/secrets/**)",
+      "Read(**/id_rsa)",
+      "Read(**/id_ed25519)",
+      "Read(~/.ssh/**)",
+      "Read(~/.aws/**)",
+      "Read(~/.netrc)",
+      "Read(~/.npmrc)",
+      "Read(~/.config/gh/hosts.yml)",
+      "Edit(**/.env)",
+      "Edit(**/.env.*)",
+      "Edit(**/secrets/**)",
+      "Write(**/.env)",
+      "Write(**/.env.*)",
+      "Write(**/secrets/**)"
+    ]
+  },
+  "effortLevel": "high",
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
+  },
+  "theme": "custom:glass",
+  "tui": "default",
+  "showThinkingSummaries": true,
+  "spinnerTipsEnabled": true,
+  "skipWorkflowUsageWarning": true,
+  "showTurnDuration": true,
+  "terminalProgressBarEnabled": true
+}

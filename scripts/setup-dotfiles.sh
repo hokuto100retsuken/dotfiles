@@ -90,12 +90,11 @@ link_claude() {
     create_symlink "$DOTPATH/claude/statusline-command.sh" "$HOME/.claude/statusline-command.sh"
     create_symlink "$DOTPATH/claude/themes" "$HOME/.claude/themes"
 
-    # settings.json は Claude Code 自身が書き換えるので、リンクせず初回だけコピーする
-    if [[ ! -e "$HOME/.claude/settings.json" ]]; then
-        cp "$DOTPATH/claude/settings.json" "$HOME/.claude/settings.json"
-        echo "  [COPY] Copied settings.json template -> $HOME/.claude/settings.json"
+    # settings.json は Claude Code 自身が書き換えるので、mise の [dotfiles] でキー単位に反映する
+    if command -v mise &> /dev/null; then
+        mise dotfiles apply --yes
     else
-        echo "  [SKIP] $HOME/.claude/settings.json already exists"
+        echo "  [WARN] mise not found: skipped applying settings.json"
     fi
 
     # herdr の hook は herdr が管理・更新するので、herdr 経由で入れる
@@ -148,14 +147,12 @@ link_claude() {
     done
 }
 
-# Handles the gemini linking (~/.gemini is shared by Gemini CLI and Antigravity CLI)
+# Handles the Antigravity CLI linking
 #
 # Antigravity CLI の customization root は ~/.gemini/config/。
 # グローバルのルールは その配下の rules/、スキルは skills/ から読まれる（CLI バイナリで確認）。
-# ~/.gemini/GEMINI.md は Gemini CLI 側の置き場なので、両方に張る。
 link_gemini() {
     echo -e "\n--- Linking Gemini Configurations ---"
-    create_symlink "$DOTPATH/gemini/GEMINI.md" "$HOME/.gemini/GEMINI.md"
     create_symlink "$DOTPATH/gemini/GEMINI.md" "$HOME/.gemini/config/rules/AGENTS.md"
 
     # skills は実ディレクトリにして中身を1件ずつ張る。

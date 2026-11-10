@@ -6,6 +6,14 @@ antigravity-cli = "latest"
 neovim = "0.12.5"
 "github:babarot/claude-recall" = { version = "latest", bin = "recall" }
 
+# settings.json は Claude Code 自身も書き換えるので、ファイルごとは持たずキー単位で管理する。
+# shared は常にこの値に揃え、defaults は値がないときだけ埋める。
+# 配列はまるごと置き換わるため、Claude Code や herdr・業務用 dotfiles が書き足す
+# permissions.allow と hooks は defaults に置く。
+[dotfiles]
+"~/.claude/settings.json/shared" = { source = "~/src/github.com/hokuto100retsuken/dotfiles/claude/settings/shared.json", merge = true }
+"~/.claude/settings.json/defaults" = { source = "~/src/github.com/hokuto100retsuken/dotfiles/claude/settings/defaults.json", merge = "missing" }
+
 [tasks.ccupdate]
 description = 'Claude Codeを最新版に更新'
 run = """

@@ -28,34 +28,10 @@
       "Bash(nkf:*)",
       "Bash(iconv:*)"
     ],
-    "deny": [
-      "Read(**/.env)",
-      "Read(**/.env.*)",
-      "Read(**/*.pem)",
-      "Read(**/*.key)",
-      "Read(**/*.p12)",
-      "Read(**/credentials.json)",
-      "Read(**/credentials)",
-      "Read(**/secrets/**)",
-      "Read(**/id_rsa)",
-      "Read(**/id_ed25519)",
-      "Read(~/.ssh/**)",
-      "Read(~/.aws/**)",
-      "Read(~/.netrc)",
-      "Read(~/.npmrc)",
-      "Read(~/.config/gh/hosts.yml)",
-      "Edit(**/.env)",
-      "Edit(**/.env.*)",
-      "Edit(**/secrets/**)",
-      "Write(**/.env)",
-      "Write(**/.env.*)",
-      "Write(**/secrets/**)"
-    ],
     "ask": [
       "Bash(pbcopy)"
     ]
   },
-  "model": "opus[1m]",
   "hooks": {
     "PreToolUse": [
       {
@@ -115,45 +91,70 @@
         ]
       },
       {
-        "hooks": [{ "type": "command", "command": "~/.local/bin/flock hook idle", "timeout": 5 }]
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.local/bin/flock hook idle",
+            "timeout": 5
+          }
+        ]
       }
     ],
     "UserPromptSubmit": [
       {
-        "hooks": [{ "type": "command", "command": "~/.local/bin/flock hook working", "timeout": 5 }]
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.local/bin/flock hook working",
+            "timeout": 5
+          }
+        ]
       }
     ],
     "PostToolUse": [
       {
-        "hooks": [{ "type": "command", "command": "~/.local/bin/flock hook working", "timeout": 5 }]
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.local/bin/flock hook working",
+            "timeout": 5
+          }
+        ]
       }
     ],
     "Notification": [
       {
         "matcher": "permission_prompt",
-        "hooks": [{ "type": "command", "command": "~/.local/bin/flock hook blocked", "timeout": 5 }]
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.local/bin/flock hook blocked",
+            "timeout": 5
+          }
+        ]
       }
     ],
     "Stop": [
       {
-        "hooks": [{ "type": "command", "command": "~/.local/bin/flock hook stop", "timeout": 5 }]
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.local/bin/flock hook stop",
+            "timeout": 5
+          }
+        ]
       }
     ],
     "SessionEnd": [
       {
-        "hooks": [{ "type": "command", "command": "~/.local/bin/flock hook end", "timeout": 5 }]
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.local/bin/flock hook end",
+            "timeout": 5
+          }
+        ]
       }
     ]
-  },
-  "statusLine": {
-    "type": "command",
-    "command": "bash ~/.claude/statusline-command.sh"
-  },
-  "spinnerTipsEnabled": true,
-  "tui": "default",
-  "showThinkingSummaries": true,
-  "skipWorkflowUsageWarning": true,
-  "theme": "custom:glass",
-  "showTurnDuration": true,
-  "terminalProgressBarEnabled": true
+  }
 }

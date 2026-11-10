@@ -63,6 +63,21 @@ run_fish() {
     fi
 }
 
+run_alcor() {
+    if [[ "$OSTYPE" != "linux-gnu"* ]]; then
+        warn "alcor is for Arch-based Linux only. Skipping."
+        return 0
+    fi
+    info "Setting up alcor (Hyprland desktop)..."
+    if bash "$SCRIPT_DIR/scripts/setup-alcor.sh" "$@"; then
+        success "alcor setup completed successfully."
+        return 0
+    else
+        error "alcor setup failed."
+        return 1
+    fi
+}
+
 # --- User Interface Functions ---
 
 show_help() {
@@ -81,6 +96,8 @@ Options:
     -d, --dotfiles  Create dotfile symlinks only.
     -m, --mise      Install tools managed by mise only.
     -f, --fish      Setup fish shell plugins only.
+    --alcor         Setup alcor (Hyprland desktop, Arch-based Linux only). Not included in --all.
+    --alcor-args    Arguments passed to alcor's installer (e.g. --alcor-args "--dry-run").
     --interactive   Interactive mode: Prompts user for desired setup steps.
     -h, --help      Show this help message.
 
@@ -243,6 +260,8 @@ main() {
     local do_dotfiles=false
     local do_mise=false
     local do_fish=false
+    local do_alcor=false
+    local alcor_args=()
     local do_all=false
     local do_interactive=false
 
@@ -272,6 +291,19 @@ main() {
                 do_fish=true
                 shift
                 ;;
+            --alcor)
+                do_alcor=true
+                shift
+                ;;
+            --alcor-args)
+                if [[ $# -lt 2 ]]; then
+                    error "--alcor-args requires a value."
+                    exit 1
+                fi
+                do_alcor=true
+                read -r -a alcor_args <<< "${2:-}"
+                shift 2
+                ;;
             --interactive)
                 do_interactive=true
                 shift
@@ -283,6 +315,11 @@ main() {
                 ;;
         esac
     done
+
+    if [[ "$do_interactive" == true || "$do_all" == true ]] && [[ "$do_alcor" == true ]]; then
+        error "--alcor cannot be combined with --all or --interactive. Run it separately."
+        exit 1
+    fi
 
     if [[ "$do_interactive" == true ]]; then
         run_interactive
@@ -325,6 +362,12 @@ main() {
         else
             warn "Fish shell not found. Skipping fish setup."
         fi
+    fi
+
+    if [[ "$do_alcor" == true ]]; then
+        run_alcor ${alcor_args[@]+"${alcor_args[@]}"} || has_error=true
+        ran_something=true
+        echo ""
     fi
 
     if [[ "$ran_something" == false ]]; then

@@ -1,0 +1,20 @@
+{
+  "agentMode": "auto",
+  "allowNonWorkspaceAccess": true,
+  "enableTerminalSandbox": false,
+  "toolPermission": "always-proceed",
+  "permissions": {
+    "deny": [
+      "read_file(/Users/hokuto100retsuken/.ssh)",
+      "read_file(/Users/hokuto100retsuken/.aws)",
+      "read_file(/Users/hokuto100retsuken/.netrc)",
+      "read_file(/Users/hokuto100retsuken/.npmrc)",
+      "read_file(/Users/hokuto100retsuken/.config/gh/hosts.yml)",
+      "write_file(/Users/hokuto100retsuken/.ssh)",
+      "write_file(/Users/hokuto100retsuken/.aws)",
+      "write_file(/Users/hokuto100retsuken/.netrc)",
+      "write_file(/Users/hokuto100retsuken/.npmrc)",
+      "write_file(/Users/hokuto100retsuken/.config/gh/hosts.yml)"
+    ]
+  }
+}

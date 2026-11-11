@@ -13,6 +13,8 @@ neovim = "0.12.5"
 [dotfiles]
 "~/.claude/settings.json/shared" = { source = "~/src/github.com/hokuto100retsuken/dotfiles/claude/settings/shared.json", merge = true }
 "~/.claude/settings.json/defaults" = { source = "~/src/github.com/hokuto100retsuken/dotfiles/claude/settings/defaults.json", merge = "missing" }
+"~/.gemini/antigravity-cli/settings.json/shared" = { source = "~/src/github.com/hokuto100retsuken/dotfiles/gemini/settings/shared.json", merge = true }
+"~/.gemini/antigravity-cli/settings.json/defaults" = { source = "~/src/github.com/hokuto100retsuken/dotfiles/gemini/settings/defaults.json", merge = "missing" }
 
 [tasks.ccupdate]
 description = 'Claude Codeを最新版に更新'

@@ -71,9 +71,6 @@ link_shell() {
     echo "  [DIR] Linking entire Neovim config directory..."
     create_symlink "$DOTPATH/config/nvim" "$HOME/.config/nvim"
 
-    # herdr
-    create_symlink "$DOTPATH/config/herdr/config.toml" "$HOME/.config/herdr/config.toml"
-
     # zellij
     echo "  [DIR] Linking Zellij configurations..."
     create_symlink "$DOTPATH/config/zellij/config.kdl" "$HOME/.config/zellij/config.kdl"
@@ -95,11 +92,6 @@ link_claude() {
         mise dotfiles apply --yes
     else
         echo "  [WARN] mise not found: skipped applying settings.json"
-    fi
-
-    # herdr の hook は herdr が管理・更新するので、herdr 経由で入れる
-    if command -v herdr &> /dev/null; then
-        herdr integration install claude
     fi
 
     # Ensure base directories exist
